@@ -46,6 +46,10 @@ foreign import data DirectionalLight :: Type
 
 foreign import newDirectionalLight :: Int -> Number -> Effect DirectionalLight
 
+foreign import data PointLight :: Type
+
+foreign import newPointLight :: Int -> Number -> Number -> Number -> Effect PointLight
+
 foreign import data PolarGridHelper :: Type
 
 foreign import newPolarGridHelper :: Number -> Int -> Int -> Int -> Effect PolarGridHelper

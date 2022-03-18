@@ -16,6 +16,9 @@ exports.newAmbientLight = rgb => intensity => () => new THREE.AmbientLight(rgb,i
 
 exports.newDirectionalLight = rgb => intensity => () => new THREE.DirectionalLight(rgb,intensity);
 
+exports.newPointLight = rgb => intensity => distance => decay => () => new
+THREE.PointLight(rgb,intensity,distance,decay);
+
 exports.newPolarGridHelper = radius => radials => circles => divisions => () => new THREE.PolarGridHelper(radius,radials,circles,divisions)
 
 exports.windowInnerWidth = () => window.innerWidth;
