@@ -34,6 +34,8 @@ foreign import setPositionOfAnything :: forall a. a -> Number -> Number -> Numbe
 
 foreign import setRotationOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
 
+foreign import setScaleOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
+
 foreign import data HemisphereLight :: Type
 
 foreign import newHemisphereLight :: Int -> Int -> Number -> Effect HemisphereLight
