@@ -70,24 +70,3 @@ exports.linearFilter = THREE.LinearFilter;
 exports.minFilter = texture => filter => () => texture.minFilter = filter
 
 exports.magFilter = texture => filter => () => texture.magFilter = filter
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---
