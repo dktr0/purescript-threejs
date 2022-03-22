@@ -8,8 +8,6 @@ import Graphics.Three.Scene as Scene
 import Graphics.Three.Camera as Camera
 import Graphics.Three.Object3D as Object3D
 
-import Data.Foreign.EasyFFI (unsafeForeignProcedure, unsafeForeignFunction)
-
 -- import Graphics.Three.Renderer as Renderer
 -- import Graphics.Three.Geometry as Geometry
 -- import Graphics.Three.Material as Material
@@ -35,6 +33,8 @@ foreign import addAnythingToScene :: forall a. Scene.Scene -> a -> Effect Unit
 foreign import setPositionOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
 
 foreign import setRotationOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
+
+foreign import setRepeatOfAnything :: forall a. a -> Number -> Number -> Effect Unit
 
 foreign import data HemisphereLight :: Type
 
@@ -74,60 +74,38 @@ foreign import setEffectiveTimeScale :: AnimationAction -> Number -> Effect Unit
 
 foreign import play :: forall o. o -> Effect Unit
 
------------------------------
------------------------------
--- EasyFFI
+foreign import print :: forall o. o -> Effect Unit
 
--- TEXTURES / MATERIAL
+foreign import requestAnimationFrame :: Effect Unit -> Effect Unit
+
+-- TEXTURE
 
 foreign import data TextureLoader             :: Type
+
+foreign import textureLoader :: String -> Effect TextureLoader
+
 foreign import data VideoTexture              :: Type
 
-class Texture a
-instance textureTextureLoader :: Texture TextureLoader
+foreign import createVideoID :: String -> Effect Unit
 
--- Importing
+foreign import data Wrapping :: Type
 
-textureLoader :: String -> Effect TextureLoader
-textureLoader = unsafeForeignFunction ["param", ""] "new THREE.TextureLoader().load(param)"
+foreign import clampToEdgeWrapping :: Effect Wrapping
 
-createVideoById :: String -> Effect Unit
-createVideoById = unsafeForeignFunction ["id", ""] "document.createElement(id)"
+foreign import repeatWrapping :: Effect Wrapping
 
--- STILL IMPLEMENTING
--- addVideoTexture :: forall opt. {|opt} -> Effect VideoTexture
--- addVideoTexture = unsafeForeignFunction ["video", ""] "new THREE.VideoTexture(video)"
+foreign import mirroredRepeatWrapping :: Effect Wrapping
 
--- Wrapping modes
+foreign import wrapS :: TextureLoader -> Effect Wrapping -> Effect Unit
 
-wrapSclampToEdge :: forall a. Texture a => a -> Effect Unit
-wrapSclampToEdge = unsafeForeignFunction ["texture", ""] "texture.wrapS = THREE.ClampToEdgeWrapping;"
+foreign import wrapT :: TextureLoader -> Effect Wrapping -> Effect Unit
 
-wrapTclampToEdge :: forall a. Texture a => a -> Effect Unit
-wrapTclampToEdge = unsafeForeignFunction ["texture", ""] "texture.wrapT = THREE.ClampToEdgeWrapping;"
+foreign import data Filter :: Type
 
-wrapSrepeat :: forall a. Texture a => a -> Effect Unit
-wrapSrepeat = unsafeForeignFunction ["texture", ""] "texture.wrapS = THREE.RepeatWrapping;"
+foreign import nearestFilter :: Effect Filter
 
-wrapTrepeat :: forall a. Texture a => a -> Effect Unit
-wrapTrepeat = unsafeForeignFunction ["texture", ""] "texture.wrapT = THREE.RepeatWrapping;"
+foreign import linearFilter :: Effect Filter
 
-wrapSmirroredRepeat :: forall a. Texture a => a -> Effect Unit
-wrapSmirroredRepeat = unsafeForeignFunction ["texture", ""] "texture.wrapS = THREE.MirroredRepeatWrapping;"
+foreign import minFilter :: TextureLoader -> Effect Filter -> Effect Unit
 
-wrapTmirroredRepeat :: forall a. Texture a => a -> Effect Unit
-wrapTmirroredRepeat = unsafeForeignFunction ["texture", ""] "texture.wrapT = THREE.MirroredRepeatWrapping;"
-
---
-
-repeatSet :: forall a. Texture a => a -> Number -> Number -> Effect Unit
-repeatSet = unsafeForeignProcedure ["texture", "x", "y", ""] "texture.repeat.set(x,y);"
-
-
--- GENERAL
-
-requestAnimationFrame :: Effect Unit -> Effect Unit
-requestAnimationFrame = unsafeForeignProcedure ["callback", ""] "window.requestAnimationFrame(callback)"
-
-unsafePrint :: forall a. a -> Effect Unit
-unsafePrint = unsafeForeignProcedure ["a", ""] "console.log(a)"
+foreign import magFilter :: TextureLoader -> Effect Filter -> Effect Unit
