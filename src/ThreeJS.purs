@@ -34,6 +34,8 @@ foreign import setPositionOfAnything :: forall a. a -> Number -> Number -> Numbe
 
 foreign import setRotationOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
 
+foreign import setScaleOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
+
 foreign import setRepeatOfAnything :: forall a. a -> Number -> Number -> Effect Unit
 
 foreign import data HemisphereLight :: Type
@@ -80,11 +82,11 @@ foreign import requestAnimationFrame :: Effect Unit -> Effect Unit
 
 -- TEXTURE
 
-foreign import data TextureLoader             :: Type
+foreign import data TextureLoader :: Type
 
 foreign import textureLoader :: String -> Effect TextureLoader
 
-foreign import data VideoTexture              :: Type
+foreign import data VideoTexture :: Type
 
 foreign import createVideoID :: String -> Effect Unit
 

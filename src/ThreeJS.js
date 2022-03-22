@@ -10,6 +10,8 @@ exports.setPositionOfAnything = thing => x => y => z => () => thing.position.set
 
 exports.setRotationOfAnything = thing => x => y => z => () => thing.rotation.set(x,y,z);
 
+exports.setScaleOfAnything = thing => x => y => z => () => thing.scale.set(x,y,z);
+
 exports.setRepeatOfAnything = thing => u => v => () => thing.repeat.set(u,v);
 
 // LIGHTS
