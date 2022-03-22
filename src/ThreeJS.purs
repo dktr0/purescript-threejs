@@ -36,6 +36,8 @@ foreign import setRotationOfAnything :: forall a. a -> Number -> Number -> Numbe
 
 foreign import setScaleOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
 
+foreign import setRepeatOfAnything :: forall a. a -> Number -> Number -> Effect Unit
+
 foreign import data HemisphereLight :: Type
 
 foreign import newHemisphereLight :: Int -> Int -> Number -> Effect HemisphereLight
@@ -47,6 +49,10 @@ foreign import newAmbientLight :: Int -> Number -> Effect AmbientLight
 foreign import data DirectionalLight :: Type
 
 foreign import newDirectionalLight :: Int -> Number -> Effect DirectionalLight
+
+foreign import data PointLight :: Type
+
+foreign import newPointLight :: Int -> Number -> Number -> Number -> Effect PointLight
 
 foreign import data PolarGridHelper :: Type
 
@@ -69,3 +75,39 @@ foreign import clipAction :: AnimationMixer -> AnimationClip -> Effect Animation
 foreign import setEffectiveTimeScale :: AnimationAction -> Number -> Effect Unit
 
 foreign import play :: forall o. o -> Effect Unit
+
+foreign import print :: forall o. o -> Effect Unit
+
+foreign import requestAnimationFrame :: Effect Unit -> Effect Unit
+
+-- TEXTURE
+
+foreign import data TextureLoader :: Type
+
+foreign import textureLoader :: String -> Effect TextureLoader
+
+foreign import data VideoTexture :: Type
+
+foreign import createVideoID :: String -> Effect Unit
+
+foreign import data Wrapping :: Type
+
+foreign import clampToEdgeWrapping :: Effect Wrapping
+
+foreign import repeatWrapping :: Effect Wrapping
+
+foreign import mirroredRepeatWrapping :: Effect Wrapping
+
+foreign import wrapS :: TextureLoader -> Effect Wrapping -> Effect Unit
+
+foreign import wrapT :: TextureLoader -> Effect Wrapping -> Effect Unit
+
+foreign import data Filter :: Type
+
+foreign import nearestFilter :: Effect Filter
+
+foreign import linearFilter :: Effect Filter
+
+foreign import minFilter :: TextureLoader -> Effect Filter -> Effect Unit
+
+foreign import magFilter :: TextureLoader -> Effect Filter -> Effect Unit
