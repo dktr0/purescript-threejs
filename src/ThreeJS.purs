@@ -82,13 +82,23 @@ foreign import requestAnimationFrame :: Effect Unit -> Effect Unit
 
 -- TEXTURE
 
+--loading
+
 foreign import data TextureLoader :: Type
 
 foreign import textureLoader :: String -> Effect TextureLoader
 
-foreign import data VideoTexture :: Type
+foreign import data ElementLoader :: Type
 
-foreign import createVideoID :: String -> Effect Unit
+foreign import createElement :: String -> Effect ElementLoader
+
+foreign import srcOfElement :: ElementLoader -> String -> Effect Unit
+
+foreign import getElementById :: String -> Effect ElementLoader
+
+foreign import videoTexture :: ElementLoader -> Effect TextureLoader
+
+--changing
 
 foreign import data Wrapping :: Type
 
@@ -111,3 +121,16 @@ foreign import linearFilter :: Effect Filter
 foreign import minFilter :: TextureLoader -> Effect Filter -> Effect Unit
 
 foreign import magFilter :: TextureLoader -> Effect Filter -> Effect Unit
+
+-- video settings
+
+foreign import loop :: ElementLoader -> Boolean -> Effect Unit
+
+foreign import muted :: ElementLoader -> Boolean -> Effect Unit
+
+foreign import autoplay :: ElementLoader -> Boolean -> Effect Unit
+
+
+-- The following functions must be moved or changed
+
+foreign import playVideo :: ElementLoader -> Effect Unit -- keyEvent: p

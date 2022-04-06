@@ -49,9 +49,19 @@ exports.requestAnimationFrame = callback => () => window.requestAnimationFrame(c
 
 // TEXTURE
 
+// loading
+
 exports.textureLoader = url => () => new THREE.TextureLoader().load(url);
 
-exports.createVideoID = idName => () => document.createElement(idName);
+exports.createElement = name => () => document.createElement(name);
+
+exports.srcOfElement = elem => url => () => elem.src = url;
+
+exports.getElementById = idName => () => document.getElementById(idName);
+
+exports.videoTexture = videoElem => () => new THREE.VideoTexture(videoElem);
+
+// changing
 
 exports.clampToEdgeWrapping = THREE.ClampToEdgeWrapping
 
@@ -70,3 +80,19 @@ exports.linearFilter = THREE.LinearFilter;
 exports.minFilter = texture => filter => () => texture.minFilter = filter
 
 exports.magFilter = texture => filter => () => texture.magFilter = filter
+
+// video settings
+
+exports.loop = videoElem => bool => () => videoElem.loop = bool;
+
+exports.muted = videoElem => bool => () => videoElem.muted = bool;
+
+exports.autoplay = videoElem => bool => () => videoElem.autoplay = bool;
+
+
+// The following functions must be moved or changed
+
+exports.playVideo = videoElem => () => document.onkeydown = function (e) {
+  if (e.keyCode === 80) {
+    videoElem.play()
+  }}
