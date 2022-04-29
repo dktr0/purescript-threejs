@@ -1,8 +1,25 @@
 "use strict";
 
+// 3D object Loaders
+
 // note the rather weird handling of the callback in the line below...
 // ... seems to be necessary when we try to pass a callback with argument from PureScript
+//                              url              cb
+// foreign import loadGLTF :: String -> (GLTF -> Effect Unit) -> Effect Unit
+
 exports.loadGLTF = url => cb => () => new THREE.GLTFLoader().load(url,x => cb(x)());
+
+// const loader = new GLTFLoader().load('url', function (gltf){});
+
+exports.loadMTL = url => cb => () => new THREE.MTLLoader().load(url,x => cb(x)());
+
+// var mtlLoader = new MTLLoader().load("url", function (materials){});
+
+exports.loadOBJ = url => cb => () => new THREE.OBJLoader().load(url,x => cb(x)());
+
+// var objLoader = new OBJLoader().load("url", function (object){});
+
+//////////
 
 exports.addAnythingToScene = scene => anything => () => scene.add(anything);
 
@@ -14,9 +31,11 @@ exports.setScaleOfAnything = thing => x => y => z => () => thing.scale.set(x,y,z
 
 exports.setRepeatOfAnything = thing => u => v => () => thing.repeat.set(u,v);
 
+exports.preloadAnything = elem => () => elem.preload = "auto";
+
 // LIGHTS
 
-exports.newHemisphereLight = skyColor => groundColor => intensity => () => new THREE.HemisphereLight(skyColor,groundColor,intensity);
+exports.hemisphereLight = skyColor => groundColor => intensity => () => new THREE.HemisphereLight(skyColor,groundColor,intensity);
 
 exports.newAmbientLight = rgb => intensity => () => new THREE.AmbientLight(rgb,intensity);
 
@@ -40,8 +59,6 @@ exports.updateAnimationMixer = mixer => delta => () => mixer.update(delta);
 exports.clipAction = animationMixer => clip => () => animationMixer.clipAction(clip);
 
 exports.setEffectiveTimeScale = action => t => () => action.setEffectiveTimeScale(t);
-
-exports.play = thing => () => thing.play();
 
 exports.print = thing => () => console.log(thing);
 
@@ -83,16 +100,26 @@ exports.magFilter = texture => filter => () => texture.magFilter = filter
 
 // video settings
 
+exports.play = videoElem => () => videoElem.play();
+
+// exports.play = videoElem => () => document.onkeydown = function (e) {
+//   if (e.keyCode === 80) {
+//     videoElem.play()
+//   }}
+
+exports.insertTexture = texture => c => () => materials.materials.None.map = texture;
+object.children[c].material = materials.materials.None;
+
+
+
+
+
+
+
 exports.loop = videoElem => bool => () => videoElem.loop = bool;
 
 exports.muted = videoElem => bool => () => videoElem.muted = bool;
 
+exports.volume = videoElem => float => () => videoElem.volumen = float;
+
 exports.autoplay = videoElem => bool => () => videoElem.autoplay = bool;
-
-
-// The following functions must be moved or changed
-
-exports.playVideo = videoElem => () => document.onkeydown = function (e) {
-  if (e.keyCode === 80) {
-    videoElem.play()
-  }}

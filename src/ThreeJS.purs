@@ -12,6 +12,8 @@ import Graphics.Three.Object3D as Object3D
 -- import Graphics.Three.Geometry as Geometry
 -- import Graphics.Three.Material as Material
 
+-- 3D object Loaders
+
 -- Loading GLTF resources via GLTFLoader
 
 foreign import data AnimationClip :: Type
@@ -26,6 +28,16 @@ type GLTF = {
 
 foreign import loadGLTF :: String -> (GLTF -> Effect Unit) -> Effect Unit
 
+foreign import data MTL :: Type
+
+foreign import loadMTL :: String -> (MTL -> Effect Unit) -> Effect Unit
+
+foreign import data OBJ :: Type
+
+foreign import loadOBJ :: String -> (OBJ -> Effect Unit) -> Effect Unit
+
+-------------
+
 -- hacky, but... for now...
 foreign import addAnythingToScene :: forall a. Scene.Scene -> a -> Effect Unit
 
@@ -38,9 +50,13 @@ foreign import setScaleOfAnything :: forall a. a -> Number -> Number -> Number -
 
 foreign import setRepeatOfAnything :: forall a. a -> Number -> Number -> Effect Unit
 
+foreign import preloadAnything :: forall o. o -> Effect Unit
+
+------------ LIGHTS
+
 foreign import data HemisphereLight :: Type
 
-foreign import newHemisphereLight :: Int -> Int -> Number -> Effect HemisphereLight
+foreign import hemisphereLight :: Int -> Int -> Int -> Effect HemisphereLight
 
 foreign import data AmbientLight :: Type
 
@@ -53,6 +69,8 @@ foreign import newDirectionalLight :: Int -> Number -> Effect DirectionalLight
 foreign import data PointLight :: Type
 
 foreign import newPointLight :: Int -> Number -> Number -> Number -> Effect PointLight
+
+--
 
 foreign import data PolarGridHelper :: Type
 
@@ -73,8 +91,6 @@ foreign import data AnimationAction :: Type
 foreign import clipAction :: AnimationMixer -> AnimationClip -> Effect AnimationAction
 
 foreign import setEffectiveTimeScale :: AnimationAction -> Number -> Effect Unit
-
-foreign import play :: forall o. o -> Effect Unit
 
 foreign import print :: forall o. o -> Effect Unit
 
@@ -122,15 +138,16 @@ foreign import minFilter :: TextureLoader -> Effect Filter -> Effect Unit
 
 foreign import magFilter :: TextureLoader -> Effect Filter -> Effect Unit
 
--- video settings
+--video settings
+
+foreign import play :: ElementLoader -> Effect Unit
+
+-- foreign import play :: ElementLoader -> Effect Unit -- keyEvent: p
 
 foreign import loop :: ElementLoader -> Boolean -> Effect Unit
 
 foreign import muted :: ElementLoader -> Boolean -> Effect Unit
 
+foreign import volume :: ElementLoader -> Number -> Effect Unit
+
 foreign import autoplay :: ElementLoader -> Boolean -> Effect Unit
-
-
--- The following functions must be moved or changed
-
-foreign import playVideo :: ElementLoader -> Effect Unit -- keyEvent: p
