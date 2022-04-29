@@ -34,6 +34,8 @@ foreign import loadMTL :: String -> (MTL -> Effect Unit) -> Effect Unit
 
 foreign import data OBJ :: Type
 
+instance object3DOBJ :: Object3D.Object3D OBJ
+
 foreign import loadOBJ :: String -> (OBJ -> Effect Unit) -> Effect Unit
 
 -------------

@@ -102,20 +102,6 @@ exports.magFilter = texture => filter => () => texture.magFilter = filter
 
 exports.play = videoElem => () => videoElem.play();
 
-// exports.play = videoElem => () => document.onkeydown = function (e) {
-//   if (e.keyCode === 80) {
-//     videoElem.play()
-//   }}
-
-exports.insertTexture = texture => c => () => materials.materials.None.map = texture;
-object.children[c].material = materials.materials.None;
-
-
-
-
-
-
-
 exports.loop = videoElem => bool => () => videoElem.loop = bool;
 
 exports.muted = videoElem => bool => () => videoElem.muted = bool;
