@@ -28,7 +28,6 @@ foreign import newWebGLRenderer :: forall p. Record p -> Effect Renderer
 foreign import render :: Renderer -> Scene -> PerspectiveCamera -> Effect Unit
 
 foreign import setSize :: Renderer -> Number -> Number -> Boolean -> Effect Unit
--- TODO 6: Renderer.setSize re.renderer iWidth iHeight
 
 
 -- Mesh

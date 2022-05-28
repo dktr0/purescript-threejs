@@ -18,7 +18,7 @@ export const newWebGLRenderer = params => () => new THREE.WebGLRenderer(params);
 
 export const render = renderer => scene => camera => () => renderer.render(scene,camera);
 
-export const setSize = renderer => w => h => updateStyle => renderer.setSize(w,h,updateStyle);
+export const setSize = renderer => w => h => updateStyle => () => renderer.setSize(w,h,updateStyle);
 
 
 // 3D object Loaders
