@@ -1,16 +1,40 @@
 module ThreeJS where
 
--- This module contains extra PureScript bindings for ThreeJS things.
-
 import Prelude
 import Effect (Effect)
-import Graphics.Three.Scene as Scene
-import Graphics.Three.Camera as Camera
-import Graphics.Three.Object3D as Object3D
 
--- import Graphics.Three.Renderer as Renderer
--- import Graphics.Three.Geometry as Geometry
--- import Graphics.Three.Material as Material
+-- Scene
+
+foreign import data Scene :: Type
+
+foreign import newScene :: Effect Scene
+
+
+-- PerspectiveCamera
+
+foreign import data PerspectiveCamera :: Type
+
+foreign import newPerspectiveCamera :: Number -> Number -> Number -> Number -> Effect PerspectiveCamera
+
+foreign import setAspect :: PerspectiveCamera -> Number -> Effect Unit
+
+
+-- Renderer
+
+foreign import data Renderer :: Type
+
+foreign import newWebGLRenderer :: forall p. Record p -> Effect Renderer
+
+foreign import render :: Renderer -> Scene -> PerspectiveCamera -> Effect Unit
+
+foreign import setSize :: Renderer -> Number -> Number -> Boolean -> Effect Unit
+-- TODO 6: Renderer.setSize re.renderer iWidth iHeight
+
+
+-- Mesh
+
+foreign import data Mesh :: Type
+
 
 -- 3D object Loaders
 
@@ -20,10 +44,10 @@ foreign import data AnimationClip :: Type
 
 type GLTF = {
   animations :: Array AnimationClip, -- in ThreeJS: Array<THREE.AnimationClip>
-  scene :: Scene.Scene, -- in ThreeJS: THREE.Group
-  scenes :: Array Scene.Scene, -- in ThreeJS: Array<THREE.Group>
-  -- cameras :: Array Camera.Camera,
-  asset :: Object3D.Mesh -- ? -- in ThreeJS: Object
+  scene :: Scene, -- in ThreeJS: THREE.Group
+  scenes :: Array Scene, -- in ThreeJS: Array<THREE.Group>
+  -- cameras :: Array Camera,
+  asset :: Mesh -- ? in ThreeJS: Object
   }
 
 foreign import loadGLTF :: String -> (GLTF -> Effect Unit) -> Effect Unit
@@ -34,14 +58,16 @@ foreign import loadMTL :: String -> (MTL -> Effect Unit) -> Effect Unit
 
 foreign import data OBJ :: Type
 
-instance object3DOBJ :: Object3D.Object3D OBJ
+-- I am not sure what this instance was being used for, nonetheless it is
+-- impossible to maintain it with purs 0.15 and without purescript-three
+-- instance object3DOBJ :: Object3D.Object3D OBJ
 
 foreign import loadOBJ :: String -> (OBJ -> Effect Unit) -> Effect Unit
 
 -------------
 
 -- hacky, but... for now...
-foreign import addAnythingToScene :: forall a. Scene.Scene -> a -> Effect Unit
+foreign import addAnythingToScene :: forall a. Scene -> a -> Effect Unit
 
 -- hacky, but... for now...
 foreign import setPositionOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
@@ -58,7 +84,7 @@ foreign import preloadAnything :: forall o. o -> Effect Unit
 
 foreign import data HemisphereLight :: Type
 
-foreign import hemisphereLight :: Int -> Int -> Int -> Effect HemisphereLight
+foreign import newHemisphereLight :: Int -> Int -> Int -> Effect HemisphereLight
 
 foreign import data AmbientLight :: Type
 
