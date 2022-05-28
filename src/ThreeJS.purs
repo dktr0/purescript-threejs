@@ -88,7 +88,7 @@ foreign import printAnything :: forall o. o -> Effect Unit
 
 foreign import data HemisphereLight :: Type
 
-foreign import newHemisphereLight :: Int -> Int -> Int -> Effect HemisphereLight
+foreign import newHemisphereLight :: Int -> Int -> Number -> Effect HemisphereLight
 
 foreign import data AmbientLight :: Type
 
