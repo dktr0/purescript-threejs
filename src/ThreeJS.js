@@ -2,8 +2,6 @@
 
 // Scene
 
-foreign import createScene :: Effect Scene
-
 export const newScene = () => new THREE.Scene();
 
 
