@@ -56,6 +56,11 @@ export const setRepeatOfAnything = thing => u => v => () => thing.repeat.set(u,v
 
 export const preloadAnything = elem => () => elem.preload = "auto";
 
+export const playAnything = thing => () => thing.play();
+
+export const printAnything = thing => () => console.log(thing);
+
+
 // LIGHTS
 
 export const newHemisphereLight = skyColor => groundColor => intensity => () => new THREE.HemisphereLight(skyColor,groundColor,intensity);
@@ -83,7 +88,6 @@ export const clipAction = animationMixer => clip => () => animationMixer.clipAct
 
 export const setEffectiveTimeScale = action => t => () => action.setEffectiveTimeScale(t);
 
-export const print = thing => () => console.log(thing);
 
 export const requestAnimationFrame = callback => () => window.requestAnimationFrame(callback)
 
@@ -122,8 +126,6 @@ export const minFilter = texture => filter => () => texture.minFilter = filter;
 export const magFilter = texture => filter => () => texture.magFilter = filter;
 
 // video settings
-
-export const play = videoElem => () => videoElem.play();
 
 export const loop = videoElem => bool => () => videoElem.loop = bool;
 

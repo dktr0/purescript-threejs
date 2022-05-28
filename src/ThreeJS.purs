@@ -80,6 +80,10 @@ foreign import setRepeatOfAnything :: forall a. a -> Number -> Number -> Effect 
 
 foreign import preloadAnything :: forall o. o -> Effect Unit
 
+foreign import playAnything :: forall o. o -> Effect Unit
+
+foreign import printAnything :: forall o. o -> Effect Unit
+
 ------------ LIGHTS
 
 foreign import data HemisphereLight :: Type
@@ -119,8 +123,6 @@ foreign import data AnimationAction :: Type
 foreign import clipAction :: AnimationMixer -> AnimationClip -> Effect AnimationAction
 
 foreign import setEffectiveTimeScale :: AnimationAction -> Number -> Effect Unit
-
-foreign import print :: forall o. o -> Effect Unit
 
 foreign import requestAnimationFrame :: Effect Unit -> Effect Unit
 
@@ -167,10 +169,6 @@ foreign import minFilter :: TextureLoader -> Effect Filter -> Effect Unit
 foreign import magFilter :: TextureLoader -> Effect Filter -> Effect Unit
 
 --video settings
-
-foreign import play :: ElementLoader -> Effect Unit
-
--- foreign import play :: ElementLoader -> Effect Unit -- keyEvent: p
 
 foreign import loop :: ElementLoader -> Boolean -> Effect Unit
 
