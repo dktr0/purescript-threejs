@@ -1,5 +1,26 @@
 "use strict";
 
+// Scene
+
+export const newScene = () => new THREE.Scene();
+
+
+// PerspectiveCamera
+
+export const newPerspectiveCamera = fov => aspect => near => far => () => new THREE.PerspectiveCamera(fov,aspect,near,far);
+
+export const setAspect = pCamera => aspect => () => pCamera.aspect = aspect;
+
+
+// Renderer
+
+export const newWebGLRenderer = params => () => new THREE.WebGLRenderer(params);
+
+export const render = renderer => scene => camera => () => renderer.render(scene,camera);
+
+export const setSize = renderer => w => h => updateStyle => () => renderer.setSize(w,h,updateStyle);
+
+
 // 3D object Loaders
 
 // note the rather weird handling of the callback in the line below...
@@ -7,112 +28,105 @@
 //                              url              cb
 // foreign import loadGLTF :: String -> (GLTF -> Effect Unit) -> Effect Unit
 
-exports.loadGLTF = url => cb => () => new THREE.GLTFLoader().load(url,x => cb(x)());
+export const loadGLTF = url => cb => () => new THREE.GLTFLoader().load(url,x => cb(x)());
 
 // const loader = new GLTFLoader().load('url', function (gltf){});
 
-exports.loadMTL = url => cb => () => new THREE.MTLLoader().load(url,x => cb(x)());
+export const loadMTL = url => cb => () => new THREE.MTLLoader().load(url,x => cb(x)());
 
 // var mtlLoader = new MTLLoader().load("url", function (materials){});
 
-exports.loadOBJ = url => cb => () => new THREE.OBJLoader().load(url,x => cb(x)());
+export const loadOBJ = url => cb => () => new THREE.OBJLoader().load(url,x => cb(x)());
 
 
 //////////
 
-exports.addAnythingToScene = scene => anything => () => scene.add(anything);
+export const addAnythingToScene = scene => anything => () => scene.add(anything);
 
-exports.setPositionOfAnything = thing => x => y => z => () => thing.position.set(x,y,z);
+export const setPositionOfAnything = thing => x => y => z => () => thing.position.set(x,y,z);
 
-exports.setRotationOfAnything = thing => x => y => z => () => thing.rotation.set(x,y,z);
+export const setRotationOfAnything = thing => x => y => z => () => thing.rotation.set(x,y,z);
 
-exports.setScaleOfAnything = thing => x => y => z => () => thing.scale.set(x,y,z);
+export const setScaleOfAnything = thing => x => y => z => () => thing.scale.set(x,y,z);
 
-exports.setRepeatOfAnything = thing => u => v => () => thing.repeat.set(u,v);
+export const setRepeatOfAnything = thing => u => v => () => thing.repeat.set(u,v);
 
-exports.loadAnything = elem => () => elem.load();
+export const preloadAnything = elem => () => elem.preload = "auto";
 
-exports.preloadAnything = elem => () => elem.preload = "auto";
+export const playAnything = thing => () => thing.play();
+
+export const printAnything = thing => () => console.log(thing);
 
 // LIGHTS
 
-exports.hemisphereLight = skyColor => groundColor => intensity => () => new THREE.HemisphereLight(skyColor,groundColor,intensity);
+export const newHemisphereLight = skyColor => groundColor => intensity => () => new THREE.HemisphereLight(skyColor,groundColor,intensity);
 
-exports.newAmbientLight = rgb => intensity => () => new THREE.AmbientLight(rgb,intensity);
+export const newAmbientLight = rgb => intensity => () => new THREE.AmbientLight(rgb,intensity);
 
-exports.newDirectionalLight = rgb => intensity => () => new THREE.DirectionalLight(rgb,intensity);
+export const newDirectionalLight = rgb => intensity => () => new THREE.DirectionalLight(rgb,intensity);
 
-exports.newPointLight = rgb => intensity => distance => decay => () => new
+export const newPointLight = rgb => intensity => distance => decay => () => new
 THREE.PointLight(rgb,intensity,distance,decay);
 
 //
 
-exports.newPolarGridHelper = radius => radials => circles => divisions => () => new THREE.PolarGridHelper(radius,radials,circles,divisions)
+export const newPolarGridHelper = radius => radials => circles => divisions => () => new THREE.PolarGridHelper(radius,radials,circles,divisions)
 
-exports.windowInnerWidth = () => window.innerWidth;
+export const windowInnerWidth = () => window.innerWidth;
 
-exports.windowInnerHeight = () => window.innerHeight;
+export const windowInnerHeight = () => window.innerHeight;
 
-exports.newAnimationMixer = object3D => () => new THREE.AnimationMixer(object3D);
+export const newAnimationMixer = object3D => () => new THREE.AnimationMixer(object3D);
 
-exports.updateAnimationMixer = mixer => delta => () => mixer.update(delta);
+export const updateAnimationMixer = mixer => delta => () => mixer.update(delta);
 
-exports.clipAction = animationMixer => clip => () => animationMixer.clipAction(clip);
+export const clipAction = animationMixer => clip => () => animationMixer.clipAction(clip);
 
-exports.setEffectiveTimeScale = action => t => () => action.setEffectiveTimeScale(t);
+export const setEffectiveTimeScale = action => t => () => action.setEffectiveTimeScale(t);
 
-exports.print = thing => () => console.log(thing);
 
-exports.requestAnimationFrame = callback => () => window.requestAnimationFrame(callback)
+export const requestAnimationFrame = callback => () => window.requestAnimationFrame(callback)
 
 // TEXTURE
 
 // loading
 
-exports.textureLoader = url => () => new THREE.TextureLoader().load(url);
+export const textureLoader = url => () => new THREE.TextureLoader().load(url);
 
-exports.createElement = name => () => document.createElement(name);
+export const createElement = name => () => document.createElement(name);
 
-exports.srcOfElement = elem => url => () => elem.src = url;
+export const srcOfElement = elem => url => () => elem.src = url;
 
-exports.getElementById = idName => () => document.getElementById(idName);
+export const getElementById = idName => () => document.getElementById(idName);
 
-exports.videoTexture = videoElem => () => new THREE.VideoTexture(videoElem);
+export const videoTexture = videoElem => () => new THREE.VideoTexture(videoElem);
 
 // changing
 
-exports.clampToEdgeWrapping = THREE.ClampToEdgeWrapping
+export const clampToEdgeWrapping = THREE.ClampToEdgeWrapping
 
-exports.repeatWrapping = THREE.RepeatWrapping
+export const repeatWrapping = THREE.RepeatWrapping
 
-exports.mirroredRepeatWrapping = THREE.MirroredRepeatWrapping
+export const mirroredRepeatWrapping = THREE.MirroredRepeatWrapping
 
-exports.wrapS = texture => wrap => () => texture.wrapS = wrap;
+export const wrapS = texture => wrap => () => texture.wrapS = wrap;
 
-exports.wrapT = texture => wrap => () => texture.wrapT = wrap;
+export const wrapT = texture => wrap => () => texture.wrapT = wrap;
 
-exports.nearestFilter = THREE.NearestFilter;
+export const nearestFilter = THREE.NearestFilter;
 
-exports.linearFilter = THREE.LinearFilter;
+export const linearFilter = THREE.LinearFilter;
 
-exports.minFilter = texture => filter => () => texture.minFilter = filter
+export const minFilter = texture => filter => () => texture.minFilter = filter;
 
-exports.magFilter = texture => filter => () => texture.magFilter = filter
+export const magFilter = texture => filter => () => texture.magFilter = filter;
 
 // video settings
 
-exports.play = videoElem => () => videoElem.play();
+export const loop = videoElem => bool => () => videoElem.loop = bool;
 
-// exports.play = videoElem => () => document.onkeydown = function (e) {
-//   if (e.keyCode === 80) {
-//     videoElem.play()
-//   }}
-//
+export const muted = videoElem => bool => () => videoElem.muted = bool;
 
-exports.loop = videoElem => bool => () => videoElem.loop = bool;
+export const volume = videoElem => float => () => videoElem.volumen = float;
 
-exports.muted = videoElem => bool => () => videoElem.muted = bool;
-
-exports.volume = videoElem => float => () => videoElem.volumen = float;
-
-exports.autoplay = videoElem => bool => () => videoElem.autoplay = bool;
+export const autoplay = videoElem => bool => () => videoElem.autoplay = bool;
