@@ -17,7 +17,6 @@ exports.loadMTL = url => cb => () => new THREE.MTLLoader().load(url,x => cb(x)()
 
 exports.loadOBJ = url => cb => () => new THREE.OBJLoader().load(url,x => cb(x)());
 
-// var objLoader = new OBJLoader().load("url", function (object){});
 
 //////////
 
@@ -30,6 +29,8 @@ exports.setRotationOfAnything = thing => x => y => z => () => thing.rotation.set
 exports.setScaleOfAnything = thing => x => y => z => () => thing.scale.set(x,y,z);
 
 exports.setRepeatOfAnything = thing => u => v => () => thing.repeat.set(u,v);
+
+exports.loadAnything = elem => () => elem.load();
 
 exports.preloadAnything = elem => () => elem.preload = "auto";
 
@@ -106,15 +107,7 @@ exports.play = videoElem => () => videoElem.play();
 //   if (e.keyCode === 80) {
 //     videoElem.play()
 //   }}
-
-exports.insertTexture = texture => c => () => materials.materials.None.map = texture;
-object.children[c].material = materials.materials.None;
-
-
-
-
-
-
+//
 
 exports.loop = videoElem => bool => () => videoElem.loop = bool;
 

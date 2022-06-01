@@ -30,7 +30,7 @@ foreign import loadGLTF :: String -> (GLTF -> Effect Unit) -> Effect Unit
 
 foreign import data MTL :: Type
 
-foreign import loadMTL :: String -> (MTL -> Effect Unit) -> Effect Unit
+foreign import loadMTL :: String -> (MTL -> Effect Unit) -> Effect MTL
 
 foreign import data OBJ :: Type
 
