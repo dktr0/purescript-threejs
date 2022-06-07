@@ -49,7 +49,30 @@ type GLTF = {
   asset :: Mesh -- ? in ThreeJS: Object
   }
 
-foreign import loadGLTF :: String -> (GLTF -> Effect Unit) -> Effect Unit
+foreign import data GLTFLoader :: Type
+
+foreign import loadGLTF :: String -> (GLTF -> Effect Unit) -> Effect GLTFLoader
+
+foreign import loadGLTF1 :: GLTFLoader -> String -> (GLTF -> Effect Unit) -> Effect Unit
+
+loadGLTF_DRACO :: String -> String -> (GLTF -> Effect Unit) -> Effect GLTFLoader
+loadGLTF_DRACO pathToDracoModules url cb = do
+  gltfLoader <- newGLTFLoader
+  dracoLoader <- newDRACOLoader
+  setDecoderPath dracoLoader pathToDracoModules
+  setDRACOLoader gltfLoader dracoLoader
+  loadGLTF1 gltfLoader url cb
+  pure gltfLoader
+
+foreign import newGLTFLoader :: Effect GLTFLoader
+
+foreign import data DRACOLoader :: Type
+
+foreign import newDRACOLoader :: Effect DRACOLoader
+
+foreign import setDecoderPath :: DRACOLoader -> String -> Effect Unit
+
+foreign import setDRACOLoader :: GLTFLoader -> DRACOLoader -> Effect Unit
 
 foreign import data MTL :: Type
 
@@ -57,18 +80,12 @@ foreign import loadMTL :: String -> (MTL -> Effect Unit) -> Effect Unit
 
 foreign import data OBJ :: Type
 
--- I am not sure what this instance was being used for, nonetheless it is
--- impossible to maintain it with purs 0.15 and without purescript-three
--- instance object3DOBJ :: Object3D.Object3D OBJ
-
 foreign import loadOBJ :: String -> (OBJ -> Effect Unit) -> Effect Unit
 
 -------------
 
--- hacky, but... for now...
 foreign import addAnythingToScene :: forall a. Scene -> a -> Effect Unit
 
--- hacky, but... for now...
 foreign import setPositionOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
 
 foreign import setRotationOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit

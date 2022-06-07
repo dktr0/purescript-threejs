@@ -21,24 +21,25 @@ export const render = renderer => scene => camera => () => renderer.render(scene
 export const setSize = renderer => w => h => updateStyle => () => renderer.setSize(w,h,updateStyle);
 
 
-// 3D object Loaders
+// Loaders
 
-// note the rather weird handling of the callback in the line below...
-// ... seems to be necessary when we try to pass a callback with argument from PureScript
-//                              url              cb
-// foreign import loadGLTF :: String -> (GLTF -> Effect Unit) -> Effect Unit
-
+// note the handling of the callback in the line below...
 export const loadGLTF = url => cb => () => new THREE.GLTFLoader().load(url,x => cb(x)());
 
-// const loader = new GLTFLoader().load('url', function (gltf){});
+export const loadGLTF1 = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newGLTFLoader = () => new THREE.GLTFLoader();
+
+export const newDRACOLoader = () => new THREE.DRACOLoader();
+
+export const setDecoderPath = dracoLoader => modulePath => () => dracoLoader.setDecoderPath(modulePath);
+
+export const setDRACOLoader = gltfLoader => dracoLoader => () => gltfLoader.setDRACOLoader(dracoLoader);
 
 export const loadMTL = url => cb => () => new THREE.MTLLoader().load(url,x => cb(x)());
 
-// var mtlLoader = new MTLLoader().load("url", function (materials){});
-
 export const loadOBJ = url => cb => () => new THREE.OBJLoader().load(url,x => cb(x)());
 
-// var objLoader = new OBJLoader().load("url", function (object){});
 
 //////////
 
