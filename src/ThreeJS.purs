@@ -86,6 +86,14 @@ foreign import loadOBJ :: String -> (OBJ -> Effect Unit) -> Effect Unit
 
 -------------
 
+foreign import data Group :: Type
+
+foreign import newGroup :: Effect Group
+
+-------------
+
+foreign import addAnything :: forall a b. a -> b -> Effect Unit
+
 foreign import addAnythingToScene :: forall a. Scene -> a -> Effect Unit
 
 foreign import cloneObject3D :: forall a b. a -> Boolean -> Effect b -- yikes!!!

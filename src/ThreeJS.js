@@ -42,7 +42,13 @@ export const loadMTL = url => cb => () => new THREE.MTLLoader().load(url,x => cb
 export const loadOBJ = url => cb => () => new THREE.OBJLoader().load(url,x => cb(x)());
 
 
+// GROUPS
+
+export const newGroup = () => new THREE.Group();
+
 //////////
+
+export const addAnything = a => b => a.add(b);
 
 export const addAnythingToScene = scene => anything => () => scene.add(anything);
 
