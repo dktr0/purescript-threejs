@@ -46,6 +46,10 @@ export const loadOBJ = url => cb => () => new THREE.OBJLoader().load(url,x => cb
 
 export const addAnythingToScene = scene => anything => () => scene.add(anything);
 
+export const cloneObject3D = object3D => recursive => () => object3D.clone(recursive);
+
+export const copyObject3D = parent => object3D => recursive => () => parent.copy(object3D,recursive);
+
 export const removeObject3D = parent => child => () => parent.remove(child);
 
 export const removeFromParent = obj3D => () => obj3D.removeFromParent();

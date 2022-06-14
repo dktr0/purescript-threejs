@@ -88,6 +88,10 @@ foreign import loadOBJ :: String -> (OBJ -> Effect Unit) -> Effect Unit
 
 foreign import addAnythingToScene :: forall a. Scene -> a -> Effect Unit
 
+foreign import cloneObject3D :: forall a b. a -> Boolean -> Effect b -- yikes!!!
+
+foreign import copyObject3D :: forall a b. a -> b -> Boolean -> Effect Unit
+
 foreign import removeObject3D :: forall a b. a -> b -> Effect Unit
 
 foreign import removeFromParent :: forall a. a -> Effect Unit
