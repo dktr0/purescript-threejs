@@ -29,6 +29,8 @@ foreign import render :: Renderer -> Scene -> PerspectiveCamera -> Effect Unit
 
 foreign import setSize :: Renderer -> Number -> Number -> Boolean -> Effect Unit
 
+foreign import renderListsDispose :: Renderer -> Effect Unit
+
 
 -- Mesh
 

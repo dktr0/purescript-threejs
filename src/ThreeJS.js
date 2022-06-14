@@ -20,6 +20,7 @@ export const render = renderer => scene => camera => () => renderer.render(scene
 
 export const setSize = renderer => w => h => updateStyle => () => renderer.setSize(w,h,updateStyle);
 
+export const renderListsDispose = renderer => () => renderer.renderLists.dispose();
 
 // Loaders
 
