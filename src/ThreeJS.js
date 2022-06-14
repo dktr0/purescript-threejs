@@ -48,7 +48,7 @@ export const newGroup = () => new THREE.Group();
 
 //////////
 
-export const addAnything = a => b => a.add(b);
+export const addAnything = a => b => () => a.add(b);
 
 export const addAnythingToScene = scene => anything => () => scene.add(anything);
 
