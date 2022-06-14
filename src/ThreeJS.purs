@@ -86,6 +86,10 @@ foreign import loadOBJ :: String -> (OBJ -> Effect Unit) -> Effect Unit
 
 foreign import addAnythingToScene :: forall a. Scene -> a -> Effect Unit
 
+foreign import removeObject3D :: forall a b. a -> b -> Effect Unit
+
+foreign import removeFromParent :: forall a. a -> Effect Unit
+
 foreign import setPositionOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
 
 foreign import setRotationOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit

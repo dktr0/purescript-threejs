@@ -45,6 +45,10 @@ export const loadOBJ = url => cb => () => new THREE.OBJLoader().load(url,x => cb
 
 export const addAnythingToScene = scene => anything => () => scene.add(anything);
 
+export const removeObject3D = parent => child => () => parent.remove(child);
+
+export const removeFromParent = obj3D => () => obj3D.removeFromParent();
+
 export const setPositionOfAnything = thing => x => y => z => () => thing.position.set(x,y,z);
 
 export const setRotationOfAnything = thing => x => y => z => () => thing.rotation.set(x,y,z);
