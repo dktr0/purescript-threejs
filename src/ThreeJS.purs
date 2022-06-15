@@ -112,7 +112,7 @@ foreign import newMeshPhongMaterial :: forall params. Record params -> Effect Me
 
 -------------
 
-foreign import setColor :: forall a. a -> Int -> Effect Unit
+foreign import setColorInt :: forall a. a -> Int -> Effect Unit
 
 foreign import addAnything :: forall a b. a -> b -> Effect Unit
 
