@@ -63,7 +63,7 @@ export const setReceiveShadow = mesh => boolean => () => mesh.receiveShadow = bo
 
 //////////
 
-export const setColorInt = thing => color => () => thing.color = new Color(color);
+export const setColorInt = thing => color => () => thing.color = new THREE.Color(color);
 
 export const addAnything = a => b => () => a.add(b);
 
