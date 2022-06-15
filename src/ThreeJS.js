@@ -57,7 +57,7 @@ export const newMeshPhongMaterial = parameters => () => new THREE.MeshPhongMater
 
 // Mesh
 
-export const newMesh = geometry => material => () => new THREE.Mesh(geoemtry,material);
+export const newMesh = geometry => material => () => new THREE.Mesh(geometry,material);
 
 export const setReceiveShadow = mesh => boolean => () => mesh.receiveShadow = boolean;
 
