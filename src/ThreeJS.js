@@ -116,7 +116,7 @@ export const setEffectiveTimeScale = animationAction => t => () => animationActi
 
 export const fadeIn = animationAction => t => () => animationAction.fadeIn(t);
 
-export const fadeOut = animationAction => t => () => animationAction.fadeIn(t);
+export const fadeOut = animationAction => t => () => animationAction.fadeOut(t);
 
 
 // TEXTURE
