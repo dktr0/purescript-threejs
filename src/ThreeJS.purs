@@ -118,6 +118,24 @@ foreign import rotationY :: forall a. a -> Effect Number
 
 foreign import rotationZ :: forall a. a -> Effect Number
 
+setRotationX :: forall a. a -> Number -> Effect Unit
+setRotationX o x = do
+  y <- rotationY o
+  z <- rotationZ o
+  setRotationOfAnything o x y z
+
+setRotationY :: forall a. a -> Number -> Effect Unit
+setRotationY o y = do
+  x <- rotationX o
+  z <- rotationZ o
+  setRotationOfAnything o x y z
+
+setRotationZ :: forall a. a -> Number -> Effect Unit
+setRotationZ o z = do
+  x <- rotationX o
+  y <- rotationY o
+  setRotationOfAnything o x y z
+
 foreign import setRotationOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
 
 foreign import setScaleOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
