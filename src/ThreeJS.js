@@ -46,7 +46,24 @@ export const loadOBJ = url => cb => () => new THREE.OBJLoader().load(url,x => cb
 
 export const newGroup = () => new THREE.Group();
 
+// Geometries
+
+export const newPlaneGeometry = width => height => widthSegments => heightSegments => () => new THREE.PlaneGeometry(width,height,widthSegments,heightSegments);
+
+// Materials
+
+export const newMeshPhongMaterial = parameters => () => new THREE.MeshPhongMaterial(parameters);
+
+
+// Mesh
+
+export const newMesh = geometry => material => () => new THREE.Mesh(geoemtry,material);
+
+export const setReceiveShadow = mesh => boolean => () => mesh.receiveShadow = boolean;
+
 //////////
+
+export const setColor = thing => color => () => thing.color = color;
 
 export const addAnything = a => b => () => a.add(b);
 

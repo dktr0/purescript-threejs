@@ -36,6 +36,11 @@ foreign import renderListsDispose :: Renderer -> Effect Unit
 
 foreign import data Mesh :: Type
 
+foreign import newMesh :: forall a b. a -> b -> Effect Mesh
+
+foreign import setReceiveShadow :: Mesh -> Boolean -> Effect Unit
+
+
 
 -- 3D object Loaders
 
@@ -91,6 +96,23 @@ foreign import data Group :: Type
 foreign import newGroup :: Effect Group
 
 -------------
+
+foreign import data PlaneGeometry :: Type
+
+foreign import newPlaneGeometry :: Number -> Number -> Int -> Int -> Effect PlaneGeometry
+
+
+-------------
+
+foreign import data MeshPhongMaterial :: Type
+
+foreign import newMeshPhongMaterial :: forall params. Record params -> Effect MeshPhongMaterial
+
+
+
+-------------
+
+foreign import setColor :: forall a. a -> Int -> Effect Unit
 
 foreign import addAnything :: forall a b. a -> b -> Effect Unit
 
