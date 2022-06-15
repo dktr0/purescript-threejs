@@ -112,10 +112,12 @@ export const updateAnimationMixer = mixer => delta => () => mixer.update(delta);
 
 export const clipAction = animationMixer => clip => () => animationMixer.clipAction(clip);
 
-export const setEffectiveTimeScale = action => t => () => action.setEffectiveTimeScale(t);
+export const setEffectiveTimeScale = animationAction => t => () => animationAction.setEffectiveTimeScale(t);
 
+export const fadeIn = animationAction => t => () => animationAction.fadeIn(t);
 
-export const requestAnimationFrame = callback => () => window.requestAnimationFrame(callback)
+export const fadeOut = animationAction => t => () => animationAction.fadeIn(t);
+
 
 // TEXTURE
 
@@ -160,3 +162,5 @@ export const muted = videoElem => bool => () => videoElem.muted = bool;
 export const volume = videoElem => float => () => videoElem.volumen = float;
 
 export const autoplay = videoElem => bool => () => videoElem.autoplay = bool;
+
+export const requestAnimationFrame = callback => () => window.requestAnimationFrame(callback)

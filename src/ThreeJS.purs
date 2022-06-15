@@ -188,7 +188,11 @@ foreign import clipAction :: AnimationMixer -> AnimationClip -> Effect Animation
 
 foreign import setEffectiveTimeScale :: AnimationAction -> Number -> Effect Unit
 
-foreign import requestAnimationFrame :: Effect Unit -> Effect Unit
+foreign import fadeIn :: AnimationAction -> Number -> Effect Unit
+
+foreign import fadeOut :: AnimationAction -> Number -> Effect Unit
+
+
 
 -- TEXTURE
 
@@ -241,3 +245,5 @@ foreign import muted :: ElementLoader -> Boolean -> Effect Unit
 foreign import volume :: ElementLoader -> Number -> Effect Unit
 
 foreign import autoplay :: ElementLoader -> Boolean -> Effect Unit
+
+foreign import requestAnimationFrame :: Effect Unit -> Effect Unit
