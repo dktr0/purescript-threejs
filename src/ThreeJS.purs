@@ -198,6 +198,7 @@ foreign import fadeIn :: AnimationAction -> Number -> Effect Unit
 
 foreign import fadeOut :: AnimationAction -> Number -> Effect Unit
 
+foreign import stop :: AnimationAction -> Effect Unit
 
 
 -- TEXTURE

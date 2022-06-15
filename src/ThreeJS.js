@@ -124,6 +124,7 @@ export const fadeIn = animationAction => t => () => animationAction.fadeIn(t);
 
 export const fadeOut = animationAction => t => () => animationAction.fadeOut(t);
 
+export const stop = animationAction => () => animationAction.stop();
 
 // TEXTURE
 
