@@ -106,6 +106,18 @@ foreign import removeFromParent :: forall a. a -> Effect Unit
 
 foreign import setPositionOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
 
+foreign import setPositionX :: forall a. a -> Number -> Effect Unit
+
+foreign import setPositionY :: forall a. a -> Number -> Effect Unit
+
+foreign import setPositionZ :: forall a. a -> Number -> Effect Unit
+
+foreign import rotationX :: forall a. a -> Effect Number
+
+foreign import rotationY :: forall a. a -> Effect Number
+
+foreign import rotationZ :: forall a. a -> Effect Number
+
 foreign import setRotationOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
 
 foreign import setScaleOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit

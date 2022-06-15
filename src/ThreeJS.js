@@ -62,6 +62,18 @@ export const removeFromParent = obj3D => () => obj3D.removeFromParent();
 
 export const setPositionOfAnything = thing => x => y => z => () => thing.position.set(x,y,z);
 
+export const setPositionX = thing => x => () => thing.position.setX(x);
+
+export const setPositionY = thing => y => () => thing.position.setY(y);
+
+export const setPositionZ = thing => z => () => thing.position.setZ(z);
+
+export const rotationX = thing => () => thing.rotation.x;
+
+export const rotationY = thing => () => thing.rotation.y;
+
+export const rotationZ = thing => () => thing.rotation.z;
+
 export const setRotationOfAnything = thing => x => y => z => () => thing.rotation.set(x,y,z);
 
 export const setScaleOfAnything = thing => x => y => z => () => thing.scale.set(x,y,z);
