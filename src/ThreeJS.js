@@ -114,6 +114,12 @@ export const clipAction = animationMixer => clip => () => animationMixer.clipAct
 
 export const setEffectiveTimeScale = animationAction => t => () => animationAction.setEffectiveTimeScale(t);
 
+export const setEffectiveWeight = animationAction => weight => () => animationAction.setEffectiveWeight(weight);
+
+export const crossFadeFrom = animationAction => fadeOutAction => durationInSeconds => warpBoolean => () => animationAction.crossFadeFrom(fadeOutAction,durationInSeconds,warpBoolean);
+
+export const crossFadeTo = animationAction => fadeInAction => durationInSeconds => warpBoolean => () => animationAction.crossFadeFrom(fadeOutAction,durationInSeconds,warpBoolean);
+
 export const fadeIn = animationAction => t => () => animationAction.fadeIn(t);
 
 export const fadeOut = animationAction => t => () => animationAction.fadeOut(t);

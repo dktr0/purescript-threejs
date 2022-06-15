@@ -188,6 +188,12 @@ foreign import clipAction :: AnimationMixer -> AnimationClip -> Effect Animation
 
 foreign import setEffectiveTimeScale :: AnimationAction -> Number -> Effect Unit
 
+foreign import setEffectiveWeight :: AnimationAction -> Number -> Effect Unit
+
+foreign import crossFadeFrom :: AnimationAction -> AnimationAction -> Number -> Boolean -> Effect Unit
+
+foreign import crossFadeTo :: AnimationAction -> AnimationAction -> Number -> Boolean -> Effect Unit
+
 foreign import fadeIn :: AnimationAction -> Number -> Effect Unit
 
 foreign import fadeOut :: AnimationAction -> Number -> Effect Unit
