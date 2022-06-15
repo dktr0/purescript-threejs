@@ -118,7 +118,7 @@ export const setEffectiveWeight = animationAction => weight => () => animationAc
 
 export const crossFadeFrom = animationAction => fadeOutAction => durationInSeconds => warpBoolean => () => animationAction.crossFadeFrom(fadeOutAction,durationInSeconds,warpBoolean);
 
-export const crossFadeTo = animationAction => fadeInAction => durationInSeconds => warpBoolean => () => animationAction.crossFadeFrom(fadeOutAction,durationInSeconds,warpBoolean);
+export const crossFadeTo = animationAction => fadeInAction => durationInSeconds => warpBoolean => () => animationAction.crossFadeFrom(fadeInAction,durationInSeconds,warpBoolean);
 
 export const fadeIn = animationAction => t => () => animationAction.fadeIn(t);
 
