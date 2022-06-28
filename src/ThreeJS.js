@@ -79,6 +79,8 @@ export const removeFromParent = obj3D => () => obj3D.removeFromParent();
 
 export const setPositionOfAnything = thing => x => y => z => () => thing.position.set(x,y,z);
 
+// export const getPositionOfAnything = thing => () => thing.position;
+
 export const setPositionX = thing => x => () => thing.position.setX(x);
 
 export const setPositionY = thing => y => () => thing.position.setY(y);
@@ -102,7 +104,6 @@ export const preloadAnything = elem => () => elem.preload = "auto";
 export const playAnything = thing => () => thing.play();
 
 export const printAnything = thing => () => console.log(thing);
-
 
 // LIGHTS
 
@@ -144,6 +145,14 @@ export const fadeIn = animationAction => t => () => animationAction.fadeIn(t);
 export const fadeOut = animationAction => t => () => animationAction.fadeOut(t);
 
 export const stop = animationAction => () => animationAction.stop();
+
+// GEOMETRIES
+
+export const newBoxGeometry = w => h => d => () => new THREE.BoxGeometry(w,h,d);
+
+// MATERIALS
+
+export const meshBasicMaterial = params => () => new THREE.MeshBasicMaterial(params);
 
 // TEXTURE
 

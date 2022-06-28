@@ -83,7 +83,7 @@ foreign import setDRACOLoader :: GLTFLoader -> DRACOLoader -> Effect Unit
 
 foreign import data MTL :: Type
 
-foreign import loadMTL :: String -> (MTL -> Effect Unit) -> Effect Unit
+foreign import loadMTL :: String -> (MTL -> Effect Unit) -> Effect MTL
 
 foreign import data OBJ :: Type
 
@@ -127,6 +127,8 @@ foreign import removeObject3D :: forall a b. a -> b -> Effect Unit
 foreign import removeFromParent :: forall a. a -> Effect Unit
 
 foreign import setPositionOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
+
+-- foreign import getPositionOfAnything :: forall a. a -> Effect Vector3
 
 foreign import setPositionX :: forall a. a -> Number -> Effect Unit
 
@@ -224,6 +226,18 @@ foreign import fadeOut :: AnimationAction -> Number -> Effect Unit
 
 foreign import stop :: AnimationAction -> Effect Unit
 
+
+------------ GEOMETRIES
+
+foreign import data Geometry :: Type
+
+foreign import newBoxGeometry :: Number -> Number -> Number -> Effect Geometry
+
+------------ MATERIALS
+
+foreign import data Material :: Type
+
+foreign import meshBasicMaterial :: forall p. Record p -> Effect Material
 
 -- TEXTURE
 
