@@ -20,6 +20,12 @@ export const render = renderer => scene => camera => () => renderer.render(scene
 
 export const setSize = renderer => w => h => updateStyle => () => renderer.setSize(w,h,updateStyle);
 
+export const domElement = renderer => () => document.body.appendChild( renderer.domElement );
+
+// Mesh
+
+export const newMesh = geometry => material => () => new THREE.Mesh( geometry, material );
+
 
 // 3D object Loaders
 
@@ -44,6 +50,8 @@ export const loadOBJ = url => cb => () => new THREE.OBJLoader().load(url,x => cb
 export const addAnythingToScene = scene => anything => () => scene.add(anything);
 
 export const setPositionOfAnything = thing => x => y => z => () => thing.position.set(x,y,z);
+
+export const getPositionOfAnything = thing => () => thing.position;
 
 export const setRotationOfAnything = thing => x => y => z => () => thing.rotation.set(x,y,z);
 
@@ -84,8 +92,15 @@ export const clipAction = animationMixer => clip => () => animationMixer.clipAct
 
 export const setEffectiveTimeScale = action => t => () => action.setEffectiveTimeScale(t);
 
-
 export const requestAnimationFrame = callback => () => window.requestAnimationFrame(callback)
+
+// GEOMETRIES
+
+export const newBoxGeometry = w => h => d => () => new THREE.BoxGeometry(w,h,d);
+
+// MATERIALS
+
+export const meshBasicMaterial = params => () => new THREE.MeshBasicMaterial(params);
 
 // TEXTURE
 
