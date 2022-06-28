@@ -20,38 +20,78 @@ export const render = renderer => scene => camera => () => renderer.render(scene
 
 export const setSize = renderer => w => h => updateStyle => () => renderer.setSize(w,h,updateStyle);
 
-export const domElement = renderer => () => document.body.appendChild( renderer.domElement );
+export const renderListsDispose = renderer => () => renderer.renderLists.dispose();
 
-// Mesh
+// Loaders
 
-export const newMesh = geometry => material => () => new THREE.Mesh( geometry, material );
-
-
-// 3D object Loaders
-
-// note the rather weird handling of the callback in the line below...
-// ... seems to be necessary when we try to pass a callback with argument from PureScript
-//                              url              cb
-// foreign import loadGLTF :: String -> (GLTF -> Effect Unit) -> Effect Unit
-
+// note the handling of the callback in the line below...
 export const loadGLTF = url => cb => () => new THREE.GLTFLoader().load(url,x => cb(x)());
 
-// const loader = new GLTFLoader().load('url', function (gltf){});
+export const loadGLTF1 = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newGLTFLoader = () => new THREE.GLTFLoader();
+
+export const newDRACOLoader = () => new THREE.DRACOLoader();
+
+export const setDecoderPath = dracoLoader => modulePath => () => dracoLoader.setDecoderPath(modulePath);
+
+export const setDRACOLoader = gltfLoader => dracoLoader => () => gltfLoader.setDRACOLoader(dracoLoader);
 
 export const loadMTL = url => cb => () => new THREE.MTLLoader().load(url,x => cb(x)());
-
-// var mtlLoader = new MTLLoader().load("url", function (materials){});
 
 export const loadOBJ = url => cb => () => new THREE.OBJLoader().load(url,x => cb(x)());
 
 
+// GROUPS
+
+export const newGroup = () => new THREE.Group();
+
+// Geometries
+
+export const newPlaneGeometry = width => height => widthSegments => heightSegments => () => new THREE.PlaneGeometry(width,height,widthSegments,heightSegments);
+
+// Materials
+
+export const newMeshPhongMaterial = parameters => () => new THREE.MeshPhongMaterial(parameters);
+
+
+// Mesh
+
+export const newMesh = geometry => material => () => new THREE.Mesh(geometry,material);
+
+export const setReceiveShadow = mesh => boolean => () => mesh.receiveShadow = boolean;
+
 //////////
+
+export const setColorInt = thing => color => () => thing.color = new THREE.Color(color);
+
+export const addAnything = a => b => () => a.add(b);
 
 export const addAnythingToScene = scene => anything => () => scene.add(anything);
 
+export const cloneObject3D = object3D => recursive => () => object3D.clone(recursive);
+
+export const copyObject3D = parent => object3D => recursive => () => parent.copy(object3D,recursive);
+
+export const removeObject3D = parent => child => () => parent.remove(child);
+
+export const removeFromParent = obj3D => () => obj3D.removeFromParent();
+
 export const setPositionOfAnything = thing => x => y => z => () => thing.position.set(x,y,z);
 
-export const getPositionOfAnything = thing => () => thing.position;
+// export const getPositionOfAnything = thing => () => thing.position;
+
+export const setPositionX = thing => x => () => thing.position.setX(x);
+
+export const setPositionY = thing => y => () => thing.position.setY(y);
+
+export const setPositionZ = thing => z => () => thing.position.setZ(z);
+
+export const rotationX = thing => () => thing.rotation.x;
+
+export const rotationY = thing => () => thing.rotation.y;
+
+export const rotationZ = thing => () => thing.rotation.z;
 
 export const setRotationOfAnything = thing => x => y => z => () => thing.rotation.set(x,y,z);
 
@@ -90,9 +130,21 @@ export const updateAnimationMixer = mixer => delta => () => mixer.update(delta);
 
 export const clipAction = animationMixer => clip => () => animationMixer.clipAction(clip);
 
-export const setEffectiveTimeScale = action => t => () => action.setEffectiveTimeScale(t);
+export const setEffectiveTimeScale = animationAction => t => () => animationAction.setEffectiveTimeScale(t);
 
-export const requestAnimationFrame = callback => () => window.requestAnimationFrame(callback)
+export const setDuration = animationAction => durationInSeconds => () => animationAction.setDuration(durationInSeconds);
+
+export const setEffectiveWeight = animationAction => weight => () => animationAction.setEffectiveWeight(weight);
+
+export const crossFadeFrom = animationAction => fadeOutAction => durationInSeconds => warpBoolean => () => animationAction.crossFadeFrom(fadeOutAction,durationInSeconds,warpBoolean);
+
+export const crossFadeTo = animationAction => fadeInAction => durationInSeconds => warpBoolean => () => animationAction.crossFadeFrom(fadeInAction,durationInSeconds,warpBoolean);
+
+export const fadeIn = animationAction => t => () => animationAction.fadeIn(t);
+
+export const fadeOut = animationAction => t => () => animationAction.fadeOut(t);
+
+export const stop = animationAction => () => animationAction.stop();
 
 // GEOMETRIES
 
@@ -145,3 +197,5 @@ export const muted = videoElem => bool => () => videoElem.muted = bool;
 export const volume = videoElem => float => () => videoElem.volumen = float;
 
 export const autoplay = videoElem => bool => () => videoElem.autoplay = bool;
+
+export const requestAnimationFrame = callback => () => window.requestAnimationFrame(callback)

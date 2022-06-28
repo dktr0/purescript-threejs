@@ -29,14 +29,17 @@ foreign import render :: Renderer -> Scene -> PerspectiveCamera -> Effect Unit
 
 foreign import setSize :: Renderer -> Number -> Number -> Boolean -> Effect Unit
 
-foreign import domElement :: Renderer -> Effect Unit
+foreign import renderListsDispose :: Renderer -> Effect Unit
 
 
 -- Mesh
 
 foreign import data Mesh :: Type
 
-foreign import newMesh :: Geometry -> Material -> Effect Unit
+foreign import newMesh :: forall a b. a -> b -> Effect Mesh
+
+foreign import setReceiveShadow :: Mesh -> Boolean -> Effect Unit
+
 
 
 -- 3D object Loaders
@@ -53,7 +56,30 @@ type GLTF = {
   asset :: Mesh -- ? in ThreeJS: Object
   }
 
-foreign import loadGLTF :: String -> (GLTF -> Effect Unit) -> Effect Unit
+foreign import data GLTFLoader :: Type
+
+foreign import loadGLTF :: String -> (GLTF -> Effect Unit) -> Effect GLTFLoader
+
+foreign import loadGLTF1 :: GLTFLoader -> String -> (GLTF -> Effect Unit) -> Effect Unit
+
+loadGLTF_DRACO :: String -> String -> (GLTF -> Effect Unit) -> Effect GLTFLoader
+loadGLTF_DRACO pathToDracoModules url cb = do
+  gltfLoader <- newGLTFLoader
+  dracoLoader <- newDRACOLoader
+  setDecoderPath dracoLoader pathToDracoModules
+  setDRACOLoader gltfLoader dracoLoader
+  loadGLTF1 gltfLoader url cb
+  pure gltfLoader
+
+foreign import newGLTFLoader :: Effect GLTFLoader
+
+foreign import data DRACOLoader :: Type
+
+foreign import newDRACOLoader :: Effect DRACOLoader
+
+foreign import setDecoderPath :: DRACOLoader -> String -> Effect Unit
+
+foreign import setDRACOLoader :: GLTFLoader -> DRACOLoader -> Effect Unit
 
 foreign import data MTL :: Type
 
@@ -61,23 +87,78 @@ foreign import loadMTL :: String -> (MTL -> Effect Unit) -> Effect MTL
 
 foreign import data OBJ :: Type
 
--- I am not sure what this instance was being used for, nonetheless it is
--- impossible to maintain it with purs 0.15 and without purescript-three
--- instance object3DOBJ :: Object3D.Object3D OBJ
-
 foreign import loadOBJ :: String -> (OBJ -> Effect Unit) -> Effect Unit
 
 -------------
 
--- hacky, but... for now...
+foreign import data Group :: Type
+
+foreign import newGroup :: Effect Group
+
+-------------
+
+foreign import data PlaneGeometry :: Type
+
+foreign import newPlaneGeometry :: Number -> Number -> Int -> Int -> Effect PlaneGeometry
+
+
+-------------
+
+foreign import data MeshPhongMaterial :: Type
+
+foreign import newMeshPhongMaterial :: forall params. Record params -> Effect MeshPhongMaterial
+
+
+
+-------------
+
+foreign import setColorInt :: forall a. a -> Int -> Effect Unit
+
+foreign import addAnything :: forall a b. a -> b -> Effect Unit
+
 foreign import addAnythingToScene :: forall a. Scene -> a -> Effect Unit
 
--- hacky, but... for now...
+foreign import cloneObject3D :: forall a b. a -> Boolean -> Effect b -- yikes!!!
+
+foreign import copyObject3D :: forall a b. a -> b -> Boolean -> Effect Unit
+
+foreign import removeObject3D :: forall a b. a -> b -> Effect Unit
+
+foreign import removeFromParent :: forall a. a -> Effect Unit
+
 foreign import setPositionOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
 
-type Vector3 = { x :: Number, y :: Number, z :: Number }
+-- foreign import getPositionOfAnything :: forall a. a -> Effect Vector3
 
-foreign import getPositionOfAnything :: forall a. a -> Effect Vector3
+foreign import setPositionX :: forall a. a -> Number -> Effect Unit
+
+foreign import setPositionY :: forall a. a -> Number -> Effect Unit
+
+foreign import setPositionZ :: forall a. a -> Number -> Effect Unit
+
+foreign import rotationX :: forall a. a -> Effect Number
+
+foreign import rotationY :: forall a. a -> Effect Number
+
+foreign import rotationZ :: forall a. a -> Effect Number
+
+setRotationX :: forall a. a -> Number -> Effect Unit
+setRotationX o x = do
+  y <- rotationY o
+  z <- rotationZ o
+  setRotationOfAnything o x y z
+
+setRotationY :: forall a. a -> Number -> Effect Unit
+setRotationY o y = do
+  x <- rotationX o
+  z <- rotationZ o
+  setRotationOfAnything o x y z
+
+setRotationZ :: forall a. a -> Number -> Effect Unit
+setRotationZ o z = do
+  x <- rotationX o
+  y <- rotationY o
+  setRotationOfAnything o x y z
 
 foreign import setRotationOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
 
@@ -131,7 +212,20 @@ foreign import clipAction :: AnimationMixer -> AnimationClip -> Effect Animation
 
 foreign import setEffectiveTimeScale :: AnimationAction -> Number -> Effect Unit
 
-foreign import requestAnimationFrame :: Effect Unit -> Effect Unit
+foreign import setDuration :: AnimationAction -> Number -> Effect Unit
+
+foreign import setEffectiveWeight :: AnimationAction -> Number -> Effect Unit
+
+foreign import crossFadeFrom :: AnimationAction -> AnimationAction -> Number -> Boolean -> Effect Unit
+
+foreign import crossFadeTo :: AnimationAction -> AnimationAction -> Number -> Boolean -> Effect Unit
+
+foreign import fadeIn :: AnimationAction -> Number -> Effect Unit
+
+foreign import fadeOut :: AnimationAction -> Number -> Effect Unit
+
+foreign import stop :: AnimationAction -> Effect Unit
+
 
 ------------ GEOMETRIES
 
@@ -196,3 +290,5 @@ foreign import muted :: ElementLoader -> Boolean -> Effect Unit
 foreign import volume :: ElementLoader -> Number -> Effect Unit
 
 foreign import autoplay :: ElementLoader -> Boolean -> Effect Unit
+
+foreign import requestAnimationFrame :: Effect Unit -> Effect Unit
