@@ -97,9 +97,35 @@ foreign import newGroup :: Effect Group
 
 -------------
 
+-- Geometries
+
 foreign import data PlaneGeometry :: Type
 
 foreign import newPlaneGeometry :: Number -> Number -> Int -> Int -> Effect PlaneGeometry
+
+foreign import data CapsuleGeometry :: Type
+
+foreign import newCapsuleGeometry :: Number -> Number -> Int -> Int -> Effect CapsuleGeometry
+
+foreign import data SphereGeometry :: Type
+
+foreign import newSphereGeometry :: Number -> Int -> Int -> Number -> Number -> Number -> Number -> Effect SphereGeometry
+
+foreign import data GridHelper :: Type
+
+foreign import newGridHelper :: Number -> Number -> Effect GridHelper
+
+foreign import data TetrahedronGeometry :: Type
+
+foreign import newTetrahedronGeometry :: Number -> Int -> Effect TetrahedronGeometry
+
+foreign import data CircleGeometry :: Type
+
+foreign import newCircleGeometry :: Number -> Int -> Number -> Number -> Effect CircleGeometry
+
+foreign import data ConeGeometry :: Type
+
+foreign import newConeGeometry :: Number -> Number -> Int -> Int -> Boolean -> Number -> Number -> Effect ConeGeometry
 
 
 -------------

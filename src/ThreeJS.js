@@ -50,6 +50,18 @@ export const newGroup = () => new THREE.Group();
 
 export const newPlaneGeometry = width => height => widthSegments => heightSegments => () => new THREE.PlaneGeometry(width,height,widthSegments,heightSegments);
 
+export const newCapsuleGeometry = radius => length => capSegments => radialSegments => () => new THREE.CapsuleGeometry(radius,length,capSegments,radialSegments);
+
+export const newSphereGeometry = radius => widthSegments => heightSegments => phiStart => phiLength => thetaStart => thetaLength => () => new THREE.SphereGeometry(radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength);
+
+export const newGridHelper = size => divisions => () => new THREE.GridHelper(size, divisions);
+
+export const newTetrahedronGeometry = radius => detail => () => new THREE.TetrahedronGeometry(radius,detail);
+
+export const newCircleGeometry = radius => segments => thetaStart => thetaLength => () => new THREE.CircleGeometry(radius,segments,thetaStart,thetaLength);
+
+export const newConeGeometry = radius => height => radialSegments => heightSegments => openEnded => thetaStart => thetaLength => () => new THREE.ConeGeometry(radius,height,radialSegments,heightSegments, openEnded, thetaStart, thetaLength);
+
 // Materials
 
 export const newMeshPhongMaterial = parameters => () => new THREE.MeshPhongMaterial(parameters);
