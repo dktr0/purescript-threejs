@@ -62,6 +62,22 @@ export const newCircleGeometry = radius => segments => thetaStart => thetaLength
 
 export const newConeGeometry = radius => height => radialSegments => heightSegments => openEnded => thetaStart => thetaLength => () => new THREE.ConeGeometry(radius,height,radialSegments,heightSegments, openEnded, thetaStart, thetaLength);
 
+export const newCylinderGeometry = radiusTop => radiusBottom => height => radialSegments => heightSegments => openEnded => thetaStart => thetaLength => () => new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded, thetaStart, thetaLength);
+
+export const newDodecahedronGeometry = radius => detail => () => new THREE.DodecahedronGeometry(radius,detail);
+
+export const newTorusGeometry = radius => tube => radialSegments => tubularSegments => arc => () => new THREE.TorusGeometry(radius, tube, radialSegments, tubularSegments, arc);
+
+export const newTorusKnotGeometry = radius => tube => tubularSegments => radialSegments => p => q => () => new THREE.TorusKnotGeometry(radius, tube, tubularSegments, radialSegments, p, q);
+
+export const newWireframeGeometry = geometry => () => new THREE.WireframeGeometry(geometry);
+
+export const newRingGeometry = innerRadius => outerRadius => thetaSegments => phiSegments => thetaStart => thetaLength => () => new THREE.RingGeometry(innerRadius, outerRadius, thetaSegments, phiSegments, thetaStart, thetaLength);
+
+export const newOctahedronGeometry = radius => detail => () => new THREE.OctahedronGeometry(radius, detail);
+
+export const newIcosahedronGeometry = radius => detail => () => new THREE.IcosahedronGeometry(radius, detail);
+
 // Materials
 
 export const newMeshPhongMaterial = parameters => () => new THREE.MeshPhongMaterial(parameters);

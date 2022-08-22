@@ -111,10 +111,6 @@ foreign import data SphereGeometry :: Type
 
 foreign import newSphereGeometry :: Number -> Int -> Int -> Number -> Number -> Number -> Number -> Effect SphereGeometry
 
-foreign import data GridHelper :: Type
-
-foreign import newGridHelper :: Number -> Number -> Effect GridHelper
-
 foreign import data TetrahedronGeometry :: Type
 
 foreign import newTetrahedronGeometry :: Number -> Int -> Effect TetrahedronGeometry
@@ -127,6 +123,37 @@ foreign import data ConeGeometry :: Type
 
 foreign import newConeGeometry :: Number -> Number -> Int -> Int -> Boolean -> Number -> Number -> Effect ConeGeometry
 
+foreign import data CylinderGeometry :: Type
+
+foreign import newCylinderGeometry :: Number -> Number -> Number -> Int -> Int -> Boolean -> Number -> Number -> Effect CylinderGeometry
+
+foreign import data DodecahedronGeometry :: Type
+
+foreign import newDodecahedronGeometry :: Number -> Int -> Effect DodecahedronGeometry
+
+foreign import data TorusGeometry :: Type
+
+foreign import newTorusGeometry :: Number -> Number -> Int -> Int -> Number -> Effect TorusGeometry
+
+foreign import data TorusKnotGeometry :: Type
+
+foreign import newTorusKnotGeometry :: Number -> Number -> Int -> Int -> Int -> Int -> Effect TorusKnotGeometry
+
+foreign import data WireframeGeometry :: Type
+
+foreign import newWireframeGeometry :: forall a. a -> Effect WireframeGeometry
+
+foreign import data RingGeometry :: Type
+
+foreign import newRingGeometry :: Number -> Number -> Int -> Int -> Number -> Number -> Effect RingGeometry
+
+foreign import data OctahedronGeometry :: Type
+
+foreign import newOctahedronGeometry :: Number -> Int -> Effect OctahedronGeometry
+
+foreign import data IcosahedronGeometry :: Type
+
+foreign import newIcosahedronGeometry :: Number -> Int -> Effect IcosahedronGeometry
 
 -------------
 
@@ -221,6 +248,10 @@ foreign import newPointLight :: Int -> Number -> Number -> Number -> Effect Poin
 foreign import data PolarGridHelper :: Type
 
 foreign import newPolarGridHelper :: Number -> Int -> Int -> Int -> Effect PolarGridHelper
+
+foreign import data GridHelper :: Type
+
+foreign import newGridHelper :: Number -> Number -> Effect GridHelper
 
 foreign import windowInnerWidth :: Effect Number
 
