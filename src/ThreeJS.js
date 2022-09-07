@@ -78,11 +78,6 @@ export const newOctahedronGeometry = radius => detail => () => new THREE.Octahed
 
 export const newIcosahedronGeometry = radius => detail => () => new THREE.IcosahedronGeometry(radius, detail);
 
-// Materials
-
-export const newMeshPhongMaterial = parameters => () => new THREE.MeshPhongMaterial(parameters);
-
-
 // Mesh
 
 export const newMesh = geometry => material => () => new THREE.Mesh(geometry,material);
@@ -178,9 +173,50 @@ export const stop = animationAction => () => animationAction.stop();
 
 export const newBoxGeometry = w => h => d => () => new THREE.BoxGeometry(w,h,d);
 
-// MATERIALS
+// Objects
+
+export const newLine = geometry => material => () => new THREE.Line(geometry, material);
+
+export const newPoints = geometry => material => () => new THREE.Points(geometry, material);
+
+export const newSprite = material => () => new THREE.Sprite(material);
+
+
+// Materials
 
 export const meshBasicMaterial = params => () => new THREE.MeshBasicMaterial(params);
+
+export const newMeshPhongMaterial = parameters => () => new THREE.MeshPhongMaterial(parameters);
+
+export const newMeshStandardMaterial = parameters => () => new THREE.MeshStandardMaterial(parameters);
+
+export const newSpriteMaterial = parameters => () => new THREE.SpriteMaterial(parameters);
+
+export const shadowMaterial = params => () => new THREE.ShadowMaterial(params);
+
+export const shaderMaterial = params => () => new THREE.ShaderMaterial(params);
+
+export const rawShaderMaterial = params => () => new THREE.RawShaderMaterial(params);
+
+export const meshToonMaterial = params => () => new THREE.MeshToonMaterial(params);
+
+export const meshPhysicalMaterial = params => () => new THREE.MeshPhysicalMaterial(params);
+
+export const meshNormalMaterial = params => () => new THREE.MeshNormalMaterial(params);
+
+export const meshMatcapMaterial = params => () => new THREE.MeshMatcapMaterial(params);
+
+export const meshLambertMaterial = params => () => new THREE.MeshLambertMaterial(params);
+
+export const meshDistanceMaterial = params => () => new THREE.MeshDistanceMaterial(params);
+
+export const meshDepthMaterial = params => () => new THREE.MeshDepthMaterial(params);
+
+export const lineDashedMaterial = params => () => new THREE.LineDashedMaterial(params);
+
+export const lineBasicMaterial = params => () => new THREE.LineBasicMaterial(params);
+
+export const pointsMaterial = params => () => new THREE.PointsMaterial(params);
 
 // TEXTURE
 
