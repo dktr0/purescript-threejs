@@ -162,9 +162,7 @@ export const textureLoader = url => () => new THREE.TextureLoader().load(url);
 
 export const createElement = name => () => document.createElement(name);
 
-export const srcOfElement = elem => url => () => elem.src = url;
-
-export const getElementById = idName => () => document.getElementById(idName);
+export const getElementById = id => () => document.getElementById(id);
 
 export const videoTexture = videoElem => () => new THREE.VideoTexture(videoElem);
 
@@ -188,14 +186,6 @@ export const minFilter = texture => filter => () => texture.minFilter = filter;
 
 export const magFilter = texture => filter => () => texture.magFilter = filter;
 
-// video settings
-
-export const loop = videoElem => bool => () => videoElem.loop = bool;
-
-export const muted = videoElem => bool => () => videoElem.muted = bool;
-
-export const volume = videoElem => float => () => videoElem.volumen = float;
-
-export const autoplay = videoElem => bool => () => videoElem.autoplay = bool;
+//
 
 export const requestAnimationFrame = callback => () => window.requestAnimationFrame(callback)

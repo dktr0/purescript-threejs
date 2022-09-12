@@ -2,6 +2,7 @@ module ThreeJS where
 
 import Prelude
 import Effect (Effect)
+import Web.HTML.HTMLMediaElement as HTML
 
 -- Scene
 
@@ -87,7 +88,7 @@ foreign import loadMTL :: String -> (MTL -> Effect Unit) -> Effect MTL
 
 foreign import data OBJ :: Type
 
-foreign import loadOBJ :: String -> (OBJ -> Effect Unit) -> Effect Unit
+foreign import loadOBJ :: String -> (OBJ -> Effect Unit) -> Effect OBJ
 
 -------------
 
@@ -247,15 +248,11 @@ foreign import data TextureLoader :: Type
 
 foreign import textureLoader :: String -> Effect TextureLoader
 
-foreign import data ElementLoader :: Type
+foreign import createElement :: String -> Effect HTML.HTMLMediaElement
 
-foreign import createElement :: String -> Effect ElementLoader
+foreign import getElementById :: String -> Effect HTML.HTMLMediaElement
 
-foreign import srcOfElement :: ElementLoader -> String -> Effect Unit
-
-foreign import getElementById :: String -> Effect ElementLoader
-
-foreign import videoTexture :: ElementLoader -> Effect TextureLoader
+foreign import videoTexture :: HTML.HTMLMediaElement -> Effect TextureLoader
 
 --changing
 
@@ -281,14 +278,6 @@ foreign import minFilter :: TextureLoader -> Effect Filter -> Effect Unit
 
 foreign import magFilter :: TextureLoader -> Effect Filter -> Effect Unit
 
---video settings
-
-foreign import loop :: ElementLoader -> Boolean -> Effect Unit
-
-foreign import muted :: ElementLoader -> Boolean -> Effect Unit
-
-foreign import volume :: ElementLoader -> Number -> Effect Unit
-
-foreign import autoplay :: ElementLoader -> Boolean -> Effect Unit
+--
 
 foreign import requestAnimationFrame :: Effect Unit -> Effect Unit

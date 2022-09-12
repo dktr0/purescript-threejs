@@ -1,5 +1,5 @@
 { name = "purescript-threejs"
-, dependencies = [ "effect", "prelude" ]
+, dependencies = [ "effect", "prelude", "web-html" ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
 }
