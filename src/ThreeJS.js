@@ -50,10 +50,33 @@ export const newGroup = () => new THREE.Group();
 
 export const newPlaneGeometry = width => height => widthSegments => heightSegments => () => new THREE.PlaneGeometry(width,height,widthSegments,heightSegments);
 
-// Materials
+export const newCapsuleGeometry = radius => length => capSegments => radialSegments => () => new THREE.CapsuleGeometry(radius,length,capSegments,radialSegments);
 
-export const newMeshPhongMaterial = parameters => () => new THREE.MeshPhongMaterial(parameters);
+export const newSphereGeometry = radius => widthSegments => heightSegments => phiStart => phiLength => thetaStart => thetaLength => () => new THREE.SphereGeometry(radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength);
 
+export const newGridHelper = size => divisions => () => new THREE.GridHelper(size, divisions);
+
+export const newTetrahedronGeometry = radius => detail => () => new THREE.TetrahedronGeometry(radius,detail);
+
+export const newCircleGeometry = radius => segments => thetaStart => thetaLength => () => new THREE.CircleGeometry(radius,segments,thetaStart,thetaLength);
+
+export const newConeGeometry = radius => height => radialSegments => heightSegments => openEnded => thetaStart => thetaLength => () => new THREE.ConeGeometry(radius,height,radialSegments,heightSegments, openEnded, thetaStart, thetaLength);
+
+export const newCylinderGeometry = radiusTop => radiusBottom => height => radialSegments => heightSegments => openEnded => thetaStart => thetaLength => () => new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded, thetaStart, thetaLength);
+
+export const newDodecahedronGeometry = radius => detail => () => new THREE.DodecahedronGeometry(radius,detail);
+
+export const newTorusGeometry = radius => tube => radialSegments => tubularSegments => arc => () => new THREE.TorusGeometry(radius, tube, radialSegments, tubularSegments, arc);
+
+export const newTorusKnotGeometry = radius => tube => tubularSegments => radialSegments => p => q => () => new THREE.TorusKnotGeometry(radius, tube, tubularSegments, radialSegments, p, q);
+
+export const newWireframeGeometry = geometry => () => new THREE.WireframeGeometry(geometry);
+
+export const newRingGeometry = innerRadius => outerRadius => thetaSegments => phiSegments => thetaStart => thetaLength => () => new THREE.RingGeometry(innerRadius, outerRadius, thetaSegments, phiSegments, thetaStart, thetaLength);
+
+export const newOctahedronGeometry = radius => detail => () => new THREE.OctahedronGeometry(radius, detail);
+
+export const newIcosahedronGeometry = radius => detail => () => new THREE.IcosahedronGeometry(radius, detail);
 
 // Mesh
 
@@ -150,9 +173,50 @@ export const stop = animationAction => () => animationAction.stop();
 
 export const newBoxGeometry = w => h => d => () => new THREE.BoxGeometry(w,h,d);
 
-// MATERIALS
+// Objects
+
+export const newLine = geometry => material => () => new THREE.Line(geometry, material);
+
+export const newPoints = geometry => material => () => new THREE.Points(geometry, material);
+
+export const newSprite = material => () => new THREE.Sprite(material);
+
+
+// Materials
 
 export const meshBasicMaterial = params => () => new THREE.MeshBasicMaterial(params);
+
+export const newMeshPhongMaterial = parameters => () => new THREE.MeshPhongMaterial(parameters);
+
+export const newMeshStandardMaterial = parameters => () => new THREE.MeshStandardMaterial(parameters);
+
+export const newSpriteMaterial = parameters => () => new THREE.SpriteMaterial(parameters);
+
+export const shadowMaterial = params => () => new THREE.ShadowMaterial(params);
+
+export const shaderMaterial = params => () => new THREE.ShaderMaterial(params);
+
+export const rawShaderMaterial = params => () => new THREE.RawShaderMaterial(params);
+
+export const meshToonMaterial = params => () => new THREE.MeshToonMaterial(params);
+
+export const meshPhysicalMaterial = params => () => new THREE.MeshPhysicalMaterial(params);
+
+export const meshNormalMaterial = params => () => new THREE.MeshNormalMaterial(params);
+
+export const meshMatcapMaterial = params => () => new THREE.MeshMatcapMaterial(params);
+
+export const meshLambertMaterial = params => () => new THREE.MeshLambertMaterial(params);
+
+export const meshDistanceMaterial = params => () => new THREE.MeshDistanceMaterial(params);
+
+export const meshDepthMaterial = params => () => new THREE.MeshDepthMaterial(params);
+
+export const lineDashedMaterial = params => () => new THREE.LineDashedMaterial(params);
+
+export const lineBasicMaterial = params => () => new THREE.LineBasicMaterial(params);
+
+export const pointsMaterial = params => () => new THREE.PointsMaterial(params);
 
 // TEXTURE
 

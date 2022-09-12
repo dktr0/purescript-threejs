@@ -98,10 +98,63 @@ foreign import newGroup :: Effect Group
 
 -------------
 
+-- Geometries
+
 foreign import data PlaneGeometry :: Type
 
 foreign import newPlaneGeometry :: Number -> Number -> Int -> Int -> Effect PlaneGeometry
 
+foreign import data CapsuleGeometry :: Type
+
+foreign import newCapsuleGeometry :: Number -> Number -> Int -> Int -> Effect CapsuleGeometry
+
+foreign import data SphereGeometry :: Type
+
+foreign import newSphereGeometry :: Number -> Int -> Int -> Number -> Number -> Number -> Number -> Effect SphereGeometry
+
+foreign import data TetrahedronGeometry :: Type
+
+foreign import newTetrahedronGeometry :: Number -> Int -> Effect TetrahedronGeometry
+
+foreign import data CircleGeometry :: Type
+
+foreign import newCircleGeometry :: Number -> Int -> Number -> Number -> Effect CircleGeometry
+
+foreign import data ConeGeometry :: Type
+
+foreign import newConeGeometry :: Number -> Number -> Int -> Int -> Boolean -> Number -> Number -> Effect ConeGeometry
+
+foreign import data CylinderGeometry :: Type
+
+foreign import newCylinderGeometry :: Number -> Number -> Number -> Int -> Int -> Boolean -> Number -> Number -> Effect CylinderGeometry
+
+foreign import data DodecahedronGeometry :: Type
+
+foreign import newDodecahedronGeometry :: Number -> Int -> Effect DodecahedronGeometry
+
+foreign import data TorusGeometry :: Type
+
+foreign import newTorusGeometry :: Number -> Number -> Int -> Int -> Number -> Effect TorusGeometry
+
+foreign import data TorusKnotGeometry :: Type
+
+foreign import newTorusKnotGeometry :: Number -> Number -> Int -> Int -> Int -> Int -> Effect TorusKnotGeometry
+
+foreign import data WireframeGeometry :: Type
+
+foreign import newWireframeGeometry :: forall a. a -> Effect WireframeGeometry
+
+foreign import data RingGeometry :: Type
+
+foreign import newRingGeometry :: Number -> Number -> Int -> Int -> Number -> Number -> Effect RingGeometry
+
+foreign import data OctahedronGeometry :: Type
+
+foreign import newOctahedronGeometry :: Number -> Int -> Effect OctahedronGeometry
+
+foreign import data IcosahedronGeometry :: Type
+
+foreign import newIcosahedronGeometry :: Number -> Int -> Effect IcosahedronGeometry
 
 -------------
 
@@ -191,11 +244,17 @@ foreign import data PointLight :: Type
 
 foreign import newPointLight :: Int -> Number -> Number -> Number -> Effect PointLight
 
---
+-- HELPERS
 
 foreign import data PolarGridHelper :: Type
 
 foreign import newPolarGridHelper :: Number -> Int -> Int -> Int -> Effect PolarGridHelper
+
+foreign import data GridHelper :: Type
+
+foreign import newGridHelper :: Number -> Number -> Effect GridHelper
+
+--
 
 foreign import windowInnerWidth :: Effect Number
 
@@ -234,11 +293,85 @@ foreign import data Geometry :: Type
 
 foreign import newBoxGeometry :: Number -> Number -> Number -> Effect Geometry
 
+------------ OBJECTS
+
+foreign import data Sprite :: Type
+
+foreign import newSprite :: SpriteMaterial -> Effect Sprite
+
+foreign import data Points :: Type
+
+foreign import newPoints :: forall a b. a -> b -> Effect Points
+
+foreign import data Line :: Type
+
+foreign import newLine :: forall a b. a -> b -> Effect Line
+
 ------------ MATERIALS
 
 foreign import data Material :: Type
 
 foreign import meshBasicMaterial :: forall p. Record p -> Effect Material
+
+foreign import data MeshStandardMaterial :: Type
+
+foreign import newMeshStandardMaterial :: forall params. Record params -> Effect MeshStandardMaterial
+
+foreign import data SpriteMaterial :: Type
+
+foreign import newSpriteMaterial :: forall params. Record params -> Effect SpriteMaterial
+
+foreign import data ShadowMaterial :: Type
+
+foreign import shadowMaterial :: forall params. Record params -> Effect ShadowMaterial
+
+foreign import data ShaderMaterial :: Type
+
+foreign import shaderMaterial :: forall params. Record params -> Effect ShaderMaterial
+
+foreign import data RawShaderMaterial :: Type
+
+foreign import rawShaderMaterial :: forall params. Record params -> Effect RawShaderMaterial
+
+foreign import data MeshToonMaterial :: Type
+
+foreign import meshToonMaterial :: forall params. Record params -> Effect MeshToonMaterial
+
+foreign import data MeshPhysicalMaterial :: Type
+
+foreign import meshPhysicalMaterial :: forall params. Record params -> Effect MeshPhysicalMaterial
+
+foreign import data MeshNormalMaterial :: Type
+
+foreign import meshNormalMaterial :: forall params. Record params -> Effect MeshNormalMaterial
+
+foreign import data MeshMatcapMaterial :: Type
+
+foreign import meshMatcapMaterial :: forall params. Record params -> Effect MeshMatcapMaterial
+
+foreign import data MeshLambertMaterial :: Type
+
+foreign import meshLambertMaterial :: forall params. Record params -> Effect MeshLambertMaterial
+
+foreign import data MeshDistanceMaterial :: Type
+
+foreign import meshDistanceMaterial :: forall params. Record params -> Effect MeshDistanceMaterial
+
+foreign import data MeshDepthMaterial :: Type
+
+foreign import meshDepthMaterial :: forall params. Record params -> Effect MeshDepthMaterial
+
+foreign import data LineDashedMaterial :: Type
+
+foreign import lineDashedMaterial :: forall params. Record params -> Effect LineDashedMaterial
+
+foreign import data LineBasicMaterial :: Type
+
+foreign import lineBasicMaterial :: forall params. Record params -> Effect LineBasicMaterial
+
+foreign import data PointsMaterial :: Type
+
+foreign import pointsMaterial :: forall params. Record params -> Effect PointsMaterial
 
 -- TEXTURE
 
