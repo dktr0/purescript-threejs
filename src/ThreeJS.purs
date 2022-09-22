@@ -18,6 +18,13 @@ foreign import newPerspectiveCamera :: Number -> Number -> Number -> Number -> E
 
 foreign import setAspect :: PerspectiveCamera -> Number -> Effect Unit
 
+-- OrthographicCamera
+
+foreign import data OrthographicCamera :: Type
+
+foreign import newOrthographicCamera :: Number -> Number -> Number -> Number -> Number -> Number -> Effect OrthographicCamera
+
+
 
 -- Renderer
 
@@ -252,6 +259,61 @@ foreign import newPolarGridHelper :: Number -> Int -> Int -> Int -> Effect Polar
 foreign import data GridHelper :: Type
 
 foreign import newGridHelper :: Number -> Number -> Effect GridHelper
+
+foreign import data AxesHelper :: Type
+
+foreign import newAxesHelper :: Number -> Effect AxesHelper
+
+foreign import data BoxHelper :: Type
+
+foreign import newBoxHelper :: forall a. a -> Int -> Effect BoxHelper
+
+foreign import data Box3Helper :: Type
+
+foreign import newBox3Helper :: Box3 -> Int -> Effect Box3Helper
+
+foreign import data CameraHelper :: Type
+
+foreign import newCameraHelper :: forall a. a -> Effect CameraHelper
+
+foreign import data PlaneHelper :: Type
+
+foreign import newPlaneHelper :: forall a. a -> Number -> Int -> Effect PlaneHelper
+
+foreign import data DirectionalLightHelper :: Type
+
+foreign import newDirectionalLightHelper :: DirectionalLight -> Number -> Int -> Effect DirectionalLightHelper
+
+foreign import data HemisphereLightHelper :: Type
+
+foreign import newHemisphereLightHelper :: HemisphereLight -> Number -> Int -> Effect HemisphereLightHelper
+
+foreign import data PointLightHelper :: Type
+
+foreign import newPointLightHelper :: PointLight -> Number -> Int -> Effect PointLightHelper
+
+foreign import data SpotLightHelper :: Type
+
+foreign import newSpotLightHelper :: SpotLight -> Int -> Effect SpotLightHelper
+
+
+-- MATH
+
+foreign import data Vector2 :: Type
+
+foreign import newVector2 :: Number -> Number -> Effect Vector2
+
+foreign import data Vector3 :: Type
+
+foreign import newVector3 :: Number -> Number -> Number -> Effect Vector3
+
+foreign import data Box3 :: Type
+
+foreign import newBox3 :: Vector3 -> Vector3 -> Effect Box3
+
+foreign import data Plane :: Type
+
+foreign import newPlane :: Vector3 -> Number -> Effect Plane
 
 --
 
