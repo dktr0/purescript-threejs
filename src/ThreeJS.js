@@ -11,6 +11,10 @@ export const newPerspectiveCamera = fov => aspect => near => far => () => new TH
 
 export const setAspect = pCamera => aspect => () => pCamera.aspect = aspect;
 
+// OrthographicCamera
+
+export const newOrthographicCamera = left => right => top => bottom => near => far => () => new THREE.OrthographicCamera(left, right, top, bottom, near, far);
+
 
 // Renderer
 
@@ -136,8 +140,39 @@ export const newAmbientLight = rgb => intensity => () => new THREE.AmbientLight(
 
 export const newDirectionalLight = rgb => intensity => () => new THREE.DirectionalLight(rgb,intensity);
 
-export const newPointLight = rgb => intensity => distance => decay => () => new
-THREE.PointLight(rgb,intensity,distance,decay);
+export const newPointLight = rgb => intensity => distance => decay => () => new THREE.PointLight(rgb,intensity,distance,decay);
+
+// HELPERS
+
+export const newArrowHelper = dir => origin => length => hex => headLength => headWidth => () => new THREE.ArrowHelper(dir, origin, length, hex, headLength, headWidth);
+
+export const newAxesHelper = size => () => new THREE.AxesHelper(size);
+
+export const newBoxHelper = object => color => () => new THREE.BoxHelper(object, color);
+
+export const newBox3Helper = box => color => () => new THREE.Box3Helper(box, color);
+
+export const newCameraHelper = camera => () => new THREE.CameraHelper(camera);
+
+export const newPlaneHelper = plane => size => hex => () => new THREE.PlaneHelper(plane, size, hex);
+
+export const newDirectionalLightHelper = light => size => color => () => new THREE.DirectionalLightHelper(light, size, color);
+
+export const newHemisphereLightHelper = light => sphereSize => color => () => new THREE.HemisphereLightHelper(light, sphereSize, color);
+
+export const newPointLightHelper = light => sphereSize => color => () => new THREE.PointLightHelper(light, sphereSize, color);
+
+export const newSpotLightHelper = light => color => () => new THREE.SpotLightHelper(light, color);
+
+// MATH
+
+export const newVector2 = x => y => () => new THREE.Vector2(x, y);
+
+export const newVector3 = x => y => z => () => new THREE.Vector3(x, y, z);
+
+export const newBox3 = min => max => () => new THREE.Box3(min, max);
+
+export const newPlane = normal => constant => () => new THREE.Plane(normal, constant);
 
 //
 
