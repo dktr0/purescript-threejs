@@ -26,24 +26,41 @@ export const setSize = renderer => w => h => updateStyle => () => renderer.setSi
 
 export const renderListsDispose = renderer => () => renderer.renderLists.dispose();
 
-// Loaders
 
-// note the handling of the callback in the line below...
-export const loadGLTF = url => cb => () => new THREE.GLTFLoader().load(url,x => cb(x)());
+// 3D Object Loaders
 
-export const loadGLTF1 = loader => url => cb => () => loader.load(url,x => cb(x)());
+//OBJ
+  export const newOBJLoader = () => new THREE.OBJLoader();
 
-export const newGLTFLoader = () => new THREE.GLTFLoader();
+  // note the handling of the callback in the line below...
+  export const loadOBJ = loader => url => cb => () => loader.load(url,x => cb(x)());
 
+  //MTL
+  export const newMTLLoader = () => new THREE.MTLLoader();
+
+  export const loadMTL= loader => url => cb => () => loader.load(url,x => cb(x)());
+
+
+  //GLTF
+  export const newGLTFLoader = () => new THREE.GLTFLoader();
+
+  export const loadGLTF1 = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+//GLTF+DRACO
 export const newDRACOLoader = () => new THREE.DRACOLoader();
 
 export const setDecoderPath = dracoLoader => modulePath => () => dracoLoader.setDecoderPath(modulePath);
 
 export const setDRACOLoader = gltfLoader => dracoLoader => () => gltfLoader.setDRACOLoader(dracoLoader);
 
-export const loadMTL = url => cb => () => new THREE.MTLLoader().load(url,x => cb(x)());
 
-export const loadOBJ = url => cb => () => new THREE.OBJLoader().load(url,x => cb(x)());
+// -- section deprecated --
+export const loadGLTF = url => cb => () => new THREE.GLTFLoader().load(url,x => cb(x)());
+
+export const loadOBJ1 = url => cb => () => new THREE.OBJLoader().load(url,x => cb(x)());
+
+export const loadMTL1 = url => cb => () => new THREE.MTLLoader().load(url,x => cb(x)());
+// ----- end of section -----
 
 
 // GROUPS
@@ -126,7 +143,7 @@ export const setScaleOfAnything = thing => x => y => z => () => thing.scale.set(
 
 export const setRepeatOfAnything = thing => u => v => () => thing.repeat.set(u,v);
 
-export const preloadAnything = elem => () => elem.preload = "auto";
+export const preloadAnything = elem => () => elem.preload = "auto"; // erase this one in the future
 
 export const playAnything = thing => () => thing.play();
 
@@ -261,9 +278,7 @@ export const textureLoader = url => () => new THREE.TextureLoader().load(url);
 
 export const createElement = name => () => document.createElement(name);
 
-export const srcOfElement = elem => url => () => elem.src = url;
-
-export const getElementById = idName => () => document.getElementById(idName);
+export const getElementById = id => () => document.getElementById(id);
 
 export const videoTexture = videoElem => () => new THREE.VideoTexture(videoElem);
 
@@ -287,14 +302,6 @@ export const minFilter = texture => filter => () => texture.minFilter = filter;
 
 export const magFilter = texture => filter => () => texture.magFilter = filter;
 
-// video settings
-
-export const loop = videoElem => bool => () => videoElem.loop = bool;
-
-export const muted = videoElem => bool => () => videoElem.muted = bool;
-
-export const volume = videoElem => float => () => videoElem.volumen = float;
-
-export const autoplay = videoElem => bool => () => videoElem.autoplay = bool;
+//
 
 export const requestAnimationFrame = callback => () => window.requestAnimationFrame(callback)

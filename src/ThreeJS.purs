@@ -2,6 +2,7 @@ module ThreeJS where
 
 import Prelude
 import Effect (Effect)
+import Web.HTML.HTMLMediaElement as HTML
 
 -- Scene
 
@@ -48,10 +49,30 @@ foreign import newMesh :: forall a b. a -> b -> Effect Mesh
 foreign import setReceiveShadow :: Mesh -> Boolean -> Effect Unit
 
 
-
 -- 3D object Loaders
 
--- Loading GLTF resources via GLTFLoader
+-- OBJ --
+
+foreign import data OBJLoader :: Type
+
+foreign import newOBJLoader :: Effect OBJLoader
+
+foreign import data OBJ :: Type
+
+foreign import loadOBJ :: OBJLoader -> String -> (OBJ -> Effect Unit) -> Effect Unit
+
+-- MTL --
+
+foreign import data MTLLoader :: Type
+
+foreign import newMTLLoader :: Effect MTLLoader
+
+foreign import data MTL :: Type
+
+foreign import loadMTL :: MTLLoader -> String -> (MTL -> Effect Unit) -> Effect Unit
+
+
+-- GLTF --
 
 foreign import data AnimationClip :: Type
 
@@ -65,9 +86,11 @@ type GLTF = {
 
 foreign import data GLTFLoader :: Type
 
-foreign import loadGLTF :: String -> (GLTF -> Effect Unit) -> Effect GLTFLoader
+foreign import newGLTFLoader :: Effect GLTFLoader
 
 foreign import loadGLTF1 :: GLTFLoader -> String -> (GLTF -> Effect Unit) -> Effect Unit
+
+-- GLTF+DRACO --
 
 loadGLTF_DRACO :: String -> String -> (GLTF -> Effect Unit) -> Effect GLTFLoader
 loadGLTF_DRACO pathToDracoModules url cb = do
@@ -78,8 +101,6 @@ loadGLTF_DRACO pathToDracoModules url cb = do
   loadGLTF1 gltfLoader url cb
   pure gltfLoader
 
-foreign import newGLTFLoader :: Effect GLTFLoader
-
 foreign import data DRACOLoader :: Type
 
 foreign import newDRACOLoader :: Effect DRACOLoader
@@ -88,13 +109,15 @@ foreign import setDecoderPath :: DRACOLoader -> String -> Effect Unit
 
 foreign import setDRACOLoader :: GLTFLoader -> DRACOLoader -> Effect Unit
 
-foreign import data MTL :: Type
+------------------------
+-- section deprecated --
+foreign import loadGLTF :: String -> (GLTF -> Effect Unit) -> Effect GLTFLoader
 
-foreign import loadMTL :: String -> (MTL -> Effect Unit) -> Effect MTL
+foreign import loadOBJ1 :: String -> (OBJ -> Effect Unit) -> Effect Unit
 
-foreign import data OBJ :: Type
-
-foreign import loadOBJ :: String -> (OBJ -> Effect Unit) -> Effect Unit
+foreign import loadMTL1 :: String -> (MTL -> Effect Unit) -> Effect Unit
+----- end of section -----
+------------------------
 
 -------------
 
@@ -442,15 +465,11 @@ foreign import data TextureLoader :: Type
 
 foreign import textureLoader :: String -> Effect TextureLoader
 
-foreign import data ElementLoader :: Type
+foreign import createElement :: String -> Effect HTML.HTMLMediaElement
 
-foreign import createElement :: String -> Effect ElementLoader
+foreign import getElementById :: String -> Effect HTML.HTMLMediaElement
 
-foreign import srcOfElement :: ElementLoader -> String -> Effect Unit
-
-foreign import getElementById :: String -> Effect ElementLoader
-
-foreign import videoTexture :: ElementLoader -> Effect TextureLoader
+foreign import videoTexture :: HTML.HTMLMediaElement -> Effect TextureLoader
 
 --changing
 
@@ -476,14 +495,6 @@ foreign import minFilter :: TextureLoader -> Effect Filter -> Effect Unit
 
 foreign import magFilter :: TextureLoader -> Effect Filter -> Effect Unit
 
---video settings
-
-foreign import loop :: ElementLoader -> Boolean -> Effect Unit
-
-foreign import muted :: ElementLoader -> Boolean -> Effect Unit
-
-foreign import volume :: ElementLoader -> Number -> Effect Unit
-
-foreign import autoplay :: ElementLoader -> Boolean -> Effect Unit
+--
 
 foreign import requestAnimationFrame :: Effect Unit -> Effect Unit
