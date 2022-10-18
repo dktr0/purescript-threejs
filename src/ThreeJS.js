@@ -4,6 +4,10 @@
 
 export const newScene = () => new THREE.Scene();
 
+export const newFog = color => near => far => () => new THREE.Fog(color, near, far);
+
+export const newFogExp2 = color => density => () => new THREE.FogExp2(color, density);
+
 
 // PerspectiveCamera
 
@@ -25,6 +29,25 @@ export const render = renderer => scene => camera => () => renderer.render(scene
 export const setSize = renderer => w => h => updateStyle => () => renderer.setSize(w,h,updateStyle);
 
 export const renderListsDispose = renderer => () => renderer.renderLists.dispose();
+
+export const newWebGLMultipleRenderTargets = width => height => count => options => () => new THREE.WebGLMultipleRenderTargets(width, height, count, options);
+
+export const newWebGL1Renderer = parameters => () => new THREE.WebGL1Renderer(parameters);
+
+export const newWebGLRenderTarget = width => height => parameters => () => new THREE.WebGLRenderTarget(width, height, parameters);
+
+export const newWebGL3DRenderTarget = width => height => depth => () => new THREE.WebGL3DRenderTarget(width, height, depth);
+
+export const newWebGLArrayRenderTarget = width => height => depth => () => new THREE.WebGLArrayRenderTarget(width, height, depth);
+
+export const newWebGLCubeRenderTarget = size => options => () => new THREE.WebGLCubeRenderTarget(size, options);
+
+export const newCSS2DRenderer = parameters => () => new THREE.CSS2DRenderer(parameters);
+
+export const newCSS3DRenderer = parameters => () => new THREE.CSS3DRenderer(parameters);
+
+export const newSVGRenderer = () => new THREE.SVGRenderer();
+
 
 
 // 3D Object Loaders
@@ -98,6 +121,9 @@ export const newRingGeometry = innerRadius => outerRadius => thetaSegments => ph
 export const newOctahedronGeometry = radius => detail => () => new THREE.OctahedronGeometry(radius, detail);
 
 export const newIcosahedronGeometry = radius => detail => () => new THREE.IcosahedronGeometry(radius, detail);
+
+export const newTextGeometry = text => parameters => () => new THREE.TextGeometry(text, parameters);
+
 
 // Mesh
 
@@ -191,6 +217,28 @@ export const newBox3 = min => max => () => new THREE.Box3(min, max);
 
 export const newPlane = normal => constant => () => new THREE.Plane(normal, constant);
 
+export const newBox2 = min => max => () => new THREE.Box2(min, max);
+
+export const newCylindrical = radius => theta => y => () => new THREE.Cylindrical(radius, theta, y);
+
+export const newEuler = x => y => z => order => () => new THREE.Euler(x, y, z, order);
+
+export const newFrustum = p0 => p1 => p2 => p3 => p4 => p5 => () => new THREE.Frustum(p0, p1, p2, p3, p4, p5);
+
+export const newLine3 = start => end => () => new THREE.Line3(start, end);
+
+export const newQuaternion = x => y => z => w => () => new THREE.Quaternion(x, y, z, w);
+
+export const newRay = origin => direction => () => new THREE.Ray(origin, direction);
+
+export const newSphere = center => radius => () => new THREE.Sphere(center, radius);
+
+export const newSpherical = radius => phi => theta => () => new THREE.Spherical(radius, phi, theta);
+
+export const newTriangle = a => b => c => () => new THREE.Triangle(a, b, c);
+
+export const newVector4 = x => y => z => w => () => new THREE.Vector4(x, y, z, w);
+
 //
 
 export const newPolarGridHelper = radius => radials => circles => divisions => () => new THREE.PolarGridHelper(radius,radials,circles,divisions)
@@ -232,6 +280,14 @@ export const newLine = geometry => material => () => new THREE.Line(geometry, ma
 export const newPoints = geometry => material => () => new THREE.Points(geometry, material);
 
 export const newSprite = material => () => new THREE.Sprite(material);
+
+export const newInstancedMesh = geometry => material => count => () => new THREE.InstancedMesh(geometry, material, count);
+
+export const newLineLoop = geometry => material => () => new THREE.LineLoop(geometry, material);
+
+export const newLineSegments = geometry => material => () => new THREE.LineSegments(geometry, material);
+
+export const newSkinnedMesh = geometry => material => () => new THREE.SkinnedMesh(geometry, material);
 
 
 // Materials
