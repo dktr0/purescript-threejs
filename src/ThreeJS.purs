@@ -10,6 +10,14 @@ foreign import data Scene :: Type
 
 foreign import newScene :: Effect Scene
 
+foreign import data Fog :: Type
+
+foreign import newFog :: Int -> Number -> Number -> Effect Fog
+
+foreign import data FogExp2 :: Type
+
+foreign import newFogExp2 :: Int -> Number -> Effect FogExp2
+
 
 -- PerspectiveCamera
 
@@ -38,6 +46,43 @@ foreign import render :: Renderer -> Scene -> PerspectiveCamera -> Effect Unit
 foreign import setSize :: Renderer -> Number -> Number -> Boolean -> Effect Unit
 
 foreign import renderListsDispose :: Renderer -> Effect Unit
+
+foreign import data WebGLMultipleRenderTargets :: Type
+
+foreign import newWebGLMultipleRenderTargets :: Number -> Number -> Number -> forall p. Record p -> Effect WebGLMultipleRenderTargets
+
+foreign import data WebGL1Renderer :: Type
+
+foreign import newWebGL1Renderer :: forall p. Record p -> Effect WebGL1Renderer
+
+foreign import data WebGLRenderTarget :: Type
+
+foreign import newWebGLRenderTarget :: Number -> Number -> forall p. Record p -> Effect WebGLRenderTarget
+
+foreign import data WebGL3DRenderTarget :: Type
+
+foreign import newWebGL3DRenderTarget :: Number -> Number -> Number -> Effect WebGL3DRenderTarget
+
+foreign import data WebGLArrayRenderTarget :: Type
+
+foreign import newWebGLArrayRenderTarget :: Number -> Number -> Number -> Effect WebGLArrayRenderTarget
+
+foreign import data WebGLCubeRenderTarget :: Type
+
+foreign import newWebGLCubeRenderTarget :: Number -> forall p. Record p -> Effect WebGLCubeRenderTarget
+
+foreign import data CSS2DRenderer :: Type
+
+foreign import newCSS2DRenderer :: forall p. Record p -> Effect CSS2DRenderer
+
+foreign import data CSS3DRenderer :: Type
+
+foreign import newCSS3DRenderer :: forall p. Record p -> Effect CSS3DRenderer
+
+foreign import data SVGRenderer :: Type
+
+foreign import newSVGRenderer :: Effect SVGRenderer
+
 
 
 -- Mesh
@@ -184,6 +229,10 @@ foreign import newOctahedronGeometry :: Number -> Int -> Effect OctahedronGeomet
 foreign import data IcosahedronGeometry :: Type
 
 foreign import newIcosahedronGeometry :: Number -> Int -> Effect IcosahedronGeometry
+
+foreign import data TextGeometry :: Type
+
+foreign import newTextGeometry :: String -> forall p. Record p -> Effect TextGeometry
 
 -------------
 
@@ -338,6 +387,51 @@ foreign import data Plane :: Type
 
 foreign import newPlane :: Vector3 -> Number -> Effect Plane
 
+foreign import data Box2 :: Type
+
+foreign import newBox2 :: Vector2 -> Vector2 -> Effect Box2
+
+foreign import data Cylindrical :: Type
+
+foreign import newCylindrical :: Number -> Number -> Number -> Effect Cylindrical
+
+foreign import data Euler :: Type
+
+foreign import newEuler :: Number -> Number -> Number -> String -> Effect Euler
+
+foreign import data Frustum :: Type
+
+foreign import newFrustum :: Plane -> Plane -> Plane -> Plane -> Plane -> Plane -> Effect Frustum
+
+foreign import data Line3 :: Type
+
+foreign import newLine3 :: Vector3 -> Vector3 -> Effect Line3
+
+foreign import data Quaternion :: Type
+
+foreign import newQuaternion :: Number -> Number -> Number -> Number -> Effect Quaternion
+
+foreign import data Ray :: Type
+
+foreign import newRay :: Vector3 -> Vector3 -> Effect Ray
+
+foreign import data Sphere :: Type
+
+foreign import newSphere :: Vector3 -> Number -> Effect Sphere
+
+foreign import data Spherical :: Type
+
+foreign import newSpherical :: Number -> Number -> Number -> Effect Spherical
+
+foreign import data Triangle :: Type
+
+foreign import newTriangle :: Vector3 -> Vector3 -> Vector3 -> Effect Triangle
+
+foreign import data Vector4 :: Type
+
+foreign import newVector4 :: Number -> Number -> Number -> Number -> Effect Vector4
+
+
 --
 
 foreign import windowInnerWidth :: Effect Number
@@ -390,6 +484,22 @@ foreign import newPoints :: forall a b. a -> b -> Effect Points
 foreign import data Line :: Type
 
 foreign import newLine :: forall a b. a -> b -> Effect Line
+
+foreign import data InstancedMesh :: Type
+
+foreign import newInstancedMesh :: forall a b. a -> b -> Int -> Effect InstancedMesh
+
+foreign import data LineLoop :: Type
+
+foreign import newLineLoop :: forall a b. a -> b -> Effect LineLoop
+
+foreign import data LineSegments :: Type
+
+foreign import newLineSegments :: forall a b. a -> b -> Effect LineSegments
+
+foreign import data SkinnedMesh :: Type
+
+foreign import newSkinnedMesh :: forall a b. a -> b -> Effect SkinnedMesh
 
 ------------ MATERIALS
 
