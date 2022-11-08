@@ -1,4 +1,7 @@
-module ThreeJS where
+module ThreeJS
+  ( newSpriteMaterial
+  )
+  where
 
 import Prelude
 import Effect (Effect)
@@ -18,7 +21,7 @@ foreign import data FogExp2 :: Type
 
 foreign import newFogExp2 :: Int -> Number -> Effect FogExp2
 
-
+-- CAMERAS
 -- PerspectiveCamera
 
 foreign import data PerspectiveCamera :: Type
@@ -33,7 +36,13 @@ foreign import data OrthographicCamera :: Type
 
 foreign import newOrthographicCamera :: Number -> Number -> Number -> Number -> Number -> Number -> Effect OrthographicCamera
 
+foreign import data ArrayCamera :: Type
 
+foreign import newArrayCamera  :: forall a. a -> Effect ArrayCamera
+
+foreign import data CubeCamera :: Type
+
+foreign import newCubeCamera  :: Number -> Number -> WebGLCubeRenderTarget -> Effect CubeCamera
 
 -- Renderer
 
@@ -234,6 +243,26 @@ foreign import data TextGeometry :: Type
 
 foreign import newTextGeometry :: String -> forall p. Record p -> Effect TextGeometry
 
+foreign import data ExtrudeGeometry :: Type
+
+foreign import newExtrudeGeometry :: forall a b. a -> Record b -> Effect ExtrudeGeometry
+
+foreign import data LatheGeometry :: Type
+
+foreign import newLatheGeometry :: forall a. a -> Int -> Number -> Number -> Effect LatheGeometry
+
+foreign import data PolyhedronGeometry :: Type
+
+foreign import newPolyhedronGeometry :: forall a b. a -> b -> Number -> Int -> Effect PolyhedronGeometry
+
+foreign import data ShapeGeometry :: Type
+
+foreign import newShapeGeometry :: forall a. a -> Int -> Effect ShapeGeometry
+
+foreign import data ConvexGeometry :: Type
+
+foreign import newConvexGeometry :: forall a. a -> Effect ConvexGeometry
+
 -------------
 
 foreign import data MeshPhongMaterial :: Type
@@ -321,6 +350,18 @@ foreign import newDirectionalLight :: Int -> Number -> Effect DirectionalLight
 foreign import data PointLight :: Type
 
 foreign import newPointLight :: Int -> Number -> Number -> Number -> Effect PointLight
+
+foreign import data AmbientLightProbe :: Type
+
+foreign import newAmbientLightProbe :: Int -> Number -> Effect AmbientLightProbe
+
+foreign import data Light :: Type
+
+foreign import newLight :: Int -> Number -> Effect Light
+
+foreign import data RectAreaLight :: Type
+
+foreign import newRectAreaLight :: Int -> Number -> Number -> Number -> Effect RectAreaLight
 
 -- HELPERS
 
@@ -431,6 +472,13 @@ foreign import data Vector4 :: Type
 
 foreign import newVector4 :: Number -> Number -> Number -> Number -> Effect Vector4
 
+foreign import data Lut :: Type
+
+foreign import newLut :: String -> Number -> Effect Lut
+
+foreign import data MeshSurfaceSampler :: Type
+
+foreign import newMeshSurfaceSampler :: Mesh -> Effect MeshSurfaceSampler
 
 --
 
@@ -501,6 +549,10 @@ foreign import data SkinnedMesh :: Type
 
 foreign import newSkinnedMesh :: forall a b. a -> b -> Effect SkinnedMesh
 
+foreign import data Skeleton :: Type
+
+foreign import newSkeleton :: forall a b. a -> b -> Effect Skeleton
+
 ------------ MATERIALS
 
 foreign import data Material :: Type
@@ -566,6 +618,128 @@ foreign import lineBasicMaterial :: forall params. Record params -> Effect LineB
 foreign import data PointsMaterial :: Type
 
 foreign import pointsMaterial :: forall params. Record params -> Effect PointsMaterial
+
+-- CORE
+
+foreign import data Clock :: Type
+
+foreign import newClock :: Boolean -> Effect Clock
+
+foreign import data Raycaster :: Type
+
+foreign import newRaycaster :: Vector3 -> Vector3 -> Number -> Number -> Effect Raycaster
+
+foreign import data Uniform :: Type
+
+foreign import newUniform  :: forall p. Record p -> Effect Uniform
+
+-- ANIMATION
+
+foreign import data AnimationClip :: Type
+
+foreign import newAnimationClip :: String -> Number -> forall a. a -> Effect AnimationClip
+
+-- ANIMATION / TRACKS
+
+foreign import data BooleanKeyframeTrack :: Type
+
+foreign import newBooleanKeyframeTrack :: String -> forall a b. a -> b -> Effect BooleanKeyframeTrack
+
+foreign import data ColorKeyframeTrack :: Type
+
+foreign import newColorKeyframeTrack  :: String -> forall a b. a -> b -> Effect ColorKeyframeTrack 
+
+foreign import data NumberKeyframeTrack :: Type
+
+foreign import newNumberKeyframeTrack  :: String -> forall a b. a -> b -> Effect NumberKeyframeTrack 
+
+foreign import data QuaternionKeyframeTrack :: Type
+
+foreign import newQuaternionKeyframeTrack  :: String -> forall a b. a -> b -> Effect QuaternionKeyframeTrack
+
+foreign import data StringKeyframeTrack :: Type
+
+foreign import newStringKeyframeTrack  :: String -> forall a b. a -> b -> Effect StringKeyframeTrack
+
+foreign import data VectorKeyframeTrack :: Type
+
+foreign import newVectorKeyframeTrack  :: String -> forall a b. a -> b -> Effect VectorKeyframeTrack
+
+-- CORE / BUFFERATTRIBUTES
+
+foreign import data TypedBufferAttribute :: Type
+
+foreign import newTypedBufferAttribute  :: forall a. a -> Int -> Boolean -> Effect TypedBufferAttribute
+
+-- EXTRAS / CORE
+
+foreign import data Path :: Type
+
+foreign import newPath :: forall a. a -> Effect Path
+
+foreign import data Shape :: Type
+
+foreign import newShape :: forall a. a -> Effect Shape
+
+-- EXTRAS / CURVES
+
+foreign import data CatmullRomCurve3 :: Type
+
+foreign import newCatmullRomCurve3 :: forall a. a -> Boolean -> String -> Number -> Effect CatmullRomCurve3
+
+foreign import data CubicBezierCurve :: Type
+
+foreign import newCubicBezierCurve :: Vector2 -> Vector2 -> Vector2 -> Vector2 -> Effect CubicBezierCurve
+
+foreign import data CubicBezierCurve3 :: Type
+
+foreign import newCubicBezierCurve3 :: Vector3 -> Vector3 -> Vector3 -> Vector3 -> Effect CubicBezierCurve3
+
+foreign import data LineCurve :: Type
+
+foreign import newLineCurve :: Vector2 -> Vector2 -> Effect LineCurve
+
+foreign import data LineCurve3 :: Type
+
+foreign import newLineCurve3 :: Vector3 -> Vector3 -> Effect LineCurve3
+
+foreign import data QuadraticBezierCurve :: Type
+
+foreign import newQuadraticBezierCurve :: Vector2 -> Vector2 -> Vector2 -> Effect QuadraticBezierCurve
+
+foreign import data QuadraticBezierCurve3 :: Type
+
+foreign import newQuadraticBezierCurve3 :: Vector3 -> Vector3 -> Vector3 -> Effect QuadraticBezierCurve3
+
+foreign import data SplineCurve :: Type
+
+foreign import newSplineCurve :: forall a. a -> Effect SplineCurve
+
+-- ANIMATIONS
+
+foreign import data CCDIKSolver :: Type
+
+foreign import newCCDIKSolver :: SkinnedMesh -> forall a. a -> Effect CCDIKSolver
+
+foreign import data MMDAnimationHelper :: Type
+
+foreign import newMMDAnimationHelper :: forall params. Record params -> Effect MMDAnimationHelper
+
+foreign import data MMDPhysics :: Type
+
+foreign import newMMDPhysics :: SkinnedMesh -> forall a b. a -> b -> forall params. Record params -> Effect MMDPhysics
+
+-- POST-PROCESSING
+
+foreign import data EffectComposer :: Type
+
+foreign import newEffectComposer :: WebGLRenderer -> WebGLRenderTarget -> Effect EffectComposer
+
+-- CONVEXHULL
+
+foreign import data VertexNode :: Type
+
+foreign import newVertexNode :: Vector3 -> Effect VertexNode
 
 -- TEXTURE
 
