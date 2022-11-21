@@ -24,6 +24,10 @@ export const newArrayCamera = array => () => new THREE.ArrayCamera(array);
 
 export const newCubeCamera = near => far => renderTarget => () => new THREE.CubeCamera(near, far, renderTarget);
 
+export const newCamera = () => new THREE.Camera()
+
+export const newStereoCamera = () => new THREE.StereoCamera()
+
 // Renderer
 
 export const newWebGLRenderer = params => () => new THREE.WebGLRenderer(params);
@@ -138,6 +142,7 @@ export const newShapeGeometry = shapes => curveSegments => () => new THREE.Shape
 
 export const newConvexGeometry = points => () => new THREE.ConvexGeometry(points);
 
+export const newTubeGeometry = path => tubularSegments => radius => radialSegments => closed => () => new THREE.TubeGeometry(path, tubularSegments, radius, radialSegments, closed);
 
 // Mesh
 
@@ -205,6 +210,22 @@ export const newLight = color => intensity => () => new THREE.Light(color, inten
 
 export const newRectAreaLight = rgb => intensity => width => height => () => new THREE.RectAreaLight(rgb,intensity, width, height);
 
+export const newHemisphereLightProbe = skyColor => groundColor => intensity => () => new THREE.HemisphereLightProbe(skyColor, groundColor, intensity);
+
+export const newSpotLight = rgb => intensity => distance => angle => penumbra => decay => () => new THREE.SpotLight(rgb,intensity, distance, angle, penumbra, decay);
+
+export const newLightProbe = sh => intensity => () => new THREE.LightProbe(sh, intensity);
+
+
+// LIGHTS / SHADOWS
+
+export const newLightShadow = camera => () => new THREE.LightShadow(camera);
+
+export const newPointLightShadow = () => new THREE.PointLightShadow();
+
+export const newDirectionalLightShadow = () => new THREE.DirectionalLightShadow();
+
+
 // HELPERS
 
 export const newArrowHelper = dir => origin => length => hex => headLength => headWidth => () => new THREE.ArrowHelper(dir, origin, length, hex, headLength, headWidth);
@@ -226,6 +247,8 @@ export const newHemisphereLightHelper = light => sphereSize => color => () => ne
 export const newPointLightHelper = light => sphereSize => color => () => new THREE.PointLightHelper(light, sphereSize, color);
 
 export const newSpotLightHelper = light => color => () => new THREE.SpotLightHelper(light, color);
+
+export const newSkeletonHelper = object => () => new THREE.SkeletonHelper(object);
 
 // MATH
 
@@ -262,6 +285,8 @@ export const newVector4 = x => y => z => w => () => new THREE.Vector4(x, y, z, w
 export const newLut = colormap => count => () => new THREE.Lut(colormap, count);
 
 export const newMeshSurfaceSampler = mesh => () => new THREE.MeshSurfaceSampler(mesh);
+
+export const newSphericalHarmonics3 = () => new THREE.SphericalHarmonics3();
 
 //
 
@@ -351,6 +376,8 @@ export const lineBasicMaterial = params => () => new THREE.LineBasicMaterial(par
 
 export const pointsMaterial = params => () => new THREE.PointsMaterial(params);
 
+export const newMaterial = () => new THREE.Material();
+
 // CORE
 
 export const newClock = autoStart => () => new THREE.Clock(autoStart);
@@ -358,6 +385,16 @@ export const newClock = autoStart => () => new THREE.Clock(autoStart);
 export const newRaycaster = origin => direction => near => far => () => new THREE.Raycaster(origin, direction, near, far);
 
 export const newUniform = value => () => new THREE.Uniform(value);
+
+export const newBufferGeometry = () => new THREE.BufferGeometry();
+
+export const newEventDispatcher = () => new THREE.EventDispatcher();
+
+export const newInstancedBufferGeometry = () => new THREE.InstancedBufferGeometry();
+
+export const newLayers = () => new THREE.Layers();
+
+export const newObject3D = () => new THREE.Object3D();
 
 // ANIMATION
 
@@ -387,6 +424,12 @@ export const newPath = points => () => new THREE.Path(points);
 
 export const newShape = points => () => new THREE.Shape(points);
 
+export const newCurve = () => new THREE.Curve();
+
+export const newCurvePath = () => new THREE.CurvePath();
+
+export const newShapePath = () => new THREE.ShapePath();
+
 // EXTRAS / CURVES
 
 export const newCatmullRomCurve3 = points => closed => curveType => tension => () => new THREE.CatmullRomCurve3(points, closed, curveType, tension);
@@ -405,6 +448,8 @@ export const newQuadraticBezierCurve3 = v0 => v1 => v2 => () => new THREE.Quadra
 
 export const newSplineCurve = points => () => new THREE.SplineCurve(points);
 
+export const newEllipseCurve = aX => aY => xRadius => yRadius => aStartAngle => aEndAngle => aClockwise => aRotation => () => new THREE.EllipseCurve(aX, aY, xRadius, yRadius, aStartAngle, aEndAngle, aClockwise, aRotation);
+
 // ANIMATIONS
 
 export const newCCDIKSolver = mesh => iks => () => new THREE.CCDIKSolver(mesh, iks);
@@ -420,6 +465,14 @@ export const newEffectComposer = renderer => renderTarget => () => new THREE.Eff
 // CONVEXHULL
 
 export const newVertexNode = point => () => new THREE.VertexNode(point);
+
+// AUDIO
+
+export const newAudioListener = () => new THREE.AudioListener()
+
+export const newPositionalAudio = listener => () => new THREE.PositionalAudio(listener)
+
+export const newAudio = listener => () => new THREE.Audio(listener)
 
 // TEXTURE
 

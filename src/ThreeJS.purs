@@ -44,6 +44,14 @@ foreign import data CubeCamera :: Type
 
 foreign import newCubeCamera  :: Number -> Number -> WebGLCubeRenderTarget -> Effect CubeCamera
 
+foreign import data Camera :: Type
+
+foreign import newCamera :: Effect Camera
+
+foreign import data StereoCamera :: Type
+
+foreign import newStereoCamera :: Effect StereoCamera
+
 -- Renderer
 
 foreign import data Renderer :: Type
@@ -263,6 +271,10 @@ foreign import data ConvexGeometry :: Type
 
 foreign import newConvexGeometry :: forall a. a -> Effect ConvexGeometry
 
+foreign import data TubeGeometry :: Type
+
+foreign import newTubeGeometry :: Curve -> Int -> Number -> Int -> Boolean -> Effect TubeGeometry
+
 -------------
 
 foreign import data MeshPhongMaterial :: Type
@@ -363,6 +375,32 @@ foreign import data RectAreaLight :: Type
 
 foreign import newRectAreaLight :: Int -> Number -> Number -> Number -> Effect RectAreaLight
 
+foreign import data HemisphereLightProbe :: Type
+
+foreign import newHemisphereLightProbe :: Int -> Int -> Number -> Effect HemisphereLightProbe
+
+foreign import data SpotLight :: Type
+
+foreign import newSpotLight :: Int -> Number -> Number -> Number -> Number -> Number -> Effect SpotLight
+
+foreign import data LightProbe :: Type
+
+foreign import newLightProbe :: SphericalHarmonics3 -> Number -> Effect LightProbe
+
+-- LIGHTS / SHADOWS
+
+foreign import data LightShadow :: Type
+
+foreign import newLightShadow :: Camera -> Effect LightShadow
+
+foreign import data PointLightShadow :: Type
+
+foreign import newPointLightShadow :: Effect PointLightShadow
+
+foreign import data DirectionalLightShadow :: Type
+
+foreign import newDirectionalLightShadow :: Effect DirectionalLightShadow
+
 -- HELPERS
 
 foreign import data PolarGridHelper :: Type
@@ -408,6 +446,10 @@ foreign import newPointLightHelper :: PointLight -> Number -> Int -> Effect Poin
 foreign import data SpotLightHelper :: Type
 
 foreign import newSpotLightHelper :: SpotLight -> Int -> Effect SpotLightHelper
+
+foreign import data SkeletonHelper :: Type
+
+foreign import newSkeletonHelper :: Object3D -> Effect SkeletonHelper
 
 
 -- MATH
@@ -479,6 +521,10 @@ foreign import newLut :: String -> Number -> Effect Lut
 foreign import data MeshSurfaceSampler :: Type
 
 foreign import newMeshSurfaceSampler :: Mesh -> Effect MeshSurfaceSampler
+
+foreign import data SphericalHarmonics3 :: Type
+
+foreign import newSphericalHarmonics3 :: Effect SphericalHarmonics3
 
 --
 
@@ -555,9 +601,9 @@ foreign import newSkeleton :: forall a b. a -> b -> Effect Skeleton
 
 ------------ MATERIALS
 
-foreign import data Material :: Type
+foreign import data MeshBasicMaterial :: Type
 
-foreign import meshBasicMaterial :: forall p. Record p -> Effect Material
+foreign import meshBasicMaterial :: forall p. Record p -> Effect MeshBasicMaterial
 
 foreign import data MeshStandardMaterial :: Type
 
@@ -619,6 +665,10 @@ foreign import data PointsMaterial :: Type
 
 foreign import pointsMaterial :: forall params. Record params -> Effect PointsMaterial
 
+foreign import data Material :: Type
+
+foreign import newMaterial :: Effect Material
+
 -- CORE
 
 foreign import data Clock :: Type
@@ -632,6 +682,27 @@ foreign import newRaycaster :: Vector3 -> Vector3 -> Number -> Number -> Effect 
 foreign import data Uniform :: Type
 
 foreign import newUniform  :: forall p. Record p -> Effect Uniform
+
+foreign import data BufferGeometry :: Type
+
+foreign import newBufferGeometry :: Effect BufferGeometry
+
+foreign import data EventDispatcher :: Type
+
+foreign import newEventDispatcher :: Effect EventDispatcher
+
+foreign import data InstancedBufferGeometry :: Type
+
+foreign import newInstancedBufferGeometry :: Effect InstancedBufferGeometry
+
+foreign import data Layers :: Type
+
+foreign import newLayers :: Effect Layers
+
+foreign import data Object3D :: Type
+
+foreign import newObject3D :: Effect Object3D
+
 
 -- ANIMATION
 
@@ -681,6 +752,18 @@ foreign import data Shape :: Type
 
 foreign import newShape :: forall a. a -> Effect Shape
 
+foreign import data Curve :: Type
+
+foreign import newCurve :: Effect Curve
+
+foreign import data CurvePath :: Type
+
+foreign import newCurvePath :: Effect CurvePath
+
+foreign import data ShapePath :: Type
+
+foreign import newShapePath :: Effect ShapePath
+
 -- EXTRAS / CURVES
 
 foreign import data CatmullRomCurve3 :: Type
@@ -715,6 +798,10 @@ foreign import data SplineCurve :: Type
 
 foreign import newSplineCurve :: forall a. a -> Effect SplineCurve
 
+foreign import data EllipseCurve :: Type
+
+foreign import newEllipseCurve :: Number -> Number -> Number -> Number -> Number -> Number -> Boolean -> Number -> Effect EllipseCurve
+
 -- ANIMATIONS
 
 foreign import data CCDIKSolver :: Type
@@ -740,6 +827,20 @@ foreign import newEffectComposer :: WebGLRenderer -> WebGLRenderTarget -> Effect
 foreign import data VertexNode :: Type
 
 foreign import newVertexNode :: Vector3 -> Effect VertexNode
+
+-- AUDIO
+
+foreign import data AudioListener :: Type
+
+foreign import newAudioListener :: Effect AudioListener
+
+foreign import data PositionalAudio :: Type
+
+foreign import newPositionalAudio :: AudioListener -> Effect PositionalAudio
+
+foreign import data Audio :: Type
+
+foreign import newAudio :: AudioListener -> Effect Audio
 
 -- TEXTURE
 
