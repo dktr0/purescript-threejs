@@ -275,6 +275,10 @@ foreign import data TubeGeometry :: Type
 
 foreign import newTubeGeometry :: Curve -> Int -> Number -> Int -> Boolean -> Effect TubeGeometry
 
+foreign import data EdgesGeometry :: Type
+
+foreign import newEdgesGeometry :: forall a. a -> Effect EdgesGeometry
+
 -------------
 
 foreign import data MeshPhongMaterial :: Type
@@ -451,6 +455,26 @@ foreign import data SkeletonHelper :: Type
 
 foreign import newSkeletonHelper :: Object3D -> Effect SkeletonHelper
 
+foreign import data LightProbeHelper :: Type
+
+foreign import newLightProbeHelper :: LightProbe -> Number -> Effect LightProbeHelper
+
+foreign import data PositionalAudioHelper :: Type
+
+foreign import newPositionalAudioHelper :: PositionalAudio -> Number -> Effect PositionalAudioHelper
+
+foreign import data RectAreaLightHelper :: Type
+
+foreign import newRectAreaLightHelper :: RectAreaLight -> Int -> Effect RectAreaLightHelper
+
+foreign import data VertexNormalsHelper :: Type
+
+foreign import newVertexNormalsHelper :: Object3D -> Number -> Int -> Effect VertexNormalsHelper
+
+foreign import data VertexTangentsHelper :: Type
+
+foreign import newVertexTangentsHelper :: Object3D -> Number -> Int -> Effect VertexTangentsHelper
+
 
 -- MATH
 
@@ -526,6 +550,18 @@ foreign import data SphericalHarmonics3 :: Type
 
 foreign import newSphericalHarmonics3 :: Effect SphericalHarmonics3
 
+foreign import data Matrix3 :: Type
+
+foreign import newMatrix3 :: Effect Matrix3
+
+foreign import data Matrix4 :: Type
+
+foreign import newMatrix4 :: Effect Matrix4
+
+foreign import data OBB :: Type
+
+foreign import newOBB :: Vector3 -> Vector3 -> Matrix3 -> Effect OBB
+
 --
 
 foreign import windowInnerWidth :: Effect Number
@@ -598,6 +634,14 @@ foreign import newSkinnedMesh :: forall a b. a -> b -> Effect SkinnedMesh
 foreign import data Skeleton :: Type
 
 foreign import newSkeleton :: forall a b. a -> b -> Effect Skeleton
+
+foreign import data Bone :: Type
+
+foreign import newBone :: Effect Bone
+
+foreign import data LOD :: Type
+
+foreign import newLOD :: Effect LOD
 
 ------------ MATERIALS
 
@@ -828,6 +872,22 @@ foreign import data VertexNode :: Type
 
 foreign import newVertexNode :: Vector3 -> Effect VertexNode
 
+foreign import data Face :: Type
+
+foreign import newFace :: Effect Face
+
+foreign import data HalfEdge :: Type
+
+foreign import newHalfEdge :: VertexNode -> Face -> Effect HalfEdge
+
+foreign import data ConvexHull :: Type
+
+foreign import newConvexHull :: Effect ConvexHull
+
+foreign import data VertexList :: Type
+
+foreign import newVertexList :: Effect VertexList
+
 -- AUDIO
 
 foreign import data AudioListener :: Type
@@ -841,6 +901,33 @@ foreign import newPositionalAudio :: AudioListener -> Effect PositionalAudio
 foreign import data Audio :: Type
 
 foreign import newAudio :: AudioListener -> Effect Audio
+
+-- EXPORTERS
+foreign import data ColladaExporter :: Type
+
+foreign import newColladaExporter :: Effect ColladaExporter
+
+foreign import data EXRExporter :: Type
+
+foreign import newEXRExporter :: Effect EXRExporter
+
+foreign import data GLTFExporter :: Type
+
+foreign import newGLTFExporter :: Effect GLTFExporter
+
+foreign import data OBJExporter :: Type
+
+foreign import newOBJExporter :: Effect OBJExporter
+
+foreign import data PLYExporter :: Type
+
+foreign import newPLYExporter :: Effect PLYExporter
+
+-- WebGLRenderer
+
+foreign import data WebGLProgram :: Type
+
+foreign import newWebGLProgram :: WebGLRenderer -> String -> forall a. a -> Effect WebGLProgram
 
 -- TEXTURE
 

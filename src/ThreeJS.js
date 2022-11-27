@@ -144,6 +144,8 @@ export const newConvexGeometry = points => () => new THREE.ConvexGeometry(points
 
 export const newTubeGeometry = path => tubularSegments => radius => radialSegments => closed => () => new THREE.TubeGeometry(path, tubularSegments, radius, radialSegments, closed);
 
+export const newEdgesGeometry = geometry => () => new THREE.EdgesGeometry(geometry);
+
 // Mesh
 
 export const newMesh = geometry => material => () => new THREE.Mesh(geometry,material);
@@ -250,6 +252,16 @@ export const newSpotLightHelper = light => color => () => new THREE.SpotLightHel
 
 export const newSkeletonHelper = object => () => new THREE.SkeletonHelper(object);
 
+export const newLightProbeHelper = lightProbe => size => () => new THREE.LightProbeHelper(lightProbe, size);
+
+export const newPositionalAudioHelper = audio => range => () => new THREE.PositionalAudioHelper(audio, range);
+
+export const newRectAreaLightHelper = light => color => () => new THREE.RectAreaLightHelper(light, color);
+
+export const newVertexNormalsHelper = object => size => color => () => new THREE.VertexNormalsHelper(object, size, color);
+
+export const newVertexTangentsHelper = object => size => color => () => new THREE.VertexTangentsHelper(object, size, color);
+
 // MATH
 
 export const newVector2 = x => y => () => new THREE.Vector2(x, y);
@@ -287,6 +299,12 @@ export const newLut = colormap => count => () => new THREE.Lut(colormap, count);
 export const newMeshSurfaceSampler = mesh => () => new THREE.MeshSurfaceSampler(mesh);
 
 export const newSphericalHarmonics3 = () => new THREE.SphericalHarmonics3();
+
+export const newMatrix3 = () => new THREE.Matrix3();
+
+export const newMatrix4 = () => new THREE.Matrix4();
+
+export const newOBB = center => halfSize => rotation => () => new THREE.OBB(center, halfSize, rotation);
 
 //
 
@@ -339,6 +357,10 @@ export const newLineSegments = geometry => material => () => new THREE.LineSegme
 export const newSkinnedMesh = geometry => material => () => new THREE.SkinnedMesh(geometry, material);
 
 export const newSkeleton = bones => boneInverses => () => new THREE.Skeleton(bones, boneInverses);
+
+export const newBone = () => new THREE.Bone();
+
+export const newLOD = () => new THREE.LOD();
 
 // Materials
 
@@ -466,6 +488,14 @@ export const newEffectComposer = renderer => renderTarget => () => new THREE.Eff
 
 export const newVertexNode = point => () => new THREE.VertexNode(point);
 
+export const newFace = () => new THREE.Face();
+
+export const newHalfEdge = vertex => face => () => new THREE.HalfEdge(vertex, face);
+
+export const newConvexHull = () => new THREE.ConvexHull();
+
+export const newVertexList = () => new THREE.VertexList();
+
 // AUDIO
 
 export const newAudioListener = () => new THREE.AudioListener()
@@ -473,6 +503,22 @@ export const newAudioListener = () => new THREE.AudioListener()
 export const newPositionalAudio = listener => () => new THREE.PositionalAudio(listener)
 
 export const newAudio = listener => () => new THREE.Audio(listener)
+
+// EXPORTERS
+
+export const newColladaExporter = () => new THREE.ColladaExporter();
+
+export const newEXRExporter = () => new THREE.EXRExporter();
+
+export const newGLTFExporter = () => new THREE.GLTFExporter();
+
+export const newOBJExporter = () => new THREE.OBJExporter();
+
+export const newPLYExporter = () => new THREE.PLYExporter();
+
+// WebGLRenderer
+
+export const newWebGLProgram = renderer => cacheKey => parameters => () => new THREE.WebGLProgram(renderer, cacheKey, parameters);
 
 // TEXTURE
 
