@@ -380,6 +380,8 @@ foreign import newAmbientLight :: Int -> Number -> Effect AmbientLight
 
 foreign import data DirectionalLight :: Type
 
+instance SetPosition DirectionalLight
+
 foreign import newDirectionalLight :: Int -> Number -> Effect DirectionalLight
 
 foreign import data PointLight :: Type
