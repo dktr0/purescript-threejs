@@ -1,15 +1,40 @@
-module ThreeJS
-  ( newSpriteMaterial
-  )
-  where
+module ThreeJS where
+
+-- This module is what should be imported in most cases by users of this library.
+-- When types imported from ThreeJS are to be members of PureScript classes
+-- then this is implemented by (1) having un-type-safe functions in the module
+-- ThreeJS.Unsafe, (2) providing definitions with class constraints in
+-- this module that use the un-type-safe definitions from ThreeJS.Unsafe, and
+-- finally (3) declaring the types imported from ThreeJS to be instances of the
+-- PureScript class. See the class SetPosition and the type Mesh below for an example.
 
 import Prelude
 import Effect (Effect)
 import Web.HTML.HTMLMediaElement as HTML
+import ThreeJS.Unsafe as Unsafe
+
+-- Classes
+
+class SetPosition a
+
+setPosition :: forall a. (SetPosition a) => a -> Number -> Number -> Number -> Effect Unit
+setPosition = Unsafe.setPosition
+
+setPositionX :: forall a. (SetPosition a) => a -> Number -> Effect Unit
+setPositionX = Unsafe.setPositionX
+
+setPositionY :: forall a. (SetPosition a) => a -> Number -> Effect Unit
+setPositionY = Unsafe.setPositionY
+
+setPositionZ :: forall a. (SetPosition a) => a -> Number -> Effect Unit
+setPositionZ = Unsafe.setPositionZ
+
 
 -- Scene
 
 foreign import data Scene :: Type
+
+instance SetPosition Scene
 
 foreign import newScene :: Effect Scene
 
@@ -25,6 +50,8 @@ foreign import newFogExp2 :: Int -> Number -> Effect FogExp2
 -- PerspectiveCamera
 
 foreign import data PerspectiveCamera :: Type
+
+instance SetPosition PerspectiveCamera
 
 foreign import newPerspectiveCamera :: Number -> Number -> Number -> Number -> Effect PerspectiveCamera
 
@@ -106,6 +133,8 @@ foreign import newSVGRenderer :: Effect SVGRenderer
 
 foreign import data Mesh :: Type
 
+instance SetPosition Mesh
+
 foreign import newMesh :: forall a b. a -> b -> Effect Mesh
 
 foreign import setReceiveShadow :: Mesh -> Boolean -> Effect Unit
@@ -135,8 +164,6 @@ foreign import loadMTL :: MTLLoader -> String -> (MTL -> Effect Unit) -> Effect 
 
 
 -- GLTF --
-
-foreign import data AnimationClip :: Type
 
 type GLTF = {
   animations :: Array AnimationClip, -- in ThreeJS: Array<THREE.AnimationClip>
@@ -302,16 +329,6 @@ foreign import copyObject3D :: forall a b. a -> b -> Boolean -> Effect Unit
 foreign import removeObject3D :: forall a b. a -> b -> Effect Unit
 
 foreign import removeFromParent :: forall a. a -> Effect Unit
-
-foreign import setPositionOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
-
--- foreign import getPositionOfAnything :: forall a. a -> Effect Vector3
-
-foreign import setPositionX :: forall a. a -> Number -> Effect Unit
-
-foreign import setPositionY :: forall a. a -> Number -> Effect Unit
-
-foreign import setPositionZ :: forall a. a -> Number -> Effect Unit
 
 foreign import rotationX :: forall a. a -> Effect Number
 
@@ -762,11 +779,11 @@ foreign import newBooleanKeyframeTrack :: String -> forall a b. a -> b -> Effect
 
 foreign import data ColorKeyframeTrack :: Type
 
-foreign import newColorKeyframeTrack  :: String -> forall a b. a -> b -> Effect ColorKeyframeTrack 
+foreign import newColorKeyframeTrack  :: String -> forall a b. a -> b -> Effect ColorKeyframeTrack
 
 foreign import data NumberKeyframeTrack :: Type
 
-foreign import newNumberKeyframeTrack  :: String -> forall a b. a -> b -> Effect NumberKeyframeTrack 
+foreign import newNumberKeyframeTrack  :: String -> forall a b. a -> b -> Effect NumberKeyframeTrack
 
 foreign import data QuaternionKeyframeTrack :: Type
 
@@ -864,7 +881,8 @@ foreign import newMMDPhysics :: SkinnedMesh -> forall a b. a -> b -> forall para
 
 foreign import data EffectComposer :: Type
 
-foreign import newEffectComposer :: WebGLRenderer -> WebGLRenderTarget -> Effect EffectComposer
+-- note: should be a class for WebGLRenderer-s but for now, just Renderer...
+foreign import newEffectComposer :: Renderer -> WebGLRenderTarget -> Effect EffectComposer
 
 -- CONVEXHULL
 
@@ -927,7 +945,8 @@ foreign import newPLYExporter :: Effect PLYExporter
 
 foreign import data WebGLProgram :: Type
 
-foreign import newWebGLProgram :: WebGLRenderer -> String -> forall a. a -> Effect WebGLProgram
+-- note: should be a class for WebGLRenderer-s but for now, just Renderer...
+foreign import newWebGLProgram :: Renderer -> String -> forall a. a -> Effect WebGLProgram
 
 -- TEXTURE
 
