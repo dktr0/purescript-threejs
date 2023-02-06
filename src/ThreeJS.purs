@@ -370,6 +370,8 @@ foreign import printAnything :: forall o. o -> Effect Unit
 
 foreign import data HemisphereLight :: Type
 
+instance SetPosition HemisphereLight
+
 foreign import newHemisphereLight :: Int -> Int -> Number -> Effect HemisphereLight
 
 foreign import data AmbientLight :: Type
