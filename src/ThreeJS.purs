@@ -773,7 +773,13 @@ foreign import newObject3D :: Effect Object3D
 
 -- ANIMATION
 
-foreign import data AnimationClip :: Type
+-- foreign import data AnimationClip :: Type
+
+type AnimationClip = {
+  name :: String,
+  duration :: Number
+  -- note: ThreeJS type has additional fields not added here yet
+  }
 
 foreign import newAnimationClip :: String -> Number -> forall a. a -> Effect AnimationClip
 
