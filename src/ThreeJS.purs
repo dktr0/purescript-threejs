@@ -29,6 +29,8 @@ setPositionY = Unsafe.setPositionY
 setPositionZ :: forall a. (SetPosition a) => a -> Number -> Effect Unit
 setPositionZ = Unsafe.setPositionZ
 
+-- Constant
+foreign import data Constant :: Type
 
 -- Scene
 
@@ -209,6 +211,184 @@ foreign import loadOBJ1 :: String -> (OBJ -> Effect Unit) -> Effect Unit
 foreign import loadMTL1 :: String -> (MTL -> Effect Unit) -> Effect Unit
 ----- end of section -----
 ------------------------
+
+-- Loaders
+foreign import data MMDLoader :: Type
+
+foreign import newMMDLoader :: Effect MMDLoader
+
+foreign import data MMD :: Type
+
+foreign import loadMMD :: MMDLoader -> String -> (MMD -> Effect Unit) -> Effect Unit
+
+foreign import data PCDLoader :: Type
+
+foreign import newPCDLoader :: Effect PCDLoader
+
+foreign import data PCD :: Type
+
+foreign import loadPCD :: PCDLoader -> String -> (PCD -> Effect Unit) -> Effect Unit
+
+foreign import data FontLoader :: Type
+
+foreign import newFontLoader :: Effect FontLoader
+
+foreign import data Font :: Type
+
+foreign import loadFont :: FontLoader -> String -> (Font -> Effect Unit) -> Effect Unit
+
+foreign import data KTX2Loader :: Type
+
+foreign import newKTX2Loader :: Effect KTX2Loader
+
+foreign import data KTX2 :: Type
+
+foreign import loadKTX2 :: KTX2Loader -> String -> (KTX2 -> Effect Unit) -> Effect Unit
+
+foreign import data LDrawLoader :: Type
+
+foreign import newLDrawLoader :: Effect LDrawLoader
+
+foreign import data LDraw :: Type
+
+foreign import loadLDraw :: LDrawLoader -> String -> (LDraw -> Effect Unit) -> Effect Unit
+
+foreign import data PDBLoader :: Type
+
+foreign import newPDBLoader :: Effect PDBLoader
+
+foreign import data PDB :: Type
+
+foreign import loadPDB :: PDBLoader -> String -> (PDB -> Effect Unit) -> Effect Unit
+
+foreign import data PRWMLoader :: Type
+
+foreign import newPRWMLoader :: Effect PRWMLoader
+
+foreign import data PRWM :: Type
+
+foreign import loadPRWM :: PRWMLoader -> String -> (PRWM -> Effect Unit) -> Effect Unit
+
+foreign import data SVGLoader :: Type
+
+foreign import newSVGLoader :: Effect SVGLoader
+
+foreign import data SVG :: Type
+
+foreign import loadSVG :: SVGLoader -> String -> (SVG -> Effect Unit) -> Effect Unit
+
+foreign import data TGALoader :: Type
+
+foreign import newTGALoader :: Effect TGALoader
+
+foreign import data TGA :: Type
+
+foreign import loadTGA :: TGALoader -> String -> (TGA -> Effect Unit) -> Effect Unit
+
+foreign import data Rhino3dmLoader :: Type
+
+foreign import newRhino3dmLoader :: Effect Rhino3dmLoader
+
+foreign import data Rhino3dm :: Type
+
+foreign import loadRhino3dm :: Rhino3dmLoader -> String -> (Rhino3dm -> Effect Unit) -> Effect Unit
+
+foreign import data AnimationLoader :: Type
+
+foreign import newAnimationLoader :: Effect AnimationLoader
+
+foreign import data Animation :: Type
+
+foreign import loadAnimation :: AnimationLoader -> String -> (Animation -> Effect Unit) -> Effect Unit
+
+foreign import data AudioLoader :: Type
+
+foreign import newAudioLoader :: Effect AudioLoader
+
+foreign import data AudioL :: Type
+
+foreign import loadAudio :: AudioLoader -> String -> (AudioL -> Effect Unit) -> Effect Unit
+
+foreign import data BufferGeometryLoader :: Type
+
+foreign import newBufferGeometryLoader :: Effect BufferGeometryLoader
+
+foreign import data BufferGeometryL :: Type
+
+foreign import loadBufferGeometry :: BufferGeometryLoader -> String -> (BufferGeometryL -> Effect Unit) -> Effect Unit
+
+foreign import data CompressedTextureLoader :: Type
+
+foreign import newCompressedTextureLoader :: Effect CompressedTextureLoader
+
+foreign import data CompressedTextureL :: Type
+
+foreign import loadCompressedTexture :: CompressedTextureLoader -> String -> (CompressedTextureL -> Effect Unit) -> Effect Unit
+
+foreign import data CubeTextureLoader :: Type
+
+foreign import newCubeTextureLoader :: Effect CubeTextureLoader
+
+foreign import data CubeTexture :: Type
+
+foreign import loadCubeTexture :: CubeTextureLoader -> String -> (CubeTexture -> Effect Unit) -> Effect Unit
+
+foreign import data DataTextureLoader :: Type
+
+foreign import newDataTextureLoader :: Effect DataTextureLoader
+
+foreign import data DataTexture :: Type
+
+foreign import loadDataTexture :: DataTextureLoader -> String -> (DataTexture -> Effect Unit) -> Effect Unit
+
+foreign import data FileLoader :: Type
+
+foreign import newFileLoader :: Effect FileLoader
+
+foreign import data File :: Type
+
+foreign import loadFile :: FileLoader -> String -> (File -> Effect Unit) -> Effect Unit
+
+foreign import data ImageBitmapLoader :: Type
+
+foreign import newImageBitmapLoader :: Effect ImageBitmapLoader
+
+foreign import data ImageBitmap :: Type
+
+foreign import loadImageBitmap :: ImageBitmapLoader -> String -> (ImageBitmap -> Effect Unit) -> Effect Unit
+
+foreign import data ImageLoader :: Type
+
+foreign import newImageLoader :: Effect ImageLoader
+
+foreign import data Image :: Type
+
+foreign import loadImage :: ImageLoader -> String -> (Image -> Effect Unit) -> Effect Unit
+
+foreign import data Loader :: Type
+
+foreign import newLoader :: Effect Loader
+
+foreign import data Load :: Type
+
+foreign import loadLoader :: Loader -> String -> (Load -> Effect Unit) -> Effect Unit
+
+foreign import data MaterialLoader :: Type
+
+foreign import newMaterialLoader :: Effect MaterialLoader
+
+foreign import data MaterialL :: Type
+
+foreign import loadMaterial :: MaterialLoader -> String -> (MaterialL-> Effect Unit) -> Effect Unit
+
+foreign import data ObjectLoader :: Type
+
+foreign import newObjectLoader :: Effect ObjectLoader
+
+foreign import data Object :: Type
+
+foreign import loadObject :: ObjectLoader -> String -> (Object-> Effect Unit) -> Effect Unit
+
 
 -------------
 
@@ -585,6 +765,27 @@ foreign import data OBB :: Type
 
 foreign import newOBB :: Vector3 -> Vector3 -> Matrix3 -> Effect OBB
 
+foreign import data Color :: Type
+
+foreign import newColor :: Int -> Effect Color
+
+-- MATH / INTERPOLANTS
+foreign import data CubicInterpolant :: Type
+
+foreign import newCubicInterpolant :: forall a b. a -> b -> Int -> forall c. c-> Effect CubicInterpolant
+
+foreign import data DiscreteInterpolant :: Type
+
+foreign import newDiscreteInterpolant :: forall a b. a -> b -> Int -> forall c. c-> Effect DiscreteInterpolant
+
+foreign import data LinearInterpolant :: Type
+
+foreign import newLinearInterpolant :: forall a b. a -> b -> Int -> forall c. c-> Effect LinearInterpolant
+
+foreign import data QuaternionLinearInterpolant :: Type
+
+foreign import newQuaternionLinearInterpolant :: forall a b. a -> b -> Int -> forall c. c-> Effect QuaternionLinearInterpolant
+
 --
 
 foreign import windowInnerWidth :: Effect Number
@@ -782,6 +983,10 @@ type AnimationClip = {
   }
 
 foreign import newAnimationClip :: String -> Number -> forall a. a -> Effect AnimationClip
+
+foreign import data KeyframeTrack :: Type
+
+foreign import newKeyframeTrack :: String -> forall a b. a -> b -> Constant -> Effect KeyframeTrack
 
 -- ANIMATION / TRACKS
 
@@ -997,6 +1202,65 @@ foreign import linearFilter :: Effect Filter
 foreign import minFilter :: TextureLoader -> Effect Filter -> Effect Unit
 
 foreign import magFilter :: TextureLoader -> Effect Filter -> Effect Unit
+
+-- Textures
+
+foreign import data Source :: Type
+
+foreign import newSource :: forall a. a -> Effect Source
+
+foreign import data CompressedTexture :: Type
+
+foreign import newCompressedTexture :: forall a. a -> Number -> Number -> Constant -> Constant -> Constant -> Constant -> Constant -> Constant -> Constant -> Number -> Effect CompressedTexture
+
+foreign import data CanvasTexture :: Type
+
+foreign import newCanvasTexture :: HTML.HTMLCanvasElement -> Constant -> Constant -> Constant -> Constant -> Constant -> Constant -> Constant -> Number -> Effect CanvasTexture
+
+foreign import data CompressedArrayTexture :: Type
+
+foreign import newCompressedArrayTexture :: forall a. a -> Number -> Number -> Constant -> Constant -> Effect CompressedArrayTexture
+
+foreign import data DepthTexture :: Type
+
+foreign import newDepthTexture :: Number -> Number -> Constant -> Constant -> Constant -> Constant -> Constant -> Constant -> Number -> Constant -> Effect DepthTexture
+
+foreign import data FramebufferTexture :: Type
+
+foreign import newFramebufferTexture :: Number -> Number -> Constant -> Effect FramebufferTexture
+
+-- Controls
+foreign import data ArcballControls :: Type
+
+foreign import newArcballControls :: Camera -> HTML.HTMLElement -> Scene -> Effect ArcballControls
+
+foreign import data DragControls :: Type
+
+foreign import newDragControls :: forall a. a -> Camera -> HTML.HTMLElement -> Effect DragControls
+
+foreign import data FirstPersonControls :: Type
+
+foreign import newFirstPersonControls :: Camera -> HTML.HTMLElement -> Effect FirstPersonControls
+
+foreign import data FlyControls :: Type
+
+foreign import newFlyControls :: Camera -> HTML.HTMLElement -> Effect FlyControls
+
+foreign import data OrbitControls :: Type
+
+foreign import newOrbitControls :: Camera -> HTML.HTMLElement -> Effect OrbitControls
+
+foreign import data PointerLockControls :: Type
+
+foreign import newPointerLockControls :: Camera -> HTML.HTMLElement -> Effect PointerLockControls
+
+foreign import data TrackballControls :: Type
+
+foreign import newTrackballControls :: Camera -> HTML.HTMLElement -> Effect TrackballControls
+
+foreign import data TransformControls :: Type
+
+foreign import newTransformControls :: Camera -> HTML.HTMLElement -> Effect TransformControls
 
 --
 

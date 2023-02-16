@@ -95,6 +95,95 @@ export const loadOBJ1 = url => cb => () => new THREE.OBJLoader().load(url,x => c
 export const loadMTL1 = url => cb => () => new THREE.MTLLoader().load(url,x => cb(x)());
 // ----- end of section -----
 
+// Loaders
+export const newMMDLoader = () => new THREE.MMDLoader();
+
+export const loadMMD = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newPCDLoader = () => new THREE.PCDLoader();
+
+export const loadPCD = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newFontLoader = () => new THREE.FontLoader();
+
+export const loadFont = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newKTX2Loader = () => new THREE.KTX2Loader();
+
+export const loadKTX2 = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newLDrawLoader = () => new THREE.LDrawLoader();
+
+export const loadLDraw = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newPDBLoader = () => new THREE.PDBLoader();
+
+export const loadPDB = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newPRWMLoader = () => new THREE.PRWMLoader();
+
+export const loadPRWM = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newSVGLoader = () => new THREE.SVGLoader();
+
+export const loadSVG = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newTGALoader = () => new THREE.TGALoader();
+
+export const loadTGA = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newRhino3dmLoader = () => new THREE.Rhino3dmLoader();
+
+export const loadRhino3dm = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newAnimationLoader = () => new THREE.AnimationLoader();
+
+export const loadAnimation = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newAudioLoader = () => new THREE.AudioLoader();
+
+export const loadAudio = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newBufferGeometryLoader = () => new THREE.BufferGeometryLoader();
+
+export const loadBufferGeometry = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newCompressedTextureLoader = () => new THREE.CompressedTextureLoader();
+
+export const loadCompressedTexture = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newCubeTextureLoader = () => new THREE.CubeTextureLoader();
+
+export const loadCubeTexture = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newDataTextureLoader = () => new THREE.DataTextureLoader();
+
+export const loadDataTexture = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newFileLoader = () => new THREE.FileLoader();
+
+export const loadFile = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newImageBitmapLoader = () => new THREE.ImageBitmapLoader();
+
+export const loadImageBitmap = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newImageLoader = () => new THREE.ImageLoader();
+
+export const loadImage = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newLoader = () => new THREE.Loader();
+
+export const loadLoader = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newMaterialLoader = () => new THREE.MaterialLoader();
+
+export const loadMaterial = loader => url => cb => () => loader.load(url,x => cb(x)());
+
+export const newObjectLoader = () => new THREE.ObjectLoader();
+
+export const loadObject = loader => url => cb => () => loader.load(url,x => cb(x)());
+
 
 // GROUPS
 
@@ -298,6 +387,17 @@ export const newMatrix4 = () => new THREE.Matrix4();
 
 export const newOBB = center => halfSize => rotation => () => new THREE.OBB(center, halfSize, rotation);
 
+export const newColor = r => () => new THREE.Color(r);
+
+// MATH / INTERPOLANTS
+export const CubicInterpolant = parameterPositions => sampleValues => sampleSize => resultBuffer => () => new THREE.CubicInterpolant(parameterPositions, sampleValues, sampleSize, resultBuffer);
+
+export const DiscreteInterpolant = parameterPositions => sampleValues => sampleSize => resultBuffer => () => new THREE.DiscreteInterpolant(parameterPositions, sampleValues, sampleSize, resultBuffer);
+
+export const LinearInterpolant = parameterPositions => sampleValues => sampleSize => resultBuffer => () => new THREE.LinearInterpolant(parameterPositions, sampleValues, sampleSize, resultBuffer);
+
+export const QuaternionLinearInterpolant = parameterPositions => sampleValues => sampleSize => resultBuffer => () => new THREE.QuaternionLinearInterpolant(parameterPositions, sampleValues, sampleSize, resultBuffer);
+
 //
 
 export const newPolarGridHelper = radius => radials => circles => divisions => () => new THREE.PolarGridHelper(radius,radials,circles,divisions)
@@ -413,6 +513,9 @@ export const newObject3D = () => new THREE.Object3D();
 // ANIMATION
 
 export const newAnimationClip = name => duration => tracks => () => new THREE.AnimationClip(name, duration, tracks);
+
+export const KeyframeTrack = name => times => values => interpolation => () => new THREE.KeyframeTrack(name, times, values, interpolation);
+
 
 // ANIMATION / TRACKS
 
@@ -543,6 +646,38 @@ export const linearFilter = THREE.LinearFilter;
 export const minFilter = texture => filter => () => texture.minFilter = filter;
 
 export const magFilter = texture => filter => () => texture.magFilter = filter;
+
+// Textures
+
+export const newSource = data => () => new THREE.Source(data);
+
+export const CompressedTexture = mipmaps => width => height => format => type => mapping => wrapS => wrapT => magFilter => minFilter => anisotropy => () => new THREE.CompressedTexture(mipmaps, width, height, format, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy);
+
+export const CanvasTexture = canvas => mapping => wrapS => wrapT => magFilter => minFilter => format => type => anisotropy => () => new THREE.CanvasTexture(canvas, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy);
+
+export const CompressedArrayTexture = mipmaps => width => height => format => type => () => new THREE.CompressedArrayTexture(mipmaps, width, height, format, type);
+
+export const DepthTexture = width => height => type => mapping => wrapS => wrapT => magFilter => minFilter => anisotropy => format => () => new THREE.DepthTexture(width, height, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy, format);
+
+export const FramebufferTexture = width => height => format => () => new THREE.FramebufferTexture(width, height, format);
+
+// Controls
+
+export const ArcballControls = camera => domElement => scene => () => new THREE.ArcballControls(camera, domElement, scene);
+
+export const DragControls = objects => camera => domElement => () => new THREE.DragControls(objects, camera, domElement);
+
+export const FirstPersonControls = object => domElement => () => new THREE.FirstPersonControls(object, domElement);
+
+export const FlyControls = object => domElement => () => new THREE.FlyControls(object, domElement);
+
+export const OrbitControls = object => domElement => () => new THREE.OrbitControls(object, domElement);
+
+export const PointerLockControls = camera => domElement => () => new THREE.PointerLockControls(camera, domElement);
+
+export const TrackballControls = camera => domElement => () => new THREE.TrackballControls(camera, domElement);
+
+export const TransformControls = camera => domElement => () => new THREE.TransformControls(camera, domElement);
 
 //
 
