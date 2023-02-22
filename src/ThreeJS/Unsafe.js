@@ -1,5 +1,7 @@
 "use strict";
 
+export const lookAt = thing => x => y => z => () => thing.lookAt(x,y,z);
+
 export const setPosition = thing => x => y => z => () => thing.position.set(x,y,z);
 
 export const setPositionX = thing => x => () => thing.position.setX(x);

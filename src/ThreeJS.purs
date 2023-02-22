@@ -15,6 +15,11 @@ import ThreeJS.Unsafe as Unsafe
 
 -- Classes
 
+class Object a
+
+lookAt :: forall a. (Object a) => a -> Number -> Number -> Number -> Effect Unit
+lookAt = Unsafe.lookAt
+
 class SetPosition a
 
 setPosition :: forall a. (SetPosition a) => a -> Number -> Number -> Number -> Effect Unit
@@ -50,6 +55,8 @@ foreign import newFogExp2 :: Int -> Number -> Effect FogExp2
 -- PerspectiveCamera
 
 foreign import data PerspectiveCamera :: Type
+
+instance Object PerspectiveCamera
 
 instance SetPosition PerspectiveCamera
 
