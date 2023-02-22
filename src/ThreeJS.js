@@ -390,13 +390,13 @@ export const newOBB = center => halfSize => rotation => () => new THREE.OBB(cent
 export const newColor = r => () => new THREE.Color(r);
 
 // MATH / INTERPOLANTS
-export const CubicInterpolant = parameterPositions => sampleValues => sampleSize => resultBuffer => () => new THREE.CubicInterpolant(parameterPositions, sampleValues, sampleSize, resultBuffer);
+export const newCubicInterpolant = parameterPositions => sampleValues => sampleSize => resultBuffer => () => new THREE.CubicInterpolant(parameterPositions, sampleValues, sampleSize, resultBuffer);
 
-export const DiscreteInterpolant = parameterPositions => sampleValues => sampleSize => resultBuffer => () => new THREE.DiscreteInterpolant(parameterPositions, sampleValues, sampleSize, resultBuffer);
+export const newDiscreteInterpolant = parameterPositions => sampleValues => sampleSize => resultBuffer => () => new THREE.DiscreteInterpolant(parameterPositions, sampleValues, sampleSize, resultBuffer);
 
-export const LinearInterpolant = parameterPositions => sampleValues => sampleSize => resultBuffer => () => new THREE.LinearInterpolant(parameterPositions, sampleValues, sampleSize, resultBuffer);
+export const newLinearInterpolant = parameterPositions => sampleValues => sampleSize => resultBuffer => () => new THREE.LinearInterpolant(parameterPositions, sampleValues, sampleSize, resultBuffer);
 
-export const QuaternionLinearInterpolant = parameterPositions => sampleValues => sampleSize => resultBuffer => () => new THREE.QuaternionLinearInterpolant(parameterPositions, sampleValues, sampleSize, resultBuffer);
+export const newQuaternionLinearInterpolant = parameterPositions => sampleValues => sampleSize => resultBuffer => () => new THREE.QuaternionLinearInterpolant(parameterPositions, sampleValues, sampleSize, resultBuffer);
 
 //
 
@@ -514,7 +514,7 @@ export const newObject3D = () => new THREE.Object3D();
 
 export const newAnimationClip = name => duration => tracks => () => new THREE.AnimationClip(name, duration, tracks);
 
-export const KeyframeTrack = name => times => values => interpolation => () => new THREE.KeyframeTrack(name, times, values, interpolation);
+export const newKeyframeTrack = name => times => values => interpolation => () => new THREE.KeyframeTrack(name, times, values, interpolation);
 
 
 // ANIMATION / TRACKS
@@ -651,33 +651,33 @@ export const magFilter = texture => filter => () => texture.magFilter = filter;
 
 export const newSource = data => () => new THREE.Source(data);
 
-export const CompressedTexture = mipmaps => width => height => format => type => mapping => wrapS => wrapT => magFilter => minFilter => anisotropy => () => new THREE.CompressedTexture(mipmaps, width, height, format, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy);
+export const newCompressedTexture = mipmaps => width => height => format => type => mapping => wrapS => wrapT => magFilter => minFilter => anisotropy => () => new THREE.CompressedTexture(mipmaps, width, height, format, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy);
 
-export const CanvasTexture = canvas => mapping => wrapS => wrapT => magFilter => minFilter => format => type => anisotropy => () => new THREE.CanvasTexture(canvas, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy);
+export const newCanvasTexture = canvas => mapping => wrapS => wrapT => magFilter => minFilter => format => type => anisotropy => () => new THREE.CanvasTexture(canvas, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy);
 
-export const CompressedArrayTexture = mipmaps => width => height => format => type => () => new THREE.CompressedArrayTexture(mipmaps, width, height, format, type);
+export const newCompressedArrayTexture = mipmaps => width => height => format => type => () => new THREE.CompressedArrayTexture(mipmaps, width, height, format, type);
 
-export const DepthTexture = width => height => type => mapping => wrapS => wrapT => magFilter => minFilter => anisotropy => format => () => new THREE.DepthTexture(width, height, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy, format);
+export const newDepthTexture = width => height => type => mapping => wrapS => wrapT => magFilter => minFilter => anisotropy => format => () => new THREE.DepthTexture(width, height, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy, format);
 
-export const FramebufferTexture = width => height => format => () => new THREE.FramebufferTexture(width, height, format);
+export const newFramebufferTexture = width => height => format => () => new THREE.FramebufferTexture(width, height, format);
 
 // Controls
 
-export const ArcballControls = camera => domElement => scene => () => new THREE.ArcballControls(camera, domElement, scene);
+export const newArcballControls = camera => domElement => scene => () => new THREE.ArcballControls(camera, domElement, scene);
 
-export const DragControls = objects => camera => domElement => () => new THREE.DragControls(objects, camera, domElement);
+export const newDragControls = objects => camera => domElement => () => new THREE.DragControls(objects, camera, domElement);
 
-export const FirstPersonControls = object => domElement => () => new THREE.FirstPersonControls(object, domElement);
+export const newFirstPersonControls = object => domElement => () => new THREE.FirstPersonControls(object, domElement);
 
-export const FlyControls = object => domElement => () => new THREE.FlyControls(object, domElement);
+export const newFlyControls = object => domElement => () => new THREE.FlyControls(object, domElement);
 
-export const OrbitControls = object => domElement => () => new THREE.OrbitControls(object, domElement);
+export const newOrbitControls = object => domElement => () => new THREE.OrbitControls(object, domElement);
 
-export const PointerLockControls = camera => domElement => () => new THREE.PointerLockControls(camera, domElement);
+export const newPointerLockControls = camera => domElement => () => new THREE.PointerLockControls(camera, domElement);
 
-export const TrackballControls = camera => domElement => () => new THREE.TrackballControls(camera, domElement);
+export const newTrackballControls = camera => domElement => () => new THREE.TrackballControls(camera, domElement);
 
-export const TransformControls = camera => domElement => () => new THREE.TransformControls(camera, domElement);
+export const newTransformControls = camera => domElement => () => new THREE.TransformControls(camera, domElement);
 
 //
 

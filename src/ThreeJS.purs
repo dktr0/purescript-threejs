@@ -10,7 +10,7 @@ module ThreeJS where
 
 import Prelude
 import Effect (Effect)
-import Web.HTML.HTMLMediaElement as HTML
+import Web.HTML as HTML
 import ThreeJS.Unsafe as Unsafe
 
 -- Classes
@@ -392,9 +392,9 @@ foreign import data ObjectLoader :: Type
 
 foreign import newObjectLoader :: Effect ObjectLoader
 
-foreign import data Object :: Type
+-- foreign import data Object :: Type
 
-foreign import loadObject :: ObjectLoader -> String -> (Object-> Effect Unit) -> Effect Unit
+-- foreign import loadObject :: ObjectLoader -> String -> (Object-> Effect Unit) -> Effect Unit
 
 
 -------------
