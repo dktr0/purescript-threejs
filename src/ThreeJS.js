@@ -259,14 +259,6 @@ export const removeObject3D = parent => child => () => parent.remove(child);
 
 export const removeFromParent = obj3D => () => obj3D.removeFromParent();
 
-export const rotationX = thing => () => thing.rotation.x;
-
-export const rotationY = thing => () => thing.rotation.y;
-
-export const rotationZ = thing => () => thing.rotation.z;
-
-export const setRotationOfAnything = thing => x => y => z => () => thing.rotation.set(x,y,z);
-
 export const setScaleOfAnything = thing => x => y => z => () => thing.scale.set(x,y,z);
 
 export const setRepeatOfAnything = thing => u => v => () => thing.repeat.set(u,v);

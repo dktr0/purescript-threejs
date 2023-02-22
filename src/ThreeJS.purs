@@ -6,7 +6,7 @@ module ThreeJS where
 -- ThreeJS.Unsafe, (2) providing definitions with class constraints in
 -- this module that use the un-type-safe definitions from ThreeJS.Unsafe, and
 -- finally (3) declaring the types imported from ThreeJS to be instances of the
--- PureScript class. See the class SetPosition and the type Mesh below for an example.
+-- PureScript class. See the class Object3D and the type Mesh below for an example.
 
 import Prelude
 import Effect (Effect)
@@ -15,24 +15,45 @@ import ThreeJS.Unsafe as Unsafe
 
 -- Classes
 
-class Object a
+class Object3D a
 
-lookAt :: forall a. (Object a) => a -> Number -> Number -> Number -> Effect Unit
+lookAt :: forall a. (Object3D a) => a -> Number -> Number -> Number -> Effect Unit
 lookAt = Unsafe.lookAt
 
-class SetPosition a
-
-setPosition :: forall a. (SetPosition a) => a -> Number -> Number -> Number -> Effect Unit
+setPosition :: forall a. (Object3D a) => a -> Number -> Number -> Number -> Effect Unit
 setPosition = Unsafe.setPosition
 
-setPositionX :: forall a. (SetPosition a) => a -> Number -> Effect Unit
+setPositionX :: forall a. (Object3D a) => a -> Number -> Effect Unit
 setPositionX = Unsafe.setPositionX
 
-setPositionY :: forall a. (SetPosition a) => a -> Number -> Effect Unit
+setPositionY :: forall a. (Object3D a) => a -> Number -> Effect Unit
 setPositionY = Unsafe.setPositionY
 
-setPositionZ :: forall a. (SetPosition a) => a -> Number -> Effect Unit
+setPositionZ :: forall a. (Object3D a) => a -> Number -> Effect Unit
 setPositionZ = Unsafe.setPositionZ
+
+getRotationX :: forall a. (Object3D a) => a -> Effect Number
+getRotationX = Unsafe.getRotationX
+
+getRotationY :: forall a. (Object3D a) => a -> Effect Number
+getRotationY = Unsafe.getRotationY
+
+getRotationZ :: forall a. (Object3D a) => a -> Effect Number
+getRotationZ = Unsafe.getRotationZ
+
+setRotation :: forall a. (Object3D a) => a -> Number -> Number -> Number -> Effect Unit
+setRotation = Unsafe.setRotation
+
+setRotationX :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setRotationX = Unsafe.setRotationX
+
+setRotationY :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setRotationY = Unsafe.setRotationY
+
+setRotationZ :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setRotationZ = Unsafe.setRotationZ
+
+
 
 -- Constant
 foreign import data Constant :: Type
@@ -41,7 +62,7 @@ foreign import data Constant :: Type
 
 foreign import data Scene :: Type
 
-instance SetPosition Scene
+instance Object3D Scene
 
 foreign import newScene :: Effect Scene
 
@@ -58,9 +79,7 @@ foreign import newFogExp2 :: Int -> Number -> Effect FogExp2
 
 foreign import data PerspectiveCamera :: Type
 
-instance Object PerspectiveCamera
-
-instance SetPosition PerspectiveCamera
+instance Object3D PerspectiveCamera
 
 foreign import newPerspectiveCamera :: Number -> Number -> Number -> Number -> Effect PerspectiveCamera
 
@@ -144,7 +163,7 @@ foreign import newSVGRenderer :: Effect SVGRenderer
 
 foreign import data Mesh :: Type
 
-instance SetPosition Mesh
+instance Object3D Mesh
 
 foreign import newMesh :: forall a b. a -> b -> Effect Mesh
 
@@ -519,32 +538,6 @@ foreign import removeObject3D :: forall a b. a -> b -> Effect Unit
 
 foreign import removeFromParent :: forall a. a -> Effect Unit
 
-foreign import rotationX :: forall a. a -> Effect Number
-
-foreign import rotationY :: forall a. a -> Effect Number
-
-foreign import rotationZ :: forall a. a -> Effect Number
-
-setRotationX :: forall a. a -> Number -> Effect Unit
-setRotationX o x = do
-  y <- rotationY o
-  z <- rotationZ o
-  setRotationOfAnything o x y z
-
-setRotationY :: forall a. a -> Number -> Effect Unit
-setRotationY o y = do
-  x <- rotationX o
-  z <- rotationZ o
-  setRotationOfAnything o x y z
-
-setRotationZ :: forall a. a -> Number -> Effect Unit
-setRotationZ o z = do
-  x <- rotationX o
-  y <- rotationY o
-  setRotationOfAnything o x y z
-
-foreign import setRotationOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
-
 foreign import setScaleOfAnything :: forall a. a -> Number -> Number -> Number -> Effect Unit
 
 foreign import setRepeatOfAnything :: forall a. a -> Number -> Number -> Effect Unit
@@ -559,7 +552,7 @@ foreign import printAnything :: forall o. o -> Effect Unit
 
 foreign import data HemisphereLight :: Type
 
-instance SetPosition HemisphereLight
+instance Object3D HemisphereLight
 
 foreign import newHemisphereLight :: Int -> Int -> Number -> Effect HemisphereLight
 
@@ -569,7 +562,7 @@ foreign import newAmbientLight :: Int -> Number -> Effect AmbientLight
 
 foreign import data DirectionalLight :: Type
 
-instance SetPosition DirectionalLight
+instance Object3D DirectionalLight
 
 foreign import newDirectionalLight :: Int -> Number -> Effect DirectionalLight
 
@@ -663,7 +656,8 @@ foreign import newSpotLightHelper :: SpotLight -> Int -> Effect SpotLightHelper
 
 foreign import data SkeletonHelper :: Type
 
-foreign import newSkeletonHelper :: Object3D -> Effect SkeletonHelper
+-- needs to be redone in Unsafe and then referenced here since constraints can't be used directly in foreign imports
+-- foreign import newSkeletonHelper :: forall a. (Object3D a) => a -> Effect SkeletonHelper
 
 foreign import data LightProbeHelper :: Type
 
@@ -679,11 +673,13 @@ foreign import newRectAreaLightHelper :: RectAreaLight -> Int -> Effect RectArea
 
 foreign import data VertexNormalsHelper :: Type
 
-foreign import newVertexNormalsHelper :: Object3D -> Number -> Int -> Effect VertexNormalsHelper
+-- needs to be redone in Unsafe and then referenced here since constraints can't be used directly in foreign imports
+-- foreign import newVertexNormalsHelper :: forall a. (Object3D a) => a -> Number -> Int -> Effect VertexNormalsHelper
 
 foreign import data VertexTangentsHelper :: Type
 
-foreign import newVertexTangentsHelper :: Object3D -> Number -> Int -> Effect VertexTangentsHelper
+-- needs to be redone in Unsafe and then referenced here since constraints can't be used directly in foreign imports
+-- foreign import newVertexTangentsHelper :: forall a. (Object3D a) => a -> Number -> Int -> Effect VertexTangentsHelper
 
 
 -- MATH
@@ -974,9 +970,7 @@ foreign import data Layers :: Type
 
 foreign import newLayers :: Effect Layers
 
-foreign import data Object3D :: Type
-
-foreign import newObject3D :: Effect Object3D
+-- foreign import newObject3D :: Effect Object3D
 
 
 -- ANIMATION
