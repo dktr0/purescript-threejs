@@ -548,6 +548,7 @@ foreign import playAnything :: forall o. o -> Effect Unit
 
 foreign import printAnything :: forall o. o -> Effect Unit
 
+
 ------------ LIGHTS
 
 foreign import data HemisphereLight :: Type
@@ -556,9 +557,13 @@ instance Object3D HemisphereLight
 
 foreign import newHemisphereLight :: Int -> Int -> Number -> Effect HemisphereLight
 
+
 foreign import data AmbientLight :: Type
 
+instance Object3D AmbientLight
+
 foreign import newAmbientLight :: Int -> Number -> Effect AmbientLight
+
 
 foreign import data DirectionalLight :: Type
 
@@ -566,33 +571,52 @@ instance Object3D DirectionalLight
 
 foreign import newDirectionalLight :: Int -> Number -> Effect DirectionalLight
 
+
 foreign import data PointLight :: Type
+
+instance Object3D PointLight
 
 foreign import newPointLight :: Int -> Number -> Number -> Number -> Effect PointLight
 
+
 foreign import data AmbientLightProbe :: Type
+
+instance Object3D AmbientLightProbe
 
 foreign import newAmbientLightProbe :: Int -> Number -> Effect AmbientLightProbe
 
-foreign import data Light :: Type
+-- because Light is an abstract base class in ThreeJS, not intended to be
+-- created directly, Light should be a class like Object3D instead of a type
+-- foreign import data Light :: Type
 
-foreign import newLight :: Int -> Number -> Effect Light
 
 foreign import data RectAreaLight :: Type
 
+instance Object3D RectAreaLight
+
 foreign import newRectAreaLight :: Int -> Number -> Number -> Number -> Effect RectAreaLight
+
 
 foreign import data HemisphereLightProbe :: Type
 
+instance Object3D HemisphereLightProbe
+
 foreign import newHemisphereLightProbe :: Int -> Int -> Number -> Effect HemisphereLightProbe
+
 
 foreign import data SpotLight :: Type
 
+instance Object3D SpotLight
+
 foreign import newSpotLight :: Int -> Number -> Number -> Number -> Number -> Number -> Effect SpotLight
 
+
+-- I think this should maybe be a class instead of a type also...
+-- leaving it in to not break a few signatures below...
 foreign import data LightProbe :: Type
 
 foreign import newLightProbe :: SphericalHarmonics3 -> Number -> Effect LightProbe
+
 
 -- LIGHTS / SHADOWS
 
