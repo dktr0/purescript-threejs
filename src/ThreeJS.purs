@@ -54,6 +54,20 @@ setRotationZ :: forall a. (Object3D a) => a -> Number -> Effect Unit
 setRotationZ = Unsafe.setRotationZ
 
 
+class Light a
+
+getLightColor :: forall a. (Light a) => a -> Effect Int
+getLightColor = Unsafe.getLightColor
+
+setLightColor :: forall a. (Light a) => a -> Int -> Effect Unit
+setLightColor = Unsafe.setLightColor
+
+getLightIntensity :: forall a. (Light a) => a -> Effect Number
+getLightIntensity = Unsafe.getLightIntensity
+
+setLightIntensity :: forall a. (Light a) => a -> Number -> Effect Unit
+setLightIntensity = Unsafe.setLightIntensity
+
 
 -- Constant
 foreign import data Constant :: Type
@@ -552,62 +566,43 @@ foreign import printAnything :: forall o. o -> Effect Unit
 ------------ LIGHTS
 
 foreign import data HemisphereLight :: Type
-
 instance Object3D HemisphereLight
-
+instance Light HemisphereLight
 foreign import newHemisphereLight :: Int -> Int -> Number -> Effect HemisphereLight
 
-
 foreign import data AmbientLight :: Type
-
 instance Object3D AmbientLight
-
+instance Light AmbientLight
 foreign import newAmbientLight :: Int -> Number -> Effect AmbientLight
 
-
 foreign import data DirectionalLight :: Type
-
 instance Object3D DirectionalLight
-
+instance Light DirectionalLight
 foreign import newDirectionalLight :: Int -> Number -> Effect DirectionalLight
 
-
 foreign import data PointLight :: Type
-
 instance Object3D PointLight
-
+instance Light PointLight
 foreign import newPointLight :: Int -> Number -> Number -> Number -> Effect PointLight
 
-
 foreign import data AmbientLightProbe :: Type
-
 instance Object3D AmbientLightProbe
-
+instance Light AmbientLightProbe
 foreign import newAmbientLightProbe :: Int -> Number -> Effect AmbientLightProbe
 
--- because Light is an abstract base class in ThreeJS, not intended to be
--- created directly, Light should be a class like Object3D instead of a type
--- foreign import data Light :: Type
-
-
 foreign import data RectAreaLight :: Type
-
 instance Object3D RectAreaLight
-
+instance Light RectAreaLight
 foreign import newRectAreaLight :: Int -> Number -> Number -> Number -> Effect RectAreaLight
 
-
 foreign import data HemisphereLightProbe :: Type
-
 instance Object3D HemisphereLightProbe
-
+instance Light HemisphereLightProbe
 foreign import newHemisphereLightProbe :: Int -> Int -> Number -> Effect HemisphereLightProbe
 
-
 foreign import data SpotLight :: Type
-
 instance Object3D SpotLight
-
+instance Light SpotLight
 foreign import newSpotLight :: Int -> Number -> Number -> Number -> Number -> Number -> Effect SpotLight
 
 

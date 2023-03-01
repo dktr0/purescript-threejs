@@ -25,3 +25,10 @@ export const setRotationX = thing => x => () => thing.rotation.setX(x);
 export const setRotationY = thing => y => () => thing.rotation.setY(y);
 
 export const setRotationZ = thing => z => () => thing.rotation.setZ(z);
+
+// for class Light
+
+export const getLightColor = x => () => x.color;
+export const setLightColor = l => x => () => l.color = x;
+export const getLightIntensity = x => () => x.intensity;
+export const setLightIntensity = l => x => () => l.intensity = x;
