@@ -608,8 +608,8 @@ foreign import data RectAreaLight :: Type
 instance Object3D RectAreaLight
 instance Light RectAreaLight
 foreign import newRectAreaLight :: Int -> Number -> Number -> Number -> Effect RectAreaLight
-foreign import setWidth :: PointLight -> Number -> Effect Unit
-foreign import setHeight :: PointLight -> Number -> Effect Unit
+foreign import setWidth :: RectAreaLight -> Number -> Effect Unit
+foreign import setHeight :: RectAreaLight -> Number -> Effect Unit
 
 foreign import data HemisphereLightProbe :: Type
 instance Object3D HemisphereLightProbe
