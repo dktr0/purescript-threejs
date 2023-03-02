@@ -622,8 +622,8 @@ instance Light SpotLight
 instance SetDistance SpotLight
 instance SetDecay SpotLight
 foreign import newSpotLight :: Int -> Number -> Number -> Number -> Number -> Number -> Effect SpotLight
-foreign import setAngle :: PointLight -> Number -> Effect Unit
-foreign import setPenumbra :: PointLight -> Number -> Effect Unit
+foreign import setAngle :: SpotLight -> Number -> Effect Unit
+foreign import setPenumbra :: SpotLight -> Number -> Effect Unit
 
 -- I think this should maybe be a class instead of a type also...
 -- leaving it in to not break a few signatures below...
