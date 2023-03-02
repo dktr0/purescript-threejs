@@ -273,7 +273,7 @@ export const printAnything = thing => () => console.log(thing);
 
 export const newHemisphereLight = skyColor => groundColor => intensity => () => new THREE.HemisphereLight(skyColor,groundColor,intensity);
 
-export const setGroundColor =  x => y => () => x.groundColor = new Color(y);
+export const setGroundColor =  x => y => () => x.groundColor =  new THREE.Color(y);
 
 export const newAmbientLight = rgb => intensity => () => new THREE.AmbientLight(rgb,intensity);
 
