@@ -281,8 +281,6 @@ export const newDirectionalLight = rgb => intensity => () => new THREE.Direction
 
 export const newPointLight = rgb => intensity => distance => decay => () => new THREE.PointLight(rgb,intensity,distance,decay);
 
-export const setDecay = x => y => () => x.decay = y;
-
 export const newAmbientLightProbe = color => intensity => () => new THREE.AmbientLightProbe(color, intensity);
 
 export const newRectAreaLight = rgb => intensity => width => height => () => new THREE.RectAreaLight(rgb,intensity, width, height);
@@ -298,8 +296,6 @@ export const newSpotLight = rgb => intensity => distance => angle => penumbra =>
 export const setAngle = x => y => () => x.angle = y;
 
 export const setPenumbra = x => y => () => x.penumbra = y;
-
-export const setDecay = x => y => () => x.decay = y;
 
 export const newLightProbe = sh => intensity => () => new THREE.LightProbe(sh, intensity);
 
