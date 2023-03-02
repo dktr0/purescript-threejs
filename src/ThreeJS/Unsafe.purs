@@ -40,3 +40,12 @@ foreign import setLightColor :: forall a. a -> Int -> Effect Unit
 foreign import getLightIntensity :: forall a. a -> Effect Number
 
 foreign import setLightIntensity :: forall a. a -> Number -> Effect Unit
+
+
+-- for class SetDistance
+
+foreign import setDistance :: forall a. a -> Number -> Effect Unit
+
+-- for class SetDecay
+
+foreign import setDecay :: forall a. a -> Number -> Effect Unit

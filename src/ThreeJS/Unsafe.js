@@ -32,3 +32,11 @@ export const getLightColor = x => () => x.color;
 export const setLightColor = l => x => () => l.color = x;
 export const getLightIntensity = x => () => x.intensity;
 export const setLightIntensity = l => x => () => l.intensity = x;
+
+// for class SetDistance
+
+export const setDistance = x => y => () => x.distance = y;
+
+// for class SetDecay
+
+export const setDecay = x => y => () => x.decay = y;

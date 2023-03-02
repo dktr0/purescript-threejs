@@ -273,21 +273,33 @@ export const printAnything = thing => () => console.log(thing);
 
 export const newHemisphereLight = skyColor => groundColor => intensity => () => new THREE.HemisphereLight(skyColor,groundColor,intensity);
 
+export const setGroundColor =  x => y => () => x.groundColor = new Color(y);
+
 export const newAmbientLight = rgb => intensity => () => new THREE.AmbientLight(rgb,intensity);
 
 export const newDirectionalLight = rgb => intensity => () => new THREE.DirectionalLight(rgb,intensity);
 
 export const newPointLight = rgb => intensity => distance => decay => () => new THREE.PointLight(rgb,intensity,distance,decay);
 
+export const setDecay = x => y => () => x.decay = y;
+
 export const newAmbientLightProbe = color => intensity => () => new THREE.AmbientLightProbe(color, intensity);
 
-export const newLight = color => intensity => () => new THREE.Light(color, intensity);
-
 export const newRectAreaLight = rgb => intensity => width => height => () => new THREE.RectAreaLight(rgb,intensity, width, height);
+
+export const setWidth = x => y => () => x.width = y;
+
+export const setHeight = x => y => () => x.height = y;
 
 export const newHemisphereLightProbe = skyColor => groundColor => intensity => () => new THREE.HemisphereLightProbe(skyColor, groundColor, intensity);
 
 export const newSpotLight = rgb => intensity => distance => angle => penumbra => decay => () => new THREE.SpotLight(rgb,intensity, distance, angle, penumbra, decay);
+
+export const setAngle = x => y => () => x.angle = y;
+
+export const setPenumbra = x => y => () => x.penumbra = y;
+
+export const setDecay = x => y => () => x.decay = y;
 
 export const newLightProbe = sh => intensity => () => new THREE.LightProbe(sh, intensity);
 

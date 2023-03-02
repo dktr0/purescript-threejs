@@ -69,6 +69,17 @@ setLightIntensity :: forall a. (Light a) => a -> Number -> Effect Unit
 setLightIntensity = Unsafe.setLightIntensity
 
 
+class SetDistance a
+
+setDistance :: forall a. SetDistance a => a -> Number -> Effect Unit
+setDistance = Unsafe.setDistance
+
+class SetDecay a
+
+setDecay :: forall a. SetDecay a => a -> Number -> Effect Unit
+setDecay = Unsafe.setDecay
+
+
 -- Constant
 foreign import data Constant :: Type
 
@@ -569,6 +580,7 @@ foreign import data HemisphereLight :: Type
 instance Object3D HemisphereLight
 instance Light HemisphereLight
 foreign import newHemisphereLight :: Int -> Int -> Number -> Effect HemisphereLight
+foreign import setGroundColor :: HemisphereLight -> Int -> Effect Unit
 
 foreign import data AmbientLight :: Type
 instance Object3D AmbientLight
@@ -583,6 +595,8 @@ foreign import newDirectionalLight :: Int -> Number -> Effect DirectionalLight
 foreign import data PointLight :: Type
 instance Object3D PointLight
 instance Light PointLight
+instance SetDistance PointLight
+instance SetDecay PointLight
 foreign import newPointLight :: Int -> Number -> Number -> Number -> Effect PointLight
 
 foreign import data AmbientLightProbe :: Type
@@ -594,6 +608,8 @@ foreign import data RectAreaLight :: Type
 instance Object3D RectAreaLight
 instance Light RectAreaLight
 foreign import newRectAreaLight :: Int -> Number -> Number -> Number -> Effect RectAreaLight
+foreign import setWidth :: PointLight -> Number -> Effect Unit
+foreign import setHeight :: PointLight -> Number -> Effect Unit
 
 foreign import data HemisphereLightProbe :: Type
 instance Object3D HemisphereLightProbe
@@ -603,8 +619,11 @@ foreign import newHemisphereLightProbe :: Int -> Int -> Number -> Effect Hemisph
 foreign import data SpotLight :: Type
 instance Object3D SpotLight
 instance Light SpotLight
+instance SetDistance SpotLight
+instance SetDecay SpotLight
 foreign import newSpotLight :: Int -> Number -> Number -> Number -> Number -> Number -> Effect SpotLight
-
+foreign import setAngle :: PointLight -> Number -> Effect Unit
+foreign import setPenumbra :: PointLight -> Number -> Effect Unit
 
 -- I think this should maybe be a class instead of a type also...
 -- leaving it in to not break a few signatures below...
