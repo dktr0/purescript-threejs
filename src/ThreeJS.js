@@ -1,5 +1,9 @@
 "use strict";
 
+// Object3D
+
+export const newObject3D = () => new THREE.Object3D();
+
 // Scene
 
 export const newScene = () => new THREE.Scene();
@@ -507,8 +511,6 @@ export const newEventDispatcher = () => new THREE.EventDispatcher();
 export const newInstancedBufferGeometry = () => new THREE.InstancedBufferGeometry();
 
 export const newLayers = () => new THREE.Layers();
-
-export const newObject3D = () => new THREE.Object3D();
 
 // ANIMATION
 

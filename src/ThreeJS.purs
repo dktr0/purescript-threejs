@@ -15,42 +15,42 @@ import ThreeJS.Unsafe as Unsafe
 
 -- Classes
 
-class Object3D a
+class Object3D' a -- the class has a tick in the name to avoid Object3D the specific type
 
-lookAt :: forall a. (Object3D a) => a -> Number -> Number -> Number -> Effect Unit
+lookAt :: forall a. (Object3D' a) => a -> Number -> Number -> Number -> Effect Unit
 lookAt = Unsafe.lookAt
 
-setPosition :: forall a. (Object3D a) => a -> Number -> Number -> Number -> Effect Unit
+setPosition :: forall a. (Object3D' a) => a -> Number -> Number -> Number -> Effect Unit
 setPosition = Unsafe.setPosition
 
-setPositionX :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setPositionX :: forall a. (Object3D' a) => a -> Number -> Effect Unit
 setPositionX = Unsafe.setPositionX
 
-setPositionY :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setPositionY :: forall a. (Object3D' a) => a -> Number -> Effect Unit
 setPositionY = Unsafe.setPositionY
 
-setPositionZ :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setPositionZ :: forall a. (Object3D' a) => a -> Number -> Effect Unit
 setPositionZ = Unsafe.setPositionZ
 
-getRotationX :: forall a. (Object3D a) => a -> Effect Number
+getRotationX :: forall a. (Object3D' a) => a -> Effect Number
 getRotationX = Unsafe.getRotationX
 
-getRotationY :: forall a. (Object3D a) => a -> Effect Number
+getRotationY :: forall a. (Object3D' a) => a -> Effect Number
 getRotationY = Unsafe.getRotationY
 
-getRotationZ :: forall a. (Object3D a) => a -> Effect Number
+getRotationZ :: forall a. (Object3D' a) => a -> Effect Number
 getRotationZ = Unsafe.getRotationZ
 
-setRotation :: forall a. (Object3D a) => a -> Number -> Number -> Number -> Effect Unit
+setRotation :: forall a. (Object3D' a) => a -> Number -> Number -> Number -> Effect Unit
 setRotation = Unsafe.setRotation
 
-setRotationX :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setRotationX :: forall a. (Object3D' a) => a -> Number -> Effect Unit
 setRotationX = Unsafe.setRotationX
 
-setRotationY :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setRotationY :: forall a. (Object3D' a) => a -> Number -> Effect Unit
 setRotationY = Unsafe.setRotationY
 
-setRotationZ :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setRotationZ :: forall a. (Object3D' a) => a -> Number -> Effect Unit
 setRotationZ = Unsafe.setRotationZ
 
 
@@ -83,11 +83,20 @@ setDecay = Unsafe.setDecay
 -- Constant
 foreign import data Constant :: Type
 
+-- Object3D
+
+foreign import data Object3D :: Type
+
+instance Object3D' Object3D
+
+foreign import newObject3D :: Effect Object3D
+
+
 -- Scene
 
 foreign import data Scene :: Type
 
-instance Object3D Scene
+instance Object3D' Scene
 
 foreign import newScene :: Effect Scene
 
@@ -104,7 +113,7 @@ foreign import newFogExp2 :: Int -> Number -> Effect FogExp2
 
 foreign import data PerspectiveCamera :: Type
 
-instance Object3D PerspectiveCamera
+instance Object3D' PerspectiveCamera
 
 foreign import newPerspectiveCamera :: Number -> Number -> Number -> Number -> Effect PerspectiveCamera
 
@@ -188,7 +197,7 @@ foreign import newSVGRenderer :: Effect SVGRenderer
 
 foreign import data Mesh :: Type
 
-instance Object3D Mesh
+instance Object3D' Mesh
 
 foreign import newMesh :: forall a b. a -> b -> Effect Mesh
 
@@ -577,47 +586,47 @@ foreign import printAnything :: forall o. o -> Effect Unit
 ------------ LIGHTS
 
 foreign import data HemisphereLight :: Type
-instance Object3D HemisphereLight
+instance Object3D' HemisphereLight
 instance Light HemisphereLight
 foreign import newHemisphereLight :: Int -> Int -> Number -> Effect HemisphereLight
 foreign import setGroundColor :: HemisphereLight -> Int -> Effect Unit
 
 foreign import data AmbientLight :: Type
-instance Object3D AmbientLight
+instance Object3D' AmbientLight
 instance Light AmbientLight
 foreign import newAmbientLight :: Int -> Number -> Effect AmbientLight
 
 foreign import data DirectionalLight :: Type
-instance Object3D DirectionalLight
+instance Object3D' DirectionalLight
 instance Light DirectionalLight
 foreign import newDirectionalLight :: Int -> Number -> Effect DirectionalLight
 
 foreign import data PointLight :: Type
-instance Object3D PointLight
+instance Object3D' PointLight
 instance Light PointLight
 instance SetDistance PointLight
 instance SetDecay PointLight
 foreign import newPointLight :: Int -> Number -> Number -> Number -> Effect PointLight
 
 foreign import data AmbientLightProbe :: Type
-instance Object3D AmbientLightProbe
+instance Object3D' AmbientLightProbe
 instance Light AmbientLightProbe
 foreign import newAmbientLightProbe :: Int -> Number -> Effect AmbientLightProbe
 
 foreign import data RectAreaLight :: Type
-instance Object3D RectAreaLight
+instance Object3D' RectAreaLight
 instance Light RectAreaLight
 foreign import newRectAreaLight :: Int -> Number -> Number -> Number -> Effect RectAreaLight
 foreign import setWidth :: RectAreaLight -> Number -> Effect Unit
 foreign import setHeight :: RectAreaLight -> Number -> Effect Unit
 
 foreign import data HemisphereLightProbe :: Type
-instance Object3D HemisphereLightProbe
+instance Object3D' HemisphereLightProbe
 instance Light HemisphereLightProbe
 foreign import newHemisphereLightProbe :: Int -> Int -> Number -> Effect HemisphereLightProbe
 
 foreign import data SpotLight :: Type
-instance Object3D SpotLight
+instance Object3D' SpotLight
 instance Light SpotLight
 instance SetDistance SpotLight
 instance SetDecay SpotLight
@@ -1008,7 +1017,6 @@ foreign import data Layers :: Type
 
 foreign import newLayers :: Effect Layers
 
--- foreign import newObject3D :: Effect Object3D
 
 
 -- ANIMATION
