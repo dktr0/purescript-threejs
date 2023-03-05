@@ -604,6 +604,7 @@ foreign import newAmbientLight :: Int -> Number -> Effect AmbientLight
 foreign import data DirectionalLight :: Type
 instance Object3D' DirectionalLight
 instance Light DirectionalLight
+instance SetTarget DirectionalLight
 foreign import newDirectionalLight :: Int -> Number -> Effect DirectionalLight
 
 foreign import data PointLight :: Type
@@ -635,6 +636,7 @@ instance Object3D' SpotLight
 instance Light SpotLight
 instance SetDistance SpotLight
 instance SetDecay SpotLight
+instance SetTarget SpotLight
 foreign import newSpotLight :: Int -> Number -> Number -> Number -> Number -> Number -> Effect SpotLight
 foreign import setAngle :: SpotLight -> Number -> Effect Unit
 foreign import setPenumbra :: SpotLight -> Number -> Effect Unit
