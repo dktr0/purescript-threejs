@@ -79,6 +79,11 @@ class SetDecay a
 setDecay :: forall a. SetDecay a => a -> Number -> Effect Unit
 setDecay = Unsafe.setDecay
 
+class SetTarget a
+
+setTarget :: forall a. SetTarget a => forall t. Object3D' t => a -> t -> Effect Unit
+setTarget = Unsafe.setTarget
+
 
 -- Constant
 foreign import data Constant :: Type
