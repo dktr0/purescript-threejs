@@ -188,7 +188,6 @@ export const newObjectLoader = () => new THREE.ObjectLoader();
 
 export const loadObject = loader => url => cb => () => loader.load(url,x => cb(x)());
 
-
 // GROUPS
 
 export const newGroup = () => new THREE.Group();
@@ -240,6 +239,10 @@ export const newConvexGeometry = points => () => new THREE.ConvexGeometry(points
 export const newTubeGeometry = path => tubularSegments => radius => radialSegments => closed => () => new THREE.TubeGeometry(path, tubularSegments, radius, radialSegments, closed);
 
 export const newEdgesGeometry = geometry => () => new THREE.EdgesGeometry(geometry);
+
+export const newDecalGeometry = mesh => position => orientation => size => () => new THREE.DecalGeometry(mesh, position, orientation, size);
+
+export const newParametricGeometry = func => slices => stacks => () => new THREE.ParametricGeometry(func, slices, stacks);
 
 // Mesh
 
@@ -302,7 +305,6 @@ export const setAngle = x => y => () => x.angle = y;
 export const setPenumbra = x => y => () => x.penumbra = y;
 
 export const newLightProbe = sh => intensity => () => new THREE.LightProbe(sh, intensity);
-
 
 // LIGHTS / SHADOWS
 
@@ -393,6 +395,8 @@ export const newOBB = center => halfSize => rotation => () => new THREE.OBB(cent
 
 export const newColor = r => () => new THREE.Color(r);
 
+export const newInterpolant = parameterPositions => sampleValues => sampleSize => resultBuffer => () => new THREE.Interpolant(parameterPositions, sampleValues, sampleSize, resultBuffer);
+
 // MATH / INTERPOLANTS
 export const newCubicInterpolant = parameterPositions => sampleValues => sampleSize => resultBuffer => () => new THREE.CubicInterpolant(parameterPositions, sampleValues, sampleSize, resultBuffer);
 
@@ -458,6 +462,8 @@ export const newBone = () => new THREE.Bone();
 
 export const newLOD = () => new THREE.LOD();
 
+export const newLensflareElement = texture => size => distance => color => () => new THREE.LensflareElement(texture, size, distance, color);
+
 // Materials
 
 export const meshBasicMaterial = params => () => new THREE.MeshBasicMaterial(params);
@@ -512,12 +518,25 @@ export const newInstancedBufferGeometry = () => new THREE.InstancedBufferGeometr
 
 export const newLayers = () => new THREE.Layers();
 
+export const newBufferAttribute = array => itemSize => normalized => () => new THREE.BufferAttribute(array, itemSize, normalized);
+
+export const newInstancedInterleavedBuffer = array => itemSize => meshPerAttribute => () => new THREE.InstancedInterleavedBuffer(array, itemSize, meshPerAttribute);
+
+export const newInterleavedBuffer = array => stride => () => new THREE.InterleavedBuffer(array, stride);
+
+export const newInterleavedBufferAttribute = interleavedBuffer => itemSize => offset => normalized => () => new THREE.InterleavedBufferAttribute(interleavedBuffer, itemSize, offset, normalized);
+
 // ANIMATION
 
 export const newAnimationClip = name => duration => tracks => () => new THREE.AnimationClip(name, duration, tracks);
 
 export const newKeyframeTrack = name => times => values => interpolation => () => new THREE.KeyframeTrack(name, times, values, interpolation);
 
+export const newPropertyBinding = rootNode => path => parsedPath => () => new THREE.PropertyBinding(rootNode, path, parsedPath);
+
+export const newPropertyMixer = binding => typeName => valueSize => () => new THREE.PropertyMixer(binding, typeName, valueSize);
+
+export const newAnimationObjectGroup = obj1 => () => new THREE.AnimationObjectGroup(obj1);
 
 // ANIMATION / TRACKS
 
@@ -536,6 +555,10 @@ export const newVectorKeyframeTrack = name => times => values => () => new THREE
 // CORE / BUFFERATTRIBUTES
 
 export const newTypedBufferAttribute = array => itemSize => normalized => () => new THREE.TypedBufferAttribute(array, itemSize, normalized);
+
+// EXTRAS
+
+export const newPMREMGenerator = renderer => () => new THREE.PMREMGenerator(renderer);
 
 // EXTRAS / CORE
 
@@ -569,6 +592,9 @@ export const newSplineCurve = points => () => new THREE.SplineCurve(points);
 
 export const newEllipseCurve = aX => aY => xRadius => yRadius => aStartAngle => aEndAngle => aClockwise => aRotation => () => new THREE.EllipseCurve(aX, aY, xRadius, yRadius, aStartAngle, aEndAngle, aClockwise, aRotation);
 
+export const newArcCurve = aX => aY => xRadius => yRadius => aStartAngle => aEndAngle => aClockwise => aRotation => () => new THREE.ArcCurve(aX, aY, xRadius, yRadius, aStartAngle, aEndAngle, aClockwise, aRotation);
+
+
 // ANIMATIONS
 
 export const newCCDIKSolver = mesh => iks => () => new THREE.CCDIKSolver(mesh, iks);
@@ -600,6 +626,8 @@ export const newAudioListener = () => new THREE.AudioListener()
 export const newPositionalAudio = listener => () => new THREE.PositionalAudio(listener)
 
 export const newAudio = listener => () => new THREE.Audio(listener)
+
+export const newAudioAnalyser = audio => fftSize  => () => new THREE.AudioAnalyser(audio, fftSize );
 
 // EXPORTERS
 
@@ -662,6 +690,14 @@ export const newCompressedArrayTexture = mipmaps => width => height => format =>
 export const newDepthTexture = width => height => type => mapping => wrapS => wrapT => magFilter => minFilter => anisotropy => format => () => new THREE.DepthTexture(width, height, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy, format);
 
 export const newFramebufferTexture = width => height => format => () => new THREE.FramebufferTexture(width, height, format);
+
+export const newDataArrayTexture = data => width => height => depth => () => new THREE.DataArrayTexture(data, width, height, depth);
+
+export const newData3DTexture = data => width => height => depth => () => new THREE.Data3DTexture(data, width, height, depth);
+
+export const newTexture = image => mapping => wrapS => wrapT => magFilter => minFilter => format => type => anisotropy => encoding  => () => new THREE.Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
+
+export const newCubeTextureImg = image => mapping => wrapS => wrapT => magFilter => minFilter => format => type => anisotropy => () => new THREE.CubeTexture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy);
 
 // Controls
 

@@ -553,13 +553,19 @@ foreign import data EdgesGeometry :: Type
 
 foreign import newEdgesGeometry :: forall a. a -> Effect EdgesGeometry
 
+foreign import data DecalGeometry :: Type
+
+foreign import newDecalGeometry :: Mesh -> Vector3 -> Euler -> Vector3 -> Effect DecalGeometry
+
+foreign import data ParametricGeometry :: Type
+
+foreign import newParametricGeometry :: forall a. a -> Int -> Int -> Effect ParametricGeometry
+
 -------------
 
 foreign import data MeshPhongMaterial :: Type
 
 foreign import newMeshPhongMaterial :: forall params. Record params -> Effect MeshPhongMaterial
-
-
 
 -------------
 
@@ -586,7 +592,6 @@ foreign import preloadAnything :: forall o. o -> Effect Unit
 foreign import playAnything :: forall o. o -> Effect Unit
 
 foreign import printAnything :: forall o. o -> Effect Unit
-
 
 ------------ LIGHTS
 
@@ -826,6 +831,10 @@ foreign import data Color :: Type
 
 foreign import newColor :: Int -> Effect Color
 
+foreign import data Interpolant :: Type
+
+foreign import newInterpolant :: forall a b. a -> b -> Number -> forall c. c -> Effect Interpolant
+
 -- MATH / INTERPOLANTS
 foreign import data CubicInterpolant :: Type
 
@@ -923,6 +932,10 @@ foreign import newBone :: Effect Bone
 foreign import data LOD :: Type
 
 foreign import newLOD :: Effect LOD
+
+foreign import data LensflareElement :: Type
+
+foreign import newLensflareElement :: forall a. a -> Number -> Number -> Color -> Effect LensflareElement
 
 ------------ MATERIALS
 
@@ -1024,6 +1037,21 @@ foreign import data Layers :: Type
 
 foreign import newLayers :: Effect Layers
 
+foreign import data BufferAttribute :: Type
+
+foreign import newBufferAttribute :: forall a. ArrayView a -> Int -> Boolean -> Effect BufferAttribute
+
+foreign import data InstancedInterleavedBuffer :: Type
+
+foreign import newInstancedInterleavedBuffer :: forall a. ArrayView a -> Int -> Number -> Effect InstancedInterleavedBuffer
+
+foreign import data InterleavedBuffer :: Type
+
+foreign import newInterleavedBuffer :: forall a. ArrayView a -> Int -> Effect InterleavedBuffer
+
+foreign import data InterleavedBufferAttribute :: Type
+
+foreign import newInterleavedBufferAttribute :: InterleavedBuffer -> Int -> Int -> Boolean -> Effect InterleavedBufferAttribute
 
 
 -- ANIMATION
@@ -1041,6 +1069,18 @@ foreign import newAnimationClip :: String -> Number -> forall a. a -> Effect Ani
 foreign import data KeyframeTrack :: Type
 
 foreign import newKeyframeTrack :: String -> forall a b. a -> b -> Constant -> Effect KeyframeTrack
+
+foreign import data PropertyBinding :: Type
+
+foreign import newPropertyBinding :: Object3D -> Number -> Number -> Effect PropertyBinding
+
+foreign import data PropertyMixer :: Type
+
+foreign import newPropertyMixer :: PropertyBinding -> String -> Number -> Effect PropertyMixer
+
+foreign import data AnimationObjectGroup :: Type
+
+foreign import newAnimationObjectGroup :: forall a. a -> Effect AnimationObjectGroup
 
 -- ANIMATION / TRACKS
 
@@ -1073,6 +1113,12 @@ foreign import newVectorKeyframeTrack  :: String -> forall a b. a -> b -> Effect
 foreign import data TypedBufferAttribute :: Type
 
 foreign import newTypedBufferAttribute  :: forall a. a -> Int -> Boolean -> Effect TypedBufferAttribute
+
+-- EXTRAS
+
+foreign import data PMREMGenerator :: Type
+
+foreign import newPMREMGenerator :: WebGLRenderer -> Effect PMREMGenerator
 
 -- EXTRAS / CORE
 
@@ -1134,6 +1180,10 @@ foreign import data EllipseCurve :: Type
 
 foreign import newEllipseCurve :: Number -> Number -> Number -> Number -> Number -> Number -> Boolean -> Number -> Effect EllipseCurve
 
+foreign import data ArcCurve :: Type
+
+foreign import newArcCurve :: Number -> Number -> Number -> Number -> Number -> Number -> Boolean -> Number -> Effect ArcCurve
+
 -- ANIMATIONS
 
 foreign import data CCDIKSolver :: Type
@@ -1190,6 +1240,11 @@ foreign import newPositionalAudio :: AudioListener -> Effect PositionalAudio
 foreign import data Audio :: Type
 
 foreign import newAudio :: AudioListener -> Effect Audio
+
+foreign import data AudioAnalyser :: Type
+
+foreign import newAudioAnalyser :: Audio -> Int -> Effect AudioAnalyser
+
 
 -- EXPORTERS
 foreign import data ColladaExporter :: Type
@@ -1282,6 +1337,22 @@ foreign import newDepthTexture :: Number -> Number -> Constant -> Constant -> Co
 foreign import data FramebufferTexture :: Type
 
 foreign import newFramebufferTexture :: Number -> Number -> Constant -> Effect FramebufferTexture
+
+foreign import data DataArrayTexture :: Type
+
+foreign import newDataArrayTexture :: forall a. ArrayView a -> Number -> Number -> Number -> Effect DataArrayTexture
+
+foreign import data Data3DTexture :: Type
+
+foreign import newData3DTexture :: forall a. ArrayView a -> Number -> Number -> Number -> Effect Data3DTexture
+
+foreign import data Texture :: Type
+
+foreign import newTexture :: TextureLoader -> Number -> wrapS -> wrapT -> magFilter -> minFilter -> Number -> Number -> Number -> forall a. a -> Effect Texture
+
+foreign import data CubeTextureImg :: Type
+
+foreign import newCubeTextureImg :: TextureLoader -> Number -> wrapS -> wrapT -> magFilter -> minFilter -> Number -> Number -> Number -> forall a. a -> Effect CubeTextureImg
 
 -- Controls
 foreign import data ArcballControls :: Type
