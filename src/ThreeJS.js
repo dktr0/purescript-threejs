@@ -1,5 +1,11 @@
 "use strict";
 
+import "*" as THREE from "./threejs/three.module.js";
+import "*" as THREE from "./threejs/GLTFLoader.js";
+import "*" as THREE from "./threejs/OBJLoader.js";
+import "*" as THREE from "./threejs/MTLLoader.js";
+import "*" as THREE from "./threejs/DRACOLoader.js";
+
 // Scene
 
 export const newScene = () => new THREE.Scene();
