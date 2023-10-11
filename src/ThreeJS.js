@@ -1,10 +1,10 @@
 "use strict";
 
-import "*" as THREE from "./threejs/three.module.js";
-import "*" as THREE from "./threejs/GLTFLoader.js";
-import "*" as THREE from "./threejs/OBJLoader.js";
-import "*" as THREE from "./threejs/MTLLoader.js";
-import "*" as THREE from "./threejs/DRACOLoader.js";
+import * as THREE from "./threejs/three.module.js";
+import * as THREE from "./threejs/GLTFLoader.js";
+import * as THREE from "./threejs/OBJLoader.js";
+import * as THREE from "./threejs/MTLLoader.js";
+import * as THREE from "./threejs/DRACOLoader.js";
 
 // Object3D
 
