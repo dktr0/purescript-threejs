@@ -73,24 +73,24 @@ export const newSVGRenderer = () => new THREE.SVGRenderer();
 // 3D Object Loaders
 
 //OBJ
-  export const newOBJLoader = () => new THREE.OBJLoader();
+  export const newOBJLoader = () => new OBJLoader();
 
   // note the handling of the callback in the line below...
   export const loadOBJ = loader => url => cb => () => loader.load(url,x => cb(x)());
 
   //MTL
-  export const newMTLLoader = () => new THREE.MTLLoader();
+  export const newMTLLoader = () => new MTLLoader();
 
   export const loadMTL= loader => url => cb => () => loader.load(url,x => cb(x)());
 
 
   //GLTF
-  export const newGLTFLoader = () => new THREE.GLTFLoader();
+  export const newGLTFLoader = () => new GLTFLoader();
 
   export const loadGLTF1 = loader => url => cb => () => loader.load(url,x => cb(x)());
 
 //GLTF+DRACO
-export const newDRACOLoader = () => new THREE.DRACOLoader();
+export const newDRACOLoader = () => new DRACOLoader();
 
 export const setDecoderPath = dracoLoader => modulePath => () => dracoLoader.setDecoderPath(modulePath);
 
@@ -98,11 +98,11 @@ export const setDRACOLoader = gltfLoader => dracoLoader => () => gltfLoader.setD
 
 
 // -- section deprecated --
-export const loadGLTF = url => cb => () => new THREE.GLTFLoader().load(url,x => cb(x)());
+export const loadGLTF = url => cb => () => new GLTFLoader().load(url,x => cb(x)());
 
-export const loadOBJ1 = url => cb => () => new THREE.OBJLoader().load(url,x => cb(x)());
+export const loadOBJ1 = url => cb => () => new OBJLoader().load(url,x => cb(x)());
 
-export const loadMTL1 = url => cb => () => new THREE.MTLLoader().load(url,x => cb(x)());
+export const loadMTL1 = url => cb => () => new MTLLoader().load(url,x => cb(x)());
 // ----- end of section -----
 
 // Loaders
