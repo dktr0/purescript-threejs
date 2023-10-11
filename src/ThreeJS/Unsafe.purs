@@ -2,7 +2,6 @@ module ThreeJS.Unsafe where
 
 import Prelude
 import Effect (Effect)
-import Web.HTML as HTML
 
 -- for class Object3D
 

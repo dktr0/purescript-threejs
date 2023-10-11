@@ -8,13 +8,15 @@ module ThreeJS where
 -- finally (3) declaring the types imported from ThreeJS to be instances of the
 -- PureScript class. See the class Object3D and the type Mesh below for an example.
 
-import Prelude
+import Prelude (Unit, bind, discard, pure)
 import Effect (Effect)
 import Web.HTML as HTML
 import ThreeJS.Unsafe as Unsafe
+import Data.ArrayBuffer.Types (ArrayView)
 
 -- Classes
 
+class Object3D' :: forall k. k -> Constraint 
 class Object3D' a -- the class has a tick in the name to avoid Object3D the specific type
 
 lookAt :: forall a. (Object3D' a) => a -> Number -> Number -> Number -> Effect Unit
@@ -54,6 +56,7 @@ setRotationZ :: forall a. (Object3D' a) => a -> Number -> Effect Unit
 setRotationZ = Unsafe.setRotationZ
 
 
+class Light :: forall k. k -> Constraint
 class Light a
 
 getLightColor :: forall a. (Light a) => a -> Effect Int
@@ -69,16 +72,19 @@ setLightIntensity :: forall a. (Light a) => a -> Number -> Effect Unit
 setLightIntensity = Unsafe.setLightIntensity
 
 
+class SetDistance :: forall k. k -> Constraint
 class SetDistance a
 
 setDistance :: forall a. SetDistance a => a -> Number -> Effect Unit
 setDistance = Unsafe.setDistance
 
+class SetDecay :: forall k. k -> Constraint
 class SetDecay a
 
 setDecay :: forall a. SetDecay a => a -> Number -> Effect Unit
 setDecay = Unsafe.setDecay
 
+class SetTarget :: forall k. k -> Constraint
 class SetTarget a
 
 setTarget :: forall a. SetTarget a => forall t. Object3D' t => a -> t -> Effect Unit
@@ -1118,7 +1124,7 @@ foreign import newTypedBufferAttribute  :: forall a. a -> Int -> Boolean -> Effe
 
 foreign import data PMREMGenerator :: Type
 
-foreign import newPMREMGenerator :: WebGLRenderer -> Effect PMREMGenerator
+foreign import newPMREMGenerator :: Renderer -> Effect PMREMGenerator
 
 -- EXTRAS / CORE
 
@@ -1348,11 +1354,11 @@ foreign import newData3DTexture :: forall a. ArrayView a -> Number -> Number -> 
 
 foreign import data Texture :: Type
 
-foreign import newTexture :: TextureLoader -> Number -> wrapS -> wrapT -> magFilter -> minFilter -> Number -> Number -> Number -> forall a. a -> Effect Texture
+foreign import newTexture :: forall wrapS. forall wrapT. forall magFilter. forall minFilter. TextureLoader -> Number -> wrapS -> wrapT -> magFilter -> minFilter -> Number -> Number -> Number -> forall a. a -> Effect Texture
 
 foreign import data CubeTextureImg :: Type
 
-foreign import newCubeTextureImg :: TextureLoader -> Number -> wrapS -> wrapT -> magFilter -> minFilter -> Number -> Number -> Number -> forall a. a -> Effect CubeTextureImg
+foreign import newCubeTextureImg :: forall wrapS. forall wrapT. forall magFilter. forall minFilter. TextureLoader -> Number -> wrapS -> wrapT -> magFilter -> minFilter -> Number -> Number -> Number -> forall a. a -> Effect CubeTextureImg
 
 -- Controls
 foreign import data ArcballControls :: Type
