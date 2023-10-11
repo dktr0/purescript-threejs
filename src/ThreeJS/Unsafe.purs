@@ -46,6 +46,12 @@ foreign import setLightIntensity :: forall a. a -> Number -> Effect Unit
 
 foreign import setDistance :: forall a. a -> Number -> Effect Unit
 
+
 -- for class SetDecay
 
 foreign import setDecay :: forall a. a -> Number -> Effect Unit
+
+
+-- for class SetTarget
+
+foreign import setTarget :: forall a t. a -> t -> Effect Unit

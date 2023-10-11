@@ -40,3 +40,7 @@ export const setDistance = x => y => () => x.distance = y;
 // for class SetDecay
 
 export const setDecay = x => y => () => x.decay = y;
+
+// for class SetTarget
+
+export const setTarget = a => t => () => a.target = t;

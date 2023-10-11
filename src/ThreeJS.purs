@@ -15,42 +15,42 @@ import ThreeJS.Unsafe as Unsafe
 
 -- Classes
 
-class Object3D a
+class Object3D' a -- the class has a tick in the name to avoid Object3D the specific type
 
-lookAt :: forall a. (Object3D a) => a -> Number -> Number -> Number -> Effect Unit
+lookAt :: forall a. (Object3D' a) => a -> Number -> Number -> Number -> Effect Unit
 lookAt = Unsafe.lookAt
 
-setPosition :: forall a. (Object3D a) => a -> Number -> Number -> Number -> Effect Unit
+setPosition :: forall a. (Object3D' a) => a -> Number -> Number -> Number -> Effect Unit
 setPosition = Unsafe.setPosition
 
-setPositionX :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setPositionX :: forall a. (Object3D' a) => a -> Number -> Effect Unit
 setPositionX = Unsafe.setPositionX
 
-setPositionY :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setPositionY :: forall a. (Object3D' a) => a -> Number -> Effect Unit
 setPositionY = Unsafe.setPositionY
 
-setPositionZ :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setPositionZ :: forall a. (Object3D' a) => a -> Number -> Effect Unit
 setPositionZ = Unsafe.setPositionZ
 
-getRotationX :: forall a. (Object3D a) => a -> Effect Number
+getRotationX :: forall a. (Object3D' a) => a -> Effect Number
 getRotationX = Unsafe.getRotationX
 
-getRotationY :: forall a. (Object3D a) => a -> Effect Number
+getRotationY :: forall a. (Object3D' a) => a -> Effect Number
 getRotationY = Unsafe.getRotationY
 
-getRotationZ :: forall a. (Object3D a) => a -> Effect Number
+getRotationZ :: forall a. (Object3D' a) => a -> Effect Number
 getRotationZ = Unsafe.getRotationZ
 
-setRotation :: forall a. (Object3D a) => a -> Number -> Number -> Number -> Effect Unit
+setRotation :: forall a. (Object3D' a) => a -> Number -> Number -> Number -> Effect Unit
 setRotation = Unsafe.setRotation
 
-setRotationX :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setRotationX :: forall a. (Object3D' a) => a -> Number -> Effect Unit
 setRotationX = Unsafe.setRotationX
 
-setRotationY :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setRotationY :: forall a. (Object3D' a) => a -> Number -> Effect Unit
 setRotationY = Unsafe.setRotationY
 
-setRotationZ :: forall a. (Object3D a) => a -> Number -> Effect Unit
+setRotationZ :: forall a. (Object3D' a) => a -> Number -> Effect Unit
 setRotationZ = Unsafe.setRotationZ
 
 
@@ -79,15 +79,29 @@ class SetDecay a
 setDecay :: forall a. SetDecay a => a -> Number -> Effect Unit
 setDecay = Unsafe.setDecay
 
+class SetTarget a
+
+setTarget :: forall a. SetTarget a => forall t. Object3D' t => a -> t -> Effect Unit
+setTarget = Unsafe.setTarget
+
 
 -- Constant
 foreign import data Constant :: Type
+
+-- Object3D
+
+foreign import data Object3D :: Type
+
+instance Object3D' Object3D
+
+foreign import newObject3D :: Effect Object3D
+
 
 -- Scene
 
 foreign import data Scene :: Type
 
-instance Object3D Scene
+instance Object3D' Scene
 
 foreign import newScene :: Effect Scene
 
@@ -104,7 +118,7 @@ foreign import newFogExp2 :: Int -> Number -> Effect FogExp2
 
 foreign import data PerspectiveCamera :: Type
 
-instance Object3D PerspectiveCamera
+instance Object3D' PerspectiveCamera
 
 foreign import newPerspectiveCamera :: Number -> Number -> Number -> Number -> Effect PerspectiveCamera
 
@@ -188,7 +202,7 @@ foreign import newSVGRenderer :: Effect SVGRenderer
 
 foreign import data Mesh :: Type
 
-instance Object3D Mesh
+instance Object3D' Mesh
 
 foreign import newMesh :: forall a b. a -> b -> Effect Mesh
 
@@ -539,13 +553,19 @@ foreign import data EdgesGeometry :: Type
 
 foreign import newEdgesGeometry :: forall a. a -> Effect EdgesGeometry
 
+foreign import data DecalGeometry :: Type
+
+foreign import newDecalGeometry :: Mesh -> Vector3 -> Euler -> Vector3 -> Effect DecalGeometry
+
+foreign import data ParametricGeometry :: Type
+
+foreign import newParametricGeometry :: forall a. a -> Int -> Int -> Effect ParametricGeometry
+
 -------------
 
 foreign import data MeshPhongMaterial :: Type
 
 foreign import newMeshPhongMaterial :: forall params. Record params -> Effect MeshPhongMaterial
-
-
 
 -------------
 
@@ -573,54 +593,55 @@ foreign import playAnything :: forall o. o -> Effect Unit
 
 foreign import printAnything :: forall o. o -> Effect Unit
 
-
 ------------ LIGHTS
 
 foreign import data HemisphereLight :: Type
-instance Object3D HemisphereLight
+instance Object3D' HemisphereLight
 instance Light HemisphereLight
 foreign import newHemisphereLight :: Int -> Int -> Number -> Effect HemisphereLight
 foreign import setGroundColor :: HemisphereLight -> Int -> Effect Unit
 
 foreign import data AmbientLight :: Type
-instance Object3D AmbientLight
+instance Object3D' AmbientLight
 instance Light AmbientLight
 foreign import newAmbientLight :: Int -> Number -> Effect AmbientLight
 
 foreign import data DirectionalLight :: Type
-instance Object3D DirectionalLight
+instance Object3D' DirectionalLight
 instance Light DirectionalLight
+instance SetTarget DirectionalLight
 foreign import newDirectionalLight :: Int -> Number -> Effect DirectionalLight
 
 foreign import data PointLight :: Type
-instance Object3D PointLight
+instance Object3D' PointLight
 instance Light PointLight
 instance SetDistance PointLight
 instance SetDecay PointLight
 foreign import newPointLight :: Int -> Number -> Number -> Number -> Effect PointLight
 
 foreign import data AmbientLightProbe :: Type
-instance Object3D AmbientLightProbe
+instance Object3D' AmbientLightProbe
 instance Light AmbientLightProbe
 foreign import newAmbientLightProbe :: Int -> Number -> Effect AmbientLightProbe
 
 foreign import data RectAreaLight :: Type
-instance Object3D RectAreaLight
+instance Object3D' RectAreaLight
 instance Light RectAreaLight
 foreign import newRectAreaLight :: Int -> Number -> Number -> Number -> Effect RectAreaLight
 foreign import setWidth :: RectAreaLight -> Number -> Effect Unit
 foreign import setHeight :: RectAreaLight -> Number -> Effect Unit
 
 foreign import data HemisphereLightProbe :: Type
-instance Object3D HemisphereLightProbe
+instance Object3D' HemisphereLightProbe
 instance Light HemisphereLightProbe
 foreign import newHemisphereLightProbe :: Int -> Int -> Number -> Effect HemisphereLightProbe
 
 foreign import data SpotLight :: Type
-instance Object3D SpotLight
+instance Object3D' SpotLight
 instance Light SpotLight
 instance SetDistance SpotLight
 instance SetDecay SpotLight
+instance SetTarget SpotLight
 foreign import newSpotLight :: Int -> Number -> Number -> Number -> Number -> Number -> Effect SpotLight
 foreign import setAngle :: SpotLight -> Number -> Effect Unit
 foreign import setPenumbra :: SpotLight -> Number -> Effect Unit
@@ -810,6 +831,10 @@ foreign import data Color :: Type
 
 foreign import newColor :: Int -> Effect Color
 
+foreign import data Interpolant :: Type
+
+foreign import newInterpolant :: forall a b. a -> b -> Number -> forall c. c -> Effect Interpolant
+
 -- MATH / INTERPOLANTS
 foreign import data CubicInterpolant :: Type
 
@@ -907,6 +932,10 @@ foreign import newBone :: Effect Bone
 foreign import data LOD :: Type
 
 foreign import newLOD :: Effect LOD
+
+foreign import data LensflareElement :: Type
+
+foreign import newLensflareElement :: forall a. a -> Number -> Number -> Color -> Effect LensflareElement
 
 ------------ MATERIALS
 
@@ -1008,7 +1037,21 @@ foreign import data Layers :: Type
 
 foreign import newLayers :: Effect Layers
 
--- foreign import newObject3D :: Effect Object3D
+foreign import data BufferAttribute :: Type
+
+foreign import newBufferAttribute :: forall a. ArrayView a -> Int -> Boolean -> Effect BufferAttribute
+
+foreign import data InstancedInterleavedBuffer :: Type
+
+foreign import newInstancedInterleavedBuffer :: forall a. ArrayView a -> Int -> Number -> Effect InstancedInterleavedBuffer
+
+foreign import data InterleavedBuffer :: Type
+
+foreign import newInterleavedBuffer :: forall a. ArrayView a -> Int -> Effect InterleavedBuffer
+
+foreign import data InterleavedBufferAttribute :: Type
+
+foreign import newInterleavedBufferAttribute :: InterleavedBuffer -> Int -> Int -> Boolean -> Effect InterleavedBufferAttribute
 
 
 -- ANIMATION
@@ -1026,6 +1069,18 @@ foreign import newAnimationClip :: String -> Number -> forall a. a -> Effect Ani
 foreign import data KeyframeTrack :: Type
 
 foreign import newKeyframeTrack :: String -> forall a b. a -> b -> Constant -> Effect KeyframeTrack
+
+foreign import data PropertyBinding :: Type
+
+foreign import newPropertyBinding :: Object3D -> Number -> Number -> Effect PropertyBinding
+
+foreign import data PropertyMixer :: Type
+
+foreign import newPropertyMixer :: PropertyBinding -> String -> Number -> Effect PropertyMixer
+
+foreign import data AnimationObjectGroup :: Type
+
+foreign import newAnimationObjectGroup :: forall a. a -> Effect AnimationObjectGroup
 
 -- ANIMATION / TRACKS
 
@@ -1058,6 +1113,12 @@ foreign import newVectorKeyframeTrack  :: String -> forall a b. a -> b -> Effect
 foreign import data TypedBufferAttribute :: Type
 
 foreign import newTypedBufferAttribute  :: forall a. a -> Int -> Boolean -> Effect TypedBufferAttribute
+
+-- EXTRAS
+
+foreign import data PMREMGenerator :: Type
+
+foreign import newPMREMGenerator :: WebGLRenderer -> Effect PMREMGenerator
 
 -- EXTRAS / CORE
 
@@ -1119,6 +1180,10 @@ foreign import data EllipseCurve :: Type
 
 foreign import newEllipseCurve :: Number -> Number -> Number -> Number -> Number -> Number -> Boolean -> Number -> Effect EllipseCurve
 
+foreign import data ArcCurve :: Type
+
+foreign import newArcCurve :: Number -> Number -> Number -> Number -> Number -> Number -> Boolean -> Number -> Effect ArcCurve
+
 -- ANIMATIONS
 
 foreign import data CCDIKSolver :: Type
@@ -1175,6 +1240,11 @@ foreign import newPositionalAudio :: AudioListener -> Effect PositionalAudio
 foreign import data Audio :: Type
 
 foreign import newAudio :: AudioListener -> Effect Audio
+
+foreign import data AudioAnalyser :: Type
+
+foreign import newAudioAnalyser :: Audio -> Int -> Effect AudioAnalyser
+
 
 -- EXPORTERS
 foreign import data ColladaExporter :: Type
@@ -1267,6 +1337,22 @@ foreign import newDepthTexture :: Number -> Number -> Constant -> Constant -> Co
 foreign import data FramebufferTexture :: Type
 
 foreign import newFramebufferTexture :: Number -> Number -> Constant -> Effect FramebufferTexture
+
+foreign import data DataArrayTexture :: Type
+
+foreign import newDataArrayTexture :: forall a. ArrayView a -> Number -> Number -> Number -> Effect DataArrayTexture
+
+foreign import data Data3DTexture :: Type
+
+foreign import newData3DTexture :: forall a. ArrayView a -> Number -> Number -> Number -> Effect Data3DTexture
+
+foreign import data Texture :: Type
+
+foreign import newTexture :: TextureLoader -> Number -> wrapS -> wrapT -> magFilter -> minFilter -> Number -> Number -> Number -> forall a. a -> Effect Texture
+
+foreign import data CubeTextureImg :: Type
+
+foreign import newCubeTextureImg :: TextureLoader -> Number -> wrapS -> wrapT -> magFilter -> minFilter -> Number -> Number -> Number -> forall a. a -> Effect CubeTextureImg
 
 -- Controls
 foreign import data ArcballControls :: Type
