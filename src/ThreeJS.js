@@ -1,10 +1,10 @@
 "use strict";
 
 import * as THREE from 'three';
-import GLTFLoader from "./threejs/GLTFLoader.js";
-import OBJLoader from "./threejs/OBJLoader.js";
-import MTLLoader from "./threejs/MTLLoader.js";
-import DRACOLoader from "./threejs/DRACOLoader.js";
+import GLTFLoader from "three/examples/jsm/loaders/GLTFLoader.js";
+import OBJLoader from "three/examples/jsm/loaders/OBJLoader.js";
+import MTLLoader from "three/examples/jsm/loaders/MTLLoader.js";
+import DRACOLoader from "three/examples/jsm/loaders/DRACOLoader.js";
 
 // Object3D
 
