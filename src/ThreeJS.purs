@@ -119,6 +119,10 @@ foreign import data FogExp2 :: Type
 
 foreign import newFogExp2 :: Int -> Number -> Effect FogExp2
 
+foreign import setFog :: Scene -> Fog -> Effect Unit
+
+foreign import setFogExp2 :: Scene -> FogExp2 -> Effect Unit
+
 -- CAMERAS
 -- PerspectiveCamera
 

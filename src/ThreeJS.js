@@ -18,6 +18,10 @@ export const newFog = color => near => far => () => new THREE.Fog(color, near, f
 
 export const newFogExp2 = color => density => () => new THREE.FogExp2(color, density);
 
+export const setFog = scene => x => () => scene.fog = x;
+
+export const setFogExp2 = scene => x => () => scene.fog = x;
+
 // CAMERAS
 
 // PerspectiveCamera
