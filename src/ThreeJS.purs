@@ -16,7 +16,7 @@ import Data.ArrayBuffer.Types (ArrayView)
 
 -- Classes
 
-class Object3D' :: forall k. k -> Constraint 
+class Object3D' :: forall k. k -> Constraint
 class Object3D' a -- the class has a tick in the name to avoid Object3D the specific type
 
 lookAt :: forall a. (Object3D' a) => a -> Number -> Number -> Number -> Effect Unit
@@ -133,6 +133,12 @@ instance Object3D' PerspectiveCamera
 foreign import newPerspectiveCamera :: Number -> Number -> Number -> Number -> Effect PerspectiveCamera
 
 foreign import setAspect :: PerspectiveCamera -> Number -> Effect Unit
+
+foreign import setFOV :: PerspectiveCamera -> Number -> Effect Unit
+
+foreign import setNear :: PerspectiveCamera -> Number -> Effect Unit
+
+foreign import setFar :: PerspectiveCamera -> Number -> Effect Unit
 
 -- OrthographicCamera
 

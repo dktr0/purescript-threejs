@@ -30,6 +30,12 @@ export const newPerspectiveCamera = fov => aspect => near => far => () => new TH
 
 export const setAspect = pCamera => aspect => () => pCamera.aspect = aspect;
 
+export const setFOV = pCamera => fov => () => pCamera.fov = fov;
+
+export const setNear = pCamera => near => () => pCamera.near = near;
+
+export const setFar = pCamera => far => () => pCamera.far = far;
+
 // OrthographicCamera
 
 export const newOrthographicCamera = left => right => top => bottom => near => far => () => new THREE.OrthographicCamera(left, right, top, bottom, near, far);
