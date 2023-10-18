@@ -140,6 +140,8 @@ foreign import setNear :: PerspectiveCamera -> Number -> Effect Unit
 
 foreign import setFar :: PerspectiveCamera -> Number -> Effect Unit
 
+foreign import updateProjectionMatrix :: PerspectiveCamera -> Effect Unit
+
 -- OrthographicCamera
 
 foreign import data OrthographicCamera :: Type

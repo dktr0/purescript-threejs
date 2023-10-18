@@ -36,6 +36,8 @@ export const setNear = pCamera => near => () => pCamera.near = near;
 
 export const setFar = pCamera => far => () => pCamera.far = far;
 
+export const updateProjectionMatrix = pCamera => () => pCamera.updateProjectionMatrix();
+
 // OrthographicCamera
 
 export const newOrthographicCamera = left => right => top => bottom => near => far => () => new THREE.OrthographicCamera(left, right, top, bottom, near, far);
